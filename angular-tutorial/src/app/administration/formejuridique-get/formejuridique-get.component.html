@@ -1,0 +1,27 @@
+<!-- Menu -->
+
+<!--  -->
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID forme juridique</th>
+        <th scope="col">Libelle forme juridique</th>
+        <th scope="col"> Operation</th>
+        <button  class="btn btn-outline-primary" (click)="ajouter()" >Ajouter</button>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let fj of FormeJuridique" >      
+        <tr *ngFor="let f of fj.formeJuridique">
+              <td>{{f.KFormJuri}}</td>
+              <td>{{f.libelleFJ}}</td>
+              <td> 
+                <button type="button" class="btn btn-outline-primary" (click)="update(FormeJuridique)">Modifier</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="supprimerFJ(FormeJuridique.kFormJuri)" >Supprimer</button>
+               </td>
+          </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+ <!-- {{FormeJuridique | json}} --> 

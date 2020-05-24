@@ -1,0 +1,36 @@
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Modifier compte bancaire</h2>
+    <form [formGroup]="editForm2" (ngSubmit)="onSubmit()">
+
+        <div class="form-group" >
+            <label for="id">ID activite entreprise:</label>
+            <input type="text" formControlName="id" [(ngModel)]="ae.kActEnt" placeholder="id" name="id" class="form-control" id="id" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label for="lae">Libelle activite d'entreprise:</label>
+            <input type="text" formControlName="lae" [(ngModel)]="ae.libelleAE" placeholder="lae" name="lae" class="form-control" id="lae" >
+          </div>
+
+        <button class="btn btn-success">Update</button>
+
+    </form>
+</div>
+
+<!--<div class="container">
+    <br>
+    <table>
+      <td><div>  Id activite entreprise :
+        <input type="text" name="id" [(ngModel)]="ae.kActEnt" disabled>
+    </div></td> <br>
+      <td> <div>  Libelle activite entreprise :
+          <input type="text" name="lae" [(ngModel)]="ae.libelleAE">
+        </div></td> <br>
+    </table>
+    <br>
+    <div>
+      <button class="btn btn-success" (click)="update()">Save</button>
+    </div>
+  
+  </div>-->
+  
