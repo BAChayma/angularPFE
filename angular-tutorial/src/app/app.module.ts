@@ -24,6 +24,8 @@ import { PaysGetComponent } from './administration/pays-get/pays-get.component';
 import { ModePaiementGetComponent } from './administration/mode-paiement-get/mode-paiement-get.component';
 import { ActiviteEseUpdateComponent } from './administration/activite-ese-get/activite-ese-update/activite-ese-update.component';
 import { ActiviteEseNewComponent } from './administration/activite-ese-get/activite-ese-new/activite-ese-new.component';
+import { FormejuridiqueNewComponent } from './administration/formejuridique-get/formejuridique-new/formejuridique-new.component';
+import { FormejuridiqueUpdateComponent } from './administration/formejuridique-get/formejuridique-update/formejuridique-update.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ActiviteEseNewComponent } from './administration/activite-ese-get/activ
     PaysGetComponent,
     ModePaiementGetComponent,
     ActiviteEseUpdateComponent,
-    ActiviteEseNewComponent
+    ActiviteEseNewComponent,
+    FormejuridiqueNewComponent,
+    FormejuridiqueUpdateComponent
   ],
   imports: [
     BrowserModule,

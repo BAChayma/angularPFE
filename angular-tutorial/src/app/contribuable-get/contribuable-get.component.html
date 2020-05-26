@@ -17,8 +17,7 @@
 									<button type="submit" class="btn btn-primary" (click)="recherche(nif)">Recherche</button>
 								  </as-split-area>
 
-								  <as-split-area size="50" *ngFor="let contribuables of contribuables"> 
-									<p> {{contribuables | json}} </p>
+								  <as-split-area size="50" *ngFor="let contribuables of contribuables">
 									<h5 class="card-title">Informations sur un contribuable</h5>
 									<br>
 									<table>
@@ -81,21 +80,20 @@
 										  </tr>
 										</thead>
 										<tbody>
-											<ng-container  *ngFor="let Adresse of Adresse">
-											<tr *ngFor="let adr of Adresse.Adresse">
-											  <td >{{adr.kadresse}}</td>
-											  <td >{{adr.numrue}}</td>
-											  <td >{{adr.rue}}</td>
-											  <td >{{adr.cp}}</td>
-											  <td >{{adr.libellesadr}}</td>
-											  <td >{{adr.libelletsadr}}</td>
+											
+											<tr>
+											  <td >{{Adresse.kadresse}}</td>
+											  <td >{{Adresse.numrue}}</td>
+											  <td >{{Adresse.rue}}</td>
+											  <td >{{Adresse.cp}}</td>
+											  <td >{{Adresse.libellesadr}}</td>
+											  <td >{{Adresse.libelletsadr}}</td>
 											   <td> 
 												 <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', contribuables.kcompte]" (click)="editcb(contribuables.kcompte)" >Modifier</button> 
 												 <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
 												</td>
 											  </tr>
-											  <p> {{Adresse | json}} </p> 
-											</ng-container>
+											
 										  </tbody>
 										</table>
 								  </as-split-area>
