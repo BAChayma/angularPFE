@@ -64,7 +64,7 @@
 						  <as-split-area size="60">
 							  <as-split direction="vertical">
 
-								  <as-split-area *ngFor="let contribuables of contribuables">
+								  <as-split-area *ngIf="contribuables">
 									<h5 class="card-title">Informations sur adresse</h5>
 									<table class="table table-hover">
 										<thead>
@@ -80,25 +80,26 @@
 										  </tr>
 										</thead>
 										<tbody>
-											
-											<tr>
-											  <td >{{Adresse.kadresse}}</td>
-											  <td >{{Adresse.numrue}}</td>
-											  <td >{{Adresse.rue}}</td>
-											  <td >{{Adresse.cp}}</td>
-											  <td >{{Adresse.libellesadr}}</td>
-											  <td >{{Adresse.libelletsadr}}</td>
+											<ng-container  *ngFor="let adrr of Adresse">
+											<tr *ngFor="let adr of adrr.adresse">
+											  <td >{{adr.kadresse}}</td>
+											  <td >{{adr.numrue}}</td>
+											  <td >{{adr.rue}}</td>
+											  <td >{{adr.cp}}</td>
+											  <td >{{adr.libellesadr}}</td>
+											  <td >{{adr.libelletsadr}}</td>
 											   <td> 
 												 <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', contribuables.kcompte]" (click)="editcb(contribuables.kcompte)" >Modifier</button> 
 												 <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
 												</td>
+
 											  </tr>
-											
+											</ng-container>
 										  </tbody>
 										</table>
 								  </as-split-area>
 
-								  <as-split-area *ngFor="let contribuables of contribuables">
+								  <as-split-area *ngIf="contribuables">
 									<h5 class="card-title">Informations sur compte bancaire</h5>
 									<table class="table table-hover">
 										<thead>
@@ -112,17 +113,16 @@
 										  </tr>
 										</thead>
 										<tbody>
-											<ng-container  *ngFor="let CompteBancaire of CompteBancaire">
-												<tr *ngFor="let cb of CompteBancaire.CompteBancaire">
-													<td>{{cb.kcompte}}</td>
-													<td>{{cb.rib}}</td>
-													<td>{{cb.nomBanque}}</td>
-													<td>{{cb.libelleAgence}}</td>
-													 <td> <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', contribuables.kcompte]" (click)="editcb(contribuables.kcompte)" >Modifier</button> 
+											<ng-container  *ngFor="let cb of CompteBancaire">
+												<tr>
+													<td>{{cb.compteBancaire?.kcompte}}</td>
+													<td>{{cb.compteBancaire?.rib}}</td>
+													<td>{{cb.compteBancaire?.nomBanque}}</td>
+													<td>{{cb.compteBancaire?.libelleAgence}}</td>
+													 <td> 
+													   <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', cb.compteBancaire?.kcompte]" (click)="editcb(cb.compteBancaire?.kcompte)" >Modifier</button> 
 													   <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
-													  </td>
-													</tr> 
-													<p> {{CompteBancaire | json}} </p>
+													  </td>													</tr> 
 											</ng-container>
 										</tbody>
 										</table>

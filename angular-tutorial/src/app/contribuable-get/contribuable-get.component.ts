@@ -17,13 +17,13 @@ import { Adresse } from '../classes/Adresse';
 })
 export class ContribuableGetComponent implements OnInit {
   contribuables: any;
-  c: Contribuable[];
+  //c: Contribuable[];
 
-  adr: Adresse[];
-  Adresse: any;
+  //adr: Adresse[];
+  Adresse: any[];
 
-  cb: CompteBancaire[];
-  CompteBancaire: any;
+  //cb: CompteBancaire[];
+  CompteBancaire: any[];
 
     nif: string;
     capitalSociale = {};

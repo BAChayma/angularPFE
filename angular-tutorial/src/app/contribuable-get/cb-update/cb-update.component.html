@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label for="bankName">Listes des banques:</label>
-            <ng-select formControlName="bankName" placeholder="bankName" name="bankName" class="form-control" id="bankName"
+            <ng-select formControlName="bankName"  id="bankName"
                    [items]="banquesItems"
                    [virtualScroll]="true"
                    [searchable]="true" 
@@ -24,10 +24,11 @@
             </ng-select>
              Selected bank ID: {{selectedBankId}} 
         </div>
+        <!-- placeholder="bankName" name="bankName" class="form-control" -->
 
         <div class="form-group">
             <label for="agenceName">Listes des agence:</label>
-            <ng-select formControlName="agenceName" class="form-control"
+            <ng-select formControlName="agenceName" 
                    [items]="agencesItems"
                    [virtualScroll]="true"
                    [searchable]="true" 
