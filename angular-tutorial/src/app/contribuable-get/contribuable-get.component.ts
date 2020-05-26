@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import {parseHttpResponse} from 'selenium-webdriver/http';
+import { CompteBancaire } from '../classes/ComteBancaire';
+import { Adresse } from '../classes/Adresse';
 
 @Component({
   selector: 'app-contribuable-get',
@@ -15,7 +17,14 @@ import {parseHttpResponse} from 'selenium-webdriver/http';
 })
 export class ContribuableGetComponent implements OnInit {
   contribuables: any;
-  
+  c: Contribuable[];
+
+  adr: Adresse[];
+  Adresse: any;
+
+  cb: CompteBancaire[];
+  CompteBancaire: any;
+
     nif: string;
     capitalSociale = {};
     dateDebExp = {};
@@ -38,15 +47,12 @@ export class ContribuableGetComponent implements OnInit {
   constructor(private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient) { }
 
   ngOnInit() {
-    //this.recherche(this.nif);
     }
 
     list(){
       this.contribuableService.getAllContribuable().subscribe(
       (res) => {
-        //this.contribuables = res.contribuables;
         this.contribuables = res;
-      
         console.log(res);
         console.log(this.contribuables);
       },
@@ -56,21 +62,7 @@ export class ContribuableGetComponent implements OnInit {
       return this.contribuables;
     }
 
-    recherche(nif) {
-      this.contribuableService.getContribuableById1(nif).subscribe(
-      (res) => {
-        this.contribuables = res;
-        this.contribuables = Array.of(this.contribuables); 
-        //console.log(res);
-        console.log(this.contribuables);
-      },
-      err => console.error(err) ,
-      () => console.log('getContribuableById completed') 
-      )
-      return this.contribuables;
-    }
-
-    recherche1(nif)  
+    recherche(nif)  
       {
         this.contribuableService.getContribuableById1(this.nif).subscribe(
           (data) => { 
@@ -80,7 +72,38 @@ export class ContribuableGetComponent implements OnInit {
            },
           err => console.error(err), 
           () => console.log('getContribuableById completed') 
-          );
+          )
+          this.recherche1(this.nif);
+          this.recherche2(this.nif);
+          return this.contribuables;
+     }
+
+     recherche1(nif)  
+      {
+        this.contribuableService.AdrContriByNif(this.nif).subscribe(
+          (data) => { 
+            this.Adresse = data;
+            this.Adresse = Array.of(this.Adresse); 
+            console.log(this.Adresse);
+           },
+          err => console.error(err), 
+          () => console.log('AdrContriByNif completed') 
+          )
+          return this.Adresse;
+     }
+
+     recherche2(nif)  
+      {
+        this.contribuableService.CbContriByNif(this.nif).subscribe(
+          (data) => { 
+            this.CompteBancaire = data;
+            this.CompteBancaire = Array.of(this.CompteBancaire); 
+            console.log(this.CompteBancaire);
+           },
+          err => console.error(err), 
+          () => console.log('CbContriByNif completed') 
+          )
+          return this.CompteBancaire;
      }
 
      /*update(nif) {

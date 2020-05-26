@@ -20,6 +20,14 @@ export class Contribuable {
     kagence?: number;
     libelleAgence?: string;
     kcompte?: number;
+    kadresse?: number; 
+    numRue?: number;
+    rue?: string;
+    cp?: string;
+    kStructureAdr?: number;
+    libellesadr?: string;
+    TStructureAdr?: number;
+    libelletsadr?: string;  
      
 
     /*constructor( nomCommerciale:string, raisonSociale:string, registreCommerce:string) {
