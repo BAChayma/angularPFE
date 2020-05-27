@@ -1,11 +1,7 @@
 <div class="col-md-6 user-container">
     <h2 class="text-center">Modifier compte bancaire</h2>
     <form [formGroup]="editForm1" (ngSubmit)="onSubmit()">
-<!-- class="overflow-box"     class="form-group"-->
-        <!--<div class="form-group">
-            <label for="id">ID compte bancaire:</label>
-            <input type="text" formControlName="id" placeholder="" name="id" class="form-control" id="id" readonly="true">
-        </div>-->
+
         <div class="hidden">
             <input type="text" formControlName="id" placeholder={{kcompte}} name="id" class="form-control" id="id">
           </div>

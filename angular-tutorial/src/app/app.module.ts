@@ -26,6 +26,9 @@ import { ActiviteEseUpdateComponent } from './administration/activite-ese-get/ac
 import { ActiviteEseNewComponent } from './administration/activite-ese-get/activite-ese-new/activite-ese-new.component';
 import { FormejuridiqueNewComponent } from './administration/formejuridique-get/formejuridique-new/formejuridique-new.component';
 import { FormejuridiqueUpdateComponent } from './administration/formejuridique-get/formejuridique-update/formejuridique-update.component';
+import { AdresseUpdateComponent } from './contribuable-get/adresse-update/adresse-update.component';
+import { AdresseNewComponent } from './contribuable-get/adresse-new/adresse-new.component';
+import { CbNewComponent } from './contribuable-get/cb-new/cb-new.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { FormejuridiqueUpdateComponent } from './administration/formejuridique-g
     ActiviteEseUpdateComponent,
     ActiviteEseNewComponent,
     FormejuridiqueNewComponent,
-    FormejuridiqueUpdateComponent
+    FormejuridiqueUpdateComponent,
+    AdresseUpdateComponent,
+    AdresseNewComponent,
+    CbNewComponent
   ],
   imports: [
     BrowserModule,

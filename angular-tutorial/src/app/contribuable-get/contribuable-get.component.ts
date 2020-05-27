@@ -21,9 +21,11 @@ export class ContribuableGetComponent implements OnInit {
 
   //adr: Adresse[];
   Adresse: any[];
+  adresses: Adresse[];
 
   //cb: CompteBancaire[];
   CompteBancaire: any[];
+  cbs: CompteBancaire[];
 
     nif: string;
     capitalSociale = {};
@@ -126,8 +128,31 @@ export class ContribuableGetComponent implements OnInit {
       this.router.navigate(['updateCb',kcompte]);
     };
 
+    editAdr(kadresse){
+      this.router.navigate(['updateAdr',kadresse]);
+    };
+      
+    ajoutercb() {
+      this.router.navigate(['newCB']);
+    }
     
+    ajouteradr() {
+      this.router.navigate(['newADR']);
+    }
 
+    deleteADR(adr: Adresse): void {
+      this.contribuableService.supprimeradr(adr.kadresse)
+        .subscribe( data => {
+          this.adresses = this.adresses.filter(u => u !== adr);
+        })
+      };
+
+      deletecb(cb: CompteBancaire): void {
+        this.contribuableService.supprimercb(cb.kcompte)
+          .subscribe( data => {
+            this.cbs = this.cbs.filter(u => u !== cb);
+          })
+        };
     
 
   }
