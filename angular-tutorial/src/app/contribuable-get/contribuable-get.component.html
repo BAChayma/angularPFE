@@ -70,13 +70,13 @@
 										<thead>
 										  <tr>
 											<th scope="col">ID adresse</th>
-											<th scope="col">Rue</th>
 											<th scope="col">Numero rue</th>
+											<th scope="col">Rue</th>
 											<th scope="col">Code postale</th>
 											<th scope="col">Libelle structure adresse</th>
 											<th scope="col">Libelle type structure adresse</th>
 											<th scope="col"> Operation</th>
-											<button  class="btn btn-outline-primary" >Ajouter</button>
+											<button  class="btn btn-outline-primary" [routerLink]="['newADR']" (click)="ajouteradr()">Ajouter</button>
 										  </tr>
 										</thead>
 										<tbody>
@@ -89,10 +89,10 @@
 											  <td >{{adr.libellesadr}}</td>
 											  <td >{{adr.libelletsadr}}</td>
 											   <td> 
-												 <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', contribuables.kcompte]" (click)="editcb(contribuables.kcompte)" >Modifier</button> 
-												 <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
+												 <button type="button" class="btn btn-outline-primary"  routerLink="/updateAdr/{{adr.kadresse}}" >Modifier</button> 
+												 <button type="button" class="btn btn-outline-secondary" (click)="deleteADR(adr)">Supprimer</button>
 												</td>
-
+												<!-- [routerLink]="['updateAdr', adr.kadresse]" (click)="editAdr(adr.kadresse)" -->
 											  </tr>
 											</ng-container>
 										  </tbody>
@@ -109,7 +109,7 @@
 											<th scope="col">Nom de la banque</th>
 											<th scope="col">Nom de l'agence</th>
 											<th scope="col"> Operation</th>
-											<button  class="btn btn-outline-primary" >Ajouter</button>
+											<button  class="btn btn-outline-primary" [routerLink]="['newCB']" (click)="ajoutercb()" >Ajouter</button>
 										  </tr>
 										</thead>
 										<tbody>
@@ -120,9 +120,11 @@
 													<td>{{cb.compteBancaire?.nomBanque}}</td>
 													<td>{{cb.compteBancaire?.libelleAgence}}</td>
 													 <td> 
-													   <button type="button" class="btn btn-outline-primary" [routerLink]="['updateCb', cb.compteBancaire?.kcompte]" (click)="editcb(cb.compteBancaire?.kcompte)" >Modifier</button> 
-													   <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
-													  </td>													</tr> 
+													   <button type="button" class="btn btn-outline-primary" routerLink="/updateCb/{{cb.compteBancaire?.kcompte}}" >Modifier</button> 
+													   <button type="button" class="btn btn-outline-secondary" (click)="deletecb(cb)">Supprimer</button>
+													  </td>													
+												</tr> 
+												<!-- [routerLink]="['updateCb', cb.compteBancaire?.kcompte]" (click)="editcb(cb.compteBancaire?.kcompte)" -->
 											</ng-container>
 										</tbody>
 										</table>

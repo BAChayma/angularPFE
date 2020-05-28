@@ -22,6 +22,7 @@ export class ContribuableGetComponent implements OnInit {
   //adr: Adresse[];
   Adresse: any[];
   adresses: Adresse[];
+  adr: Adresse;
 
   //cb: CompteBancaire[];
   CompteBancaire: any[];
@@ -124,12 +125,12 @@ export class ContribuableGetComponent implements OnInit {
       this.router.navigate(['updateCb']);
     };*/
 
-    editcb(kcompte){
-      this.router.navigate(['updateCb',kcompte]);
+    editcb(kcompte: number){
+      this.router.navigate(['updateCb', kcompte]);
     };
 
-    editAdr(kadresse){
-      this.router.navigate(['updateAdr',kadresse]);
+    editAdr(kadresse: number){
+      this.router.navigate(['updateAdr', kadresse]);
     };
       
     ajoutercb() {

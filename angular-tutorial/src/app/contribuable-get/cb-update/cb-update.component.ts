@@ -8,6 +8,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Contribuable } from 'src/app/classes/Contribuable';
 import { Observable } from 'rxjs';
+import { CompteBancaire } from 'src/app/classes/ComteBancaire';
 
 @Component({
   selector: 'app-cb-update',
@@ -29,6 +30,7 @@ export class CbUpdateComponent implements OnInit {
 
   editForm1: FormGroup;
   contribuables: Contribuable;
+  cb: CompteBancaire;
 
   constructor(private formBuilder: FormBuilder ,private contribuableService: ScontribuableService ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) { 
   
@@ -42,16 +44,23 @@ export class CbUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.kcompte = this.route.snapshot.params.id;
-    /*if(!this.kcompte) {
-      alert("Invalid action.")
-      this.router.navigate(['contribuable']);
-      return;
-    }*/
+    this.cb = new CompteBancaire();
+
+    this.kcompte = this.route.snapshot.params['kcompte'];
+    
+    this.contribuableService.getCBById(this.kcompte)
+      .subscribe(data => {
+        this.cb = data;
+        console.log(data);
+        console.log(this.cb);
+      }, 
+      error => console.log(error));
+
+    /*this.kcompte = this.route.snapshot.params.id;
     this.contribuableService.getCBById(this.kcompte).subscribe( 
       data => {
         this.editForm1.setValue(data);
-      });
+      });*/
 
     this.editForm1 = this.formBuilder.group({
       bankName: [''],
@@ -72,9 +81,26 @@ export class CbUpdateComponent implements OnInit {
     });
   }
 
+  updateCb() {
+    this.contribuableService.updateCB(this.cb) 
+    .subscribe(
+      data => {
+        this.editForm1.patchValue({id: this.cb.kcompte , 
+          RIB: this.cb.rib , 
+          selectedBankId: this.cb.kbanque , 
+          selectedAgenceId: this.cb.kagence });
+        console.log(data);
+      },
+      error => {
+        alert(error);
+      });
+    this.gotoList();
+  }
+
+
   onSubmit() {
-    this.contribuableService.updateCB(this.editForm1.value)
-    //this.contribuableService.updateCB(this.contribuables, this.contribuables.kcompte)
+    this.updateCb();
+    /*this.contribuableService.updateCB(this.editForm1.value)
       .subscribe(
         data => {
             alert('Compte bancaire contribuable updated successfully.');
@@ -82,7 +108,12 @@ export class CbUpdateComponent implements OnInit {
         },
         error => {
           alert(error);
-        });
+        });*/
+  }
+
+  gotoList() {
+    alert('Compte bancaire contribuable updated successfully.');
+    this.router.navigate(['contribuable']);
   }
 
 }

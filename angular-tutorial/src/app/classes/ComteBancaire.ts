@@ -2,13 +2,13 @@ export class CompteBancaire {
 
     nombanque?: string;
     rib?: string;
-    //kbanque?: number;
+    kbanque?: number;
     nomBanque?: string;
-    //kagence?: number;
+    kagence?: number;
     libelleAgence?: string;
     kcompte?: number;
     
-      CompteBancaires: []
+    CompteBancaires: []
 
     }
     

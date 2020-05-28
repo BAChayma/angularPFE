@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'ModePaiement', component: ModePaiementGetComponent},
   {path: 'updateAE/:kActEnt', component: ActiviteEseUpdateComponent},
   {path: 'newAE', component: ActiviteEseNewComponent},
-  {path: 'updateAdr/:kadresse', component: AdresseUpdateComponent , data: [{isProd: true}]},
+  {path: 'updateAdr/:kadresse', component: AdresseUpdateComponent},
   {path: 'newFJ', component: FormejuridiqueNewComponent},
   {path: 'updateFJ/:kFormJuri', component: FormejuridiqueUpdateComponent},
   {path: 'newADR', component: AdresseNewComponent},

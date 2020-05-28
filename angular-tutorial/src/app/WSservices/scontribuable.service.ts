@@ -111,7 +111,7 @@ getCBById(kcompte: number): Observable<any> {
  updateADR(adresses : Adresse): Observable<Adresse> {
   return this.httpClient.put<Adresse>(this.updateADRUrl , adresses);
 }*/
-public url_UpdateAdr: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/ActiviteEntrepriseWS/updateAdr?kadresse=';
+public url_UpdateAdr: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/adresseWS/updateAdr?kadresse=';
   modifierAdr(adr : Adresse) {
     return this.httpClient.put(this.url_UpdateAdr + adr.kadresse, adr);
   }
@@ -126,10 +126,13 @@ AjouterAdr( adr : Adresse): Observable<Adresse> {
   return this.httpClient.post<Adresse>(this.url_Adr + '/createAdr' , adr);
 }
 
-getADRByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/adresseWS/getAdrbyID/?kadresse=';
-getADRById(id : number){
+getADRByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/adresseWS/getAdrbyID';
+/*getADRById(id : number){
   return this.httpClient.get<Adresse[]>(this.getADRByIdUrl+id) 
-} 
+} /?kadresse=*/
+getADRById(kadresse: number): Observable<any> {
+  return this.httpClient.get<any>(`${this.getADRByIdUrl}?kActEnt=${kadresse}`);
+}
 
 /* lov */
 
@@ -145,7 +148,7 @@ LOVAgence(kbanque){
 
 LOVSADRUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/StructureAdrWS/LOVStructureAdr/';
 LOVSADR(){
-  return this.httpClient.get<any[]>(this.LOVSADRUrl , this.httpOptions );
+  return this.httpClient.get<Adresse[]>(this.LOVSADRUrl , this.httpOptions );
 } 
 
 LOVTSADRUrl: string = 'http://127.0.0.1:7101/AppTeleServiceS2V1-ViewController-context-root/resources/TypeStructureAdrWS/LOVTypeStructureAdr/';

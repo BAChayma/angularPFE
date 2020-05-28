@@ -40,8 +40,10 @@ export class ActiviteEseUpdateComponent implements OnInit {
         this.ae = data;
         console.log(data);
         console.log(this.ae);
-      }, error => console.log(error));
+      }, 
+      error => console.log(error));
     }
+    
     updateAE() {
       this.aeService.modifierAE(this.ae) //this.kActEnt,  this.editForm2.value this.ae
       .subscribe(
