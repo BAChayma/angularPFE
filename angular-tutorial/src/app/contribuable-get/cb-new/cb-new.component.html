@@ -1,0 +1,46 @@
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Ajouter compte bancaire</h2>
+    <form [formGroup]="editForm1" (ngSubmit)="onSubmit()">
+
+        <div class="hidden">
+            <input type="text" formControlName="id" placeholder={{kcompte}} name="id" class="form-control" id="id">
+          </div>
+
+        <div class="form-group">
+            <label for="bankName">Listes des banques:</label>
+            <ng-select formControlName="bankName"  id="bankName"
+                   [items]="banquesItems"
+                   [virtualScroll]="true"
+                   [searchable]="true" 
+                   bindLabel="nomBanque"
+                   bindValue="kbanque"
+                   placeholder="Choisir une banque"
+                   [(ngModel)]="selectedBankId"
+                   (change)="LOVAgences()">
+            </ng-select>
+             Selected bank ID: {{selectedBankId}} 
+        </div>
+
+        <div class="form-group">
+            <label for="agenceName">Listes des agence:</label>
+            <ng-select formControlName="agenceName" 
+                   [items]="agencesItems"
+                   [virtualScroll]="true"
+                   [searchable]="true" 
+                   bindLabel="libelleAgence"
+                   bindValue="kagence"
+                   placeholder="Choisir une agence"
+                   [(ngModel)]="selectedAgenceId"
+                   >
+            </ng-select>
+            <label> Selected bank ID: {{selectedAgenceId}} </label>
+        </div>
+
+        <div class="form-group">
+            <label for="RIB">RIB:</label>
+            <input type="text" formControlName="RIB" placeholder="RIB" name="RIB" class="form-control" id="RIB" >
+          </div>
+
+        <button class="btn btn-success">Ajouter</button>
+    </form>
+</div>

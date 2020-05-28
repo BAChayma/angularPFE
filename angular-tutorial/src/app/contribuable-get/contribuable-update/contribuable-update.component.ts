@@ -15,7 +15,39 @@ export class ContribuableUpdateComponent implements OnInit {
   nif: string;
   editForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder ,private contribuableService: ScontribuableService , private router: Router , private route: ActivatedRoute) { }
+  aeItems = [];
+  selectedAeId: number;
+
+  fjItems = [];
+  selectedFjId: number;
+
+  paysItems = [];
+  selectedPaysId: number;
+
+  constructor(private formBuilder: FormBuilder ,private contribuableService: ScontribuableService , private router: Router , private route: ActivatedRoute) 
+  {
+    this.contribuableService.LOVAE().subscribe(data => {  
+      this.aeItems = data;
+      this.aeItems = Array.of(this.aeItems); 
+      console.log(data);
+      console.log(this.aeItems);
+  });
+
+  this.contribuableService.LOVFJ().subscribe(data => {  
+    this.fjItems = data;
+    this.fjItems = Array.of(this.fjItems); 
+    console.log(data);
+    console.log(this.fjItems);
+});
+
+this.contribuableService.LOVPays().subscribe(data => {  
+  this.paysItems = data;
+  this.paysItems = Array.of(this.paysItems); 
+  console.log(data);
+  console.log(this.paysItems);
+});
+
+   }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
@@ -24,7 +56,10 @@ export class ContribuableUpdateComponent implements OnInit {
       raisonSociale: ['', Validators.required],
       registreCommerce: ['', Validators.required],
       dateDebExp: ['', Validators.required],
-      capitalSociale: ['', Validators.required]
+      capitalSociale: ['', Validators.required],
+      aeName: ['', Validators.required],
+      fjName: ['', Validators.required],
+      paysName: ['', Validators.required]
     });
     
   }

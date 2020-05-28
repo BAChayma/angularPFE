@@ -1,0 +1,41 @@
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Ajouter adresse</h2>
+    <form [formGroup]="editForm1" (ngSubmit)="onSubmit()">
+
+        <div class="hidden">
+            <input type="text" formControlName="id" placeholder={{kadresse}} name="id" class="form-control" id="id">
+          </div>
+
+          <div class="form-group">
+            <label for="RIB">Numero rue:</label>
+            <input type="text" formControlName="numRue" placeholder="numRue" name="RIB" class="form-control" id="numRue" >
+          </div>
+
+          <div class="form-group">
+            <label for="RIB">Rue:</label>
+            <input type="text" formControlName="rue" placeholder="rue" name="rue" class="form-control" id="rue" >
+          </div>
+
+          <div class="form-group">
+            <label for="RIB">Code postale:</label>
+            <input type="text" formControlName="cp" placeholder="cp" name="cp" class="form-control" id="cp" >
+          </div>
+
+        <div class="form-group">
+            <label for="sadrName">Libelle structure adresse:</label>
+            <ng-select formControlName="sadrName" 
+                   [items]="sadrItems"
+                   [virtualScroll]="true"
+                   [searchable]="true" 
+                   bindLabel="libellesadr"
+                   bindValue="kStructureAdr"
+                   placeholder="Choisir libelle structure adresse"
+                   [(ngModel)]="selectedkStructureAdr"
+                   >
+            </ng-select>
+            <label> Selected libelle structure adresse ID: {{selectedkStructureAdr}} </label>
+        </div>
+
+        <button class="btn btn-success">Ajouter</button>
+    </form>
+</div>

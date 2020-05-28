@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Adresse } from '../classes/Adresse';
 import { CompteBancaire } from '../classes/ComteBancaire';
+import { FormeJuridique } from '../classes/FormeJuridique';
+import { ActiviteEntreprise } from '../classes/ActiviteEntreprise';
+import { Pays } from '../classes/Pays';
 
 
 @Injectable({
@@ -154,6 +157,21 @@ LOVSADR(){
 LOVTSADRUrl: string = 'http://127.0.0.1:7101/AppTeleServiceS2V1-ViewController-context-root/resources/TypeStructureAdrWS/LOVTypeStructureAdr/';
 LOVTSADR(){
   return this.httpClient.get<any[]>(this.LOVTSADRUrl , this.httpOptions );
+} 
+
+LOVFJUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/FormejuridiqueWS/LOVFJ/';
+LOVFJ(){
+  return this.httpClient.get<FormeJuridique[]>(this.LOVFJUrl , this.httpOptions );
+} 
+
+LOVAEUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/ActiviteEntrepriseWS/LOVAE/';
+LOVAE(){
+  return this.httpClient.get<ActiviteEntreprise[]>(this.LOVAEUrl , this.httpOptions );
+} 
+
+LOVPAYSUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/PaysWS/LOVPays/';
+LOVPays(){
+  return this.httpClient.get<Pays[]>(this.LOVPAYSUrl , this.httpOptions );
 } 
 
 }
