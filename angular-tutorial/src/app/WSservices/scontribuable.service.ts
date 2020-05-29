@@ -37,7 +37,7 @@ export class ScontribuableService {
  //getContribuableByIdUrl: string = 'http://127.0.0.1:7101/AppTeleServiceS2V1-ViewController-context-root/resources/agenceWS/LOVAgence/?kbanque=';
  //valide
  //getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/ContribuableById?nif=';
- //getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/ContribuableByNIF?nif=';
+ //getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/ContribuableByNIF';
  getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContribuableById?nif=';
  getContribuableById1(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.getContribuableByIdUrl}?nif=${nif}`);

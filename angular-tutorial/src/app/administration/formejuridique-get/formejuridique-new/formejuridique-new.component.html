@@ -1,1 +1,19 @@
-<p>formejuridique-new works!</p>
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Ajouter forme juridique</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+        <!--<div class="form-group" >
+            <label for="id">ID forme juridique:</label>
+            <input type="text" formControlName="id"  placeholder="id" name="id" class="form-control" id="id" readonly/>
+        </div>-->
+
+        <div class="form-group">
+            <label for="lae">Libelle forme juridique:</label>
+            <input type="text" formControlName="lfj"  placeholder="lfj" name="lfj" class="form-control" id="lfj" >
+          </div>
+
+        <button class="btn btn-success">Ajouter</button>
+
+    </form>
+</div>
+  

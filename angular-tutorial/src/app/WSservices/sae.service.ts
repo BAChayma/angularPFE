@@ -31,8 +31,12 @@ export class SaeService {
     return this.http.get<any>(`${this.url_getAEByID}?kActEnt=${kActEnt}`);
   }
 
-  SupprimerAE(kActEnt : number) {
+  /*SupprimerAE(kActEnt : number) {
     return this.http.delete(this.url_AE  + kActEnt);
+  }*/
+  public deleteAEUrl = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/ActiviteEntrepriseWS/deleteAEbyID?kActEnt=';
+  SupprimerAE(kActEnt: number): Observable<ActiviteEntreprise> {
+    return this.http.delete<ActiviteEntreprise>(this.deleteAEUrl + kActEnt);
   }
 
   AjouterAE( ae : ActiviteEntreprise): Observable<ActiviteEntreprise> {

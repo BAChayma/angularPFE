@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SfjService } from 'src/app/WSservices/sfj.service';
 import { Router } from '@angular/router';
+import { FormeJuridique } from 'src/app/classes/FormeJuridique';
 
 @Component({
   selector: 'app-formejuridique-get',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class FormejuridiqueGetComponent implements OnInit {
 
+  fj: FormeJuridique[];
   FormeJuridique: any;
   kFormJuri: number;
   constructor(private fjService: SfjService , private router: Router) { }
@@ -45,7 +47,7 @@ this.router.navigate(['updateFJ' , kFormJuri]);
 }
 
 ajouter() {
-this.router.navigate(['newFJ' , 'new']);
+this.router.navigate(['newFJ']);
 }
 
 }

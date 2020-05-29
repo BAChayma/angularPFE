@@ -26,6 +26,8 @@ import { FormejuridiqueGetComponent } from './administration/formejuridique-get/
 import { FormejuridiqueNewComponent } from './administration/formejuridique-get/formejuridique-new/formejuridique-new.component';
 import { FormejuridiqueUpdateComponent } from './administration/formejuridique-get/formejuridique-update/formejuridique-update.component';
 
+import { DeclarationGetComponent } from './declaration-get/declaration-get.component';
+
 const routes: Routes = [
   {path: 'connexion', component: ConnexionComponent},
   {path: 'inscription', component: InscriptionComponent},
@@ -45,6 +47,7 @@ const routes: Routes = [
   {path: 'updateFJ/:kFormJuri', component: FormejuridiqueUpdateComponent},
   {path: 'newADR', component: AdresseNewComponent},
   {path: 'newCB', component: CbNewComponent},
+  {path: 'declaration', component: DeclarationGetComponent}
 
 ];
 

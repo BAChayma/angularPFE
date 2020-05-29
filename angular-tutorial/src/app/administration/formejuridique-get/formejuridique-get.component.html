@@ -16,8 +16,8 @@
               <td>{{f.KFormJuri}}</td>
               <td>{{f.libelleFJ}}</td>
               <td> 
-                <button type="button" class="btn btn-outline-primary" (click)="update(FormeJuridique)">Modifier</button>
-                <button type="button" class="btn btn-outline-secondary" (click)="supprimerFJ(FormeJuridique.kFormJuri)" >Supprimer</button>
+                <button type="button" class="btn btn-outline-primary" routerLink="/updateFJ/{{f.KFormJuri}}">Modifier</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="supprimerFJ(f.kFormJuri)" >Supprimer</button>
                </td>
           </tr>
       </ng-container>

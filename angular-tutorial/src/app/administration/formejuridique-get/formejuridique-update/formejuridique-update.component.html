@@ -1,1 +1,19 @@
-<p>formejuridique-update works!</p>
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Modifier forme juridique</h2>
+    <form [formGroup]="editForm2" (ngSubmit)="onSubmit()">
+
+        <div class="form-group" >
+            <label for="id">ID forme juridique:</label>
+            <input type="text" formControlName="id" [(ngModel)]="fj.kFormJuri" placeholder="id" name="id" class="form-control" id="id" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label for="lae">Libelle forme juridique:</label>
+            <input type="text" formControlName="lfj" [(ngModel)]="fj.libelleFJ" placeholder="lfj" name="lfj" class="form-control" id="lfj" >
+          </div>
+
+        <button class="btn btn-success">Modifier</button>
+
+    </form>
+</div>
+  

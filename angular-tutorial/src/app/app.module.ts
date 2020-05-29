@@ -29,6 +29,7 @@ import { FormejuridiqueUpdateComponent } from './administration/formejuridique-g
 import { AdresseUpdateComponent } from './contribuable-get/adresse-update/adresse-update.component';
 import { AdresseNewComponent } from './contribuable-get/adresse-new/adresse-new.component';
 import { CbNewComponent } from './contribuable-get/cb-new/cb-new.component';
+import { DeclarationGetComponent } from './declaration-get/declaration-get.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { CbNewComponent } from './contribuable-get/cb-new/cb-new.component';
     FormejuridiqueUpdateComponent,
     AdresseUpdateComponent,
     AdresseNewComponent,
-    CbNewComponent
+    CbNewComponent,
+    DeclarationGetComponent
   ],
   imports: [
     BrowserModule,
