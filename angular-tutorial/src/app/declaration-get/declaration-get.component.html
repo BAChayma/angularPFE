@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>  
+<title>Dossier contribuable</title>
+</head>
+<body>
+
+	<div style="width: 1200px; height: 1000px; background: rgb(229, 234, 238);">
+		<as-split direction="horizontal">
+						  <as-split-area size="40">
+							  <as-split direction="vertical">
+								  <as-split-area size="10">
+									<h5 class="card-title">Recherche d'un contribuable</h5>
+									<label> Nif: </label>
+									<input type="text" name="nif"/> 
+									<button type="submit" class="btn btn-primary" (click)="rechercheContri(nif)">Recherche</button>
+								  </as-split-area>
+
+								  <as-split-area size="50" *ngFor="let contribuables of contribuables">
+									<h5 class="card-title">Informations sur un contribuable</h5>
+									<br>
+									<table>
+										<table>
+												<tbody>
+                                                    <tr><td> <div *ngIf="contribuables">  NIF:<input type="text" name="nif" [(ngModel)]="contribuables.nif" readonly></div></td><br></tr>
+                                                    <tr><td> <div *ngIf="contribuables">  Id contribuable:<input type="text" name="kcnc" [(ngModel)]="contribuables.kcnc" readonly></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Nom commerciale:<input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale"></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Raison sociale:<input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale"></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce"></div></td> <br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp"></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale"></div></td> <br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj"></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae"></div></td><br></tr>
+												  <tr><td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite"></div></td><br></tr>
+												</tbody>
+										</table>
+									</table>
+									<br>
+									<div>
+										<button type="button" class="btn btn-outline-primary" >Modifier</button>
+									</div>
+								</as-split-area>
+
+								  
+								<as-split-area size="40" *ngIf="contribuables">
+								<h5 class="card-title">Liste des declarations</h5>
+								<br>
+								<table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">ID declaration</th>
+                                        <th scope="col">ID contribuable</th>
+                                        <th scope="col">ID impot</th>
+                                        <th scope="col">Mantant declarer</th>
+                                        <th scope="col">Mantant declaration</th>
+                                        <th scope="col">Date declaration</th>
+                                        <button  class="btn btn-outline-primary" [routerLink]="['newDCL']" (click)="ajouterdcl()">Ajouter</button>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container  *ngFor="let dcl of Declaration">
+                                        <tr *ngFor="let d of dcl.declaration">
+                                          <td >{{d.kdcl}}</td>
+                                          <td >{{d.kcnc}}</td>
+                                          <td >{{d.kimpot}}</td>
+                                          <td >{{d.mantantDeclarer}}</td>
+                                          <td >{{d.mantantDeclaration}}</td>
+                                          <td >{{d.datedcl}}</td>
+										  
+										  </tr>
+										  
+                                        </ng-container>
+                                      </tbody>
+							  </table>
+							
+								  </as-split-area>
+							  </as-split>
+						  </as-split-area>
+                        </as-split>
+						  
+	  </div>
+	  
+</body>
+</html>

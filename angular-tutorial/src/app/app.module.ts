@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
@@ -30,6 +33,11 @@ import { AdresseUpdateComponent } from './contribuable-get/adresse-update/adress
 import { AdresseNewComponent } from './contribuable-get/adresse-new/adresse-new.component';
 import { CbNewComponent } from './contribuable-get/cb-new/cb-new.component';
 import { DeclarationGetComponent } from './declaration-get/declaration-get.component';
+import { DeclarationNewComponent } from './declaration-get/declaration-new/declaration-new.component';
+import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
+import { AccueilComponent } from './accueil/accueil.component';
+
 
 
 @NgModule({
@@ -53,7 +61,11 @@ import { DeclarationGetComponent } from './declaration-get/declaration-get.compo
     AdresseUpdateComponent,
     AdresseNewComponent,
     CbNewComponent,
-    DeclarationGetComponent
+    DeclarationGetComponent,
+    DeclarationNewComponent,
+    HeaderComponent,
+    LogoutComponent,
+    AccueilComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +74,14 @@ import { DeclarationGetComponent } from './declaration-get/declaration-get.compo
     ReactiveFormsModule,
     FormsModule,
     AngularSplitModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatTabsModule
   ],
-  providers: [],
+  providers: [
+   
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

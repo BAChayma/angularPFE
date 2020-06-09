@@ -3,7 +3,7 @@
     <form [formGroup]="editForm1" (ngSubmit)="onSubmit()">
 
         <div class="hidden">
-            <input type="text" formControlName="id" placeholder={{kcompte}} name="id" class="form-control" id="id">
+            <input type="text" formControlName="id" [(ngModel)]="cb.kcompte" placeholder={{kcompte}} name="id" class="form-control" id="id" readonly>
           </div>
 
         <div class="form-group">
@@ -39,8 +39,8 @@
 
         <div class="form-group">
             <label for="RIB">RIB:</label>
-            <input type="text" formControlName="RIB" placeholder="RIB" name="RIB" class="form-control" id="RIB" >
-          </div>
+            <input type="text" formControlName="RIB" [(ngModel)]="cb.rib" placeholder="RIB" name="RIB" class="form-control" id="RIB" >
+        </div>
 
         <button class="btn btn-success">Update</button>
     </form>

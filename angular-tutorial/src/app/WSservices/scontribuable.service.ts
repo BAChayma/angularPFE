@@ -38,10 +38,23 @@ export class ScontribuableService {
  //valide
  //getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/ContribuableById?nif=';
  //getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/ContribuableByNIF';
- getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContribuableById?nif=';
- getContribuableById1(nif): Observable<any>{
+ 
+ getContriByNifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContriDclByNif?nif=';
+ getContriByNif(nif): Observable<any>{
+  //return this.httpClient.get<any>(`${this.getContriByNifUrl}?nif=${nif}`);
+  return this.httpClient.get<any>(this.getContriByNifUrl+'123456') 
+} 
+
+getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContribuableById?nif=';
+ getContribuableById1(nif : string): Observable<any>{
   //return this.httpClient.get<any>(`${this.getContribuableByIdUrl}?nif=${nif}`);
   return this.httpClient.get<any>(this.getContribuableByIdUrl+'123456') 
+} 
+
+RechercheContribuableUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/RechercheContribuable?nif=';
+RechercheContribuable(nif : string): Observable<any>{
+  //return this.httpClient.get<any>(`${this.RechercheContribuableUrl}?nif=${nif}`);
+  return this.httpClient.get<any>(this.RechercheContribuableUrl+'123456') 
 } 
 
 adrcontribynifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/adresseWS/AdresseInfoContribuableById?nif=';
@@ -134,7 +147,7 @@ getADRByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController
   return this.httpClient.get<Adresse[]>(this.getADRByIdUrl+id) 
 } /?kadresse=*/
 getADRById(kadresse: number): Observable<any> {
-  return this.httpClient.get<any>(`${this.getADRByIdUrl}?kActEnt=${kadresse}`);
+  return this.httpClient.get<any>(`${this.getADRByIdUrl}?kadresse=${kadresse}`);
 }
 
 /* lov */

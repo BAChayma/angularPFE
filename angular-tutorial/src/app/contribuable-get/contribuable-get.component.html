@@ -1,156 +1,175 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8"/>  
-<title>Dossier contribuable</title>
+<title>Consulter dossier contribuable</title>
 </head>
 <body>
+		<h5>Recherche d'un contribuable</h5>
+		<label> NIF: </label>
+		<input type="text" name="nif"/> 
+		<button type="submit" class="btn btn-outline-primary" (click)="recherche(nif)">Recherche</button>
 
-	<div style="width: 1200px; height: 1000px; background: rgb(229, 234, 238);">
-		<as-split direction="horizontal">
-						  <as-split-area size="40">
-							  <as-split direction="vertical">
-								  <as-split-area size="10">
-									<h5 class="card-title">Recherche d'un contribuable</h5>
-									<label> Nif: </label>
-									<input type="text" name="nif"/> 
-									<button type="submit" class="btn btn-primary" (click)="recherche(nif)">Recherche</button>
-								  </as-split-area>
+	<mat-tab-group>
+		<mat-tab label="Information generale sur un contribuable"> 
+			<mat-tab-group>
+				<mat-tab label="Fiche contribuable"> 
+			<h5 *ngIf="contribuables">Fiche contribuable</h5>
+			<br>
+			<table>
+			<table>
+				<tbody>
+					<tr><td> <div *ngIf="contribuables">  Nom commerciale:<input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale" readonly="true"></div></td><br></tr>
+					<tr><td> <div *ngIf="contribuables">  Raison sociale:<input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale" readonly></div></td><br></tr>
+					<tr><td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce" readonly></div></td> <br></tr>
+					<tr><td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp" readonly></div></td><br></tr>
+					<tr><td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale" readonly></div></td> <br></tr>
+					<tr><td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj" readonly></div></td><br></tr>
+					<tr><td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae" readonly></div></td><br></tr>
+					<tr><td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite" readonly></div></td><br></tr>
+				</tbody>
+			</table>
+			</table>
+			<br>
+				<div *ngIf="contribuables">
+					<button type="button" class="btn btn-outline-primary" (click)="editcontribuables(contribuables)">Modifier</button>
+				</div>
+			</mat-tab>
+			
+				<mat-tab label="Premiere responsable ">   
+					<table *ngIf="contribuables">
+						<table>
+							<tbody>
+								<tr><td> <div *ngIf="contribuables">  Identifiant:<input type="text" name="rib" [(ngModel)]="contribuables.identifiant" readonly></div></td> <br></tr>
+								<tr><td> <div *ngIf="contribuables">  Nom:<input type="text" name="nombanque" [(ngModel)]="contribuables.nom" readonly></div></td><br></tr>
+								<tr><td> <div *ngIf="contribuables">  Prenom:<input type="text" name="libelleagence" [(ngModel)]="contribuables.prenom" readonly></div></td><br></tr>
+							</tbody>
+						</table>
+					</table>
+					  <br>
+					  <div *ngIf="contribuables">
+						<button class="btn btn-outline-primary" >Modifier</button>
+					  </div>
+				</mat-tab>
+		
+				<mat-tab label="Adresse "> 
+					<table class="table table-hover" *ngIf="contribuables">
+						<thead>
+						  <tr>
+							<th scope="col">ID adresse</th>
+							<th scope="col">Numero rue</th>
+							<th scope="col">Rue</th>
+							<th scope="col">Code postale</th>
+							<th scope="col">Libelle structure adresse</th>
+							<th scope="col">Libelle type structure adresse</th>
+							<th scope="col"> Operation</th>
+							<button  class="btn btn-outline-primary" [routerLink]="['newADR']" (click)="ajouteradr()">Ajouter</button>
+						  </tr>
+						</thead>
+						<tbody>
+							<ng-container  *ngFor="let adrr of Adresse">
+							<tr *ngFor="let adr of adrr.adresse">
+							  <td >{{adr.kadresse}}</td>
+							  <td >{{adr.numrue}}</td>
+							  <td >{{adr.rue}}</td>
+							  <td >{{adr.cp}}</td>
+							  <td >{{adr.libellesadr}}</td>
+							  <td >{{adr.libelletsadr}}</td>
+							   <td> 
+								 <button type="button" class="btn btn-outline-primary"  routerLink="/updateAdr/{{adr.kadresse}}" >Modifier</button> 
+								 <button type="button" class="btn btn-outline-secondary" (click)="deleteADR(adr)">Supprimer</button>
+								</td>
+							  </tr>
+							</ng-container>
+						  </tbody>
+						</table>
+				</mat-tab>
+		
+				<mat-tab label="Compte bancaire"> 
+					<table class="table table-hover" *ngIf="contribuables">
+						<thead>
+						  <tr>
+							<th scope="col">ID compte bancaire</th>
+							<th scope="col">RIB</th>
+							<th scope="col">Nom de la banque</th>
+							<th scope="col">Nom de l'agence</th>
+							<th scope="col"> Operation</th>
+							<button  class="btn btn-outline-primary" [routerLink]="['newCB']" (click)="ajoutercb()" >Ajouter</button>
+						  </tr>
+						</thead>
+						<tbody>
+							<ng-container  *ngFor="let cb of CompteBancaire">
+								<tr>
+									<td>{{cb.compteBancaire?.kcompte}}</td>
+									<td>{{cb.compteBancaire?.rib}}</td>
+									<td>{{cb.compteBancaire?.nomBanque}}</td>
+									<td>{{cb.compteBancaire?.libelleAgence}}</td>
+									 <td> 
+									   <button type="button" class="btn btn-outline-primary" routerLink="/updateCb/{{cb.compteBancaire?.kcompte}}" >Modifier</button> 
+									   <button type="button" class="btn btn-outline-secondary" (click)="deletecb(cb)">Supprimer</button>
+									  </td>													
+								</tr> 
+							</ng-container>
+						</tbody>
+						</table>
+				</mat-tab>
+		
+				<mat-tab label="Actionnaires "> 
+					<table class="table table-hover" *ngIf="contribuables">
+						<thead>
+						  <tr>
+							<th scope="col">ID actionnaire</th>
+							<th scope="col">Nom de actionnaire</th>
+							<th scope="col">Prenom de actionnaire</th>
+							<th scope="col">Part de actionnaire</th>
+							<th scope="col"> Operation</th>
+							<button  class="btn btn-outline-primary" >Ajouter</button>
+						  </tr>
+						</thead>
+						</table>
+				</mat-tab>
 
-								  <as-split-area size="50" *ngFor="let contribuables of contribuables">
-									<h5 class="card-title">Informations sur un contribuable</h5>
-									<br>
-									<table>
-										<table>
-												<tbody>
-												  <tr><td> <div *ngIf="contribuables">  Nom commerciale:<input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Raison sociale:<input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce"></div></td> <br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale"></div></td> <br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite"></div></td><br></tr>
-												</tbody>
-										</table>
-									</table>
-									<br>
-									<div>
-										<button type="button" class="btn btn-outline-primary" (click)="editcontribuables(contribuables)">Modifier</button>
-									</div>
-										  </as-split-area>
+			</mat-tab-group>
+		</mat-tab>
 
-								  
-								  <as-split-area size="40" *ngFor="let contribuables of contribuables">
-								<h5 class="card-title">Informations sur le premiere responsable</h5>
-								<br>
-								<table>
-								  <table>
-										  <tbody>
-											<tr><td> <div *ngIf="contribuables">  Identifiant:<input type="text" name="rib" [(ngModel)]="contribuables.identifiant"></div></td> <br></tr>
-											<tr><td> <div *ngIf="contribuables">  Nom:<input type="text" name="nombanque" [(ngModel)]="contribuables.nom"></div></td><br></tr>
-											<tr><td> <div *ngIf="contribuables">  Prenom:<input type="text" name="libelleagence" [(ngModel)]="contribuables.prenom"></div></td><br></tr>
-										  </tbody>
-								  </table>
-							  </table>
-								<br>
-								<div>
-								  <button class="btn btn-success" >Enregistrer</button>
-								</div>
-								  </as-split-area>
-							  </as-split>
-						  </as-split-area>
+		<mat-tab label="Impots "> 
+			List des impots
+		</mat-tab>
 
-						  <as-split-area size="60">
-							  <as-split direction="vertical">
+		<mat-tab label="Declarations "> 
+			<table class="table table-hover">
+				<thead>
+				  <tr>
+					<th scope="col">ID declaration</th>
+					<th scope="col">ID contribuable</th>
+					<th scope="col">ID impot</th>
+					<th scope="col">Mantant declarer</th>
+					<th scope="col">Mantant declaration</th>
+					<th scope="col">Date declaration</th>
+					<button  class="btn btn-outline-primary" [routerLink]="['newDCL']" (click)="ajouterdcl()">Ajouter</button>
+				  </tr>
+				</thead>
+				<tbody>
+					<ng-container  *ngFor="let dcl of Declaration">
+					<tr *ngFor="let d of dcl.declaration">
+					  <td >{{d.kdcl}}</td>
+					  <td >{{d.kcnc}}</td>
+					  <td >{{d.kimpot}}</td>
+					  <td >{{d.mantantDeclarer}}</td>
+					  <td >{{d.mantantDeclaration}}</td>
+					  <td >{{d.datedcl}}</td>
+					  </tr>	  
+					</ng-container>
+				  </tbody>
+		  </table>
+		</mat-tab>
 
-								  <as-split-area *ngIf="contribuables">
-									<h5 class="card-title">Informations sur adresse</h5>
-									<table class="table table-hover">
-										<thead>
-										  <tr>
-											<th scope="col">ID adresse</th>
-											<th scope="col">Numero rue</th>
-											<th scope="col">Rue</th>
-											<th scope="col">Code postale</th>
-											<th scope="col">Libelle structure adresse</th>
-											<th scope="col">Libelle type structure adresse</th>
-											<th scope="col"> Operation</th>
-											<button  class="btn btn-outline-primary" [routerLink]="['newADR']" (click)="ajouteradr()">Ajouter</button>
-										  </tr>
-										</thead>
-										<tbody>
-											<ng-container  *ngFor="let adrr of Adresse">
-											<tr *ngFor="let adr of adrr.adresse">
-											  <td >{{adr.kadresse}}</td>
-											  <td >{{adr.numrue}}</td>
-											  <td >{{adr.rue}}</td>
-											  <td >{{adr.cp}}</td>
-											  <td >{{adr.libellesadr}}</td>
-											  <td >{{adr.libelletsadr}}</td>
-											   <td> 
-												 <button type="button" class="btn btn-outline-primary"  routerLink="/updateAdr/{{adr.kadresse}}" >Modifier</button> 
-												 <button type="button" class="btn btn-outline-secondary" (click)="deleteADR(adr)">Supprimer</button>
-												</td>
-												<!-- [routerLink]="['updateAdr', adr.kadresse]" (click)="editAdr(adr.kadresse)" -->
-											  </tr>
-											</ng-container>
-										  </tbody>
-										</table>
-								  </as-split-area>
+		<mat-tab label="Reclamation "> 
+			List des  reclamation
+		</mat-tab>
 
-								  <as-split-area *ngIf="contribuables">
-									<h5 class="card-title">Informations sur compte bancaire</h5>
-									<table class="table table-hover">
-										<thead>
-										  <tr>
-											<th scope="col">ID compte bancaire</th>
-											<th scope="col">RIB</th>
-											<th scope="col">Nom de la banque</th>
-											<th scope="col">Nom de l'agence</th>
-											<th scope="col"> Operation</th>
-											<button  class="btn btn-outline-primary" [routerLink]="['newCB']" (click)="ajoutercb()" >Ajouter</button>
-										  </tr>
-										</thead>
-										<tbody>
-											<ng-container  *ngFor="let cb of CompteBancaire">
-												<tr>
-													<td>{{cb.compteBancaire?.kcompte}}</td>
-													<td>{{cb.compteBancaire?.rib}}</td>
-													<td>{{cb.compteBancaire?.nomBanque}}</td>
-													<td>{{cb.compteBancaire?.libelleAgence}}</td>
-													 <td> 
-													   <button type="button" class="btn btn-outline-primary" routerLink="/updateCb/{{cb.compteBancaire?.kcompte}}" >Modifier</button> 
-													   <button type="button" class="btn btn-outline-secondary" (click)="deletecb(cb)">Supprimer</button>
-													  </td>													
-												</tr> 
-												<!-- [routerLink]="['updateCb', cb.compteBancaire?.kcompte]" (click)="editcb(cb.compteBancaire?.kcompte)" -->
-											</ng-container>
-										</tbody>
-										</table>
-									  </as-split-area>	
-
-									  <as-split-area *ngFor="let contribuables of contribuables">
-										<h5 class="card-title">Informations sur les actionnaires</h5>
-										<table class="table table-hover">
-											<thead>
-											  <tr>
-												<th scope="col">ID actionnaire</th>
-												<th scope="col">Nom de actionnaire</th>
-												<th scope="col">Prenom de actionnaire</th>
-												<th scope="col">Part de actionnaire</th>
-												<th scope="col"> Operation</th>
-												<button  class="btn btn-outline-primary" >Ajouter</button>
-											  </tr>
-											</thead>
-											</table>
-									   </as-split-area>	
-	
-
-							  </as-split>
-						  </as-split-area>
-					  </as-split>
-	  </div>
+	  </mat-tab-group>
 	  
 </body>
 </html>

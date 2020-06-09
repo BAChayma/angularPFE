@@ -63,12 +63,12 @@ export class CbUpdateComponent implements OnInit {
       });*/
 
     this.editForm1 = this.formBuilder.group({
-      bankName: [''],
-      agenceName: ['', Validators.required],
-      RIB: ['', Validators.required],
-      id: ['', Validators.required],
-      selectedBankId: ['', Validators.required],
-      selectedAgenceId: ['', Validators.required]
+      bankName: [null, Validators.required],
+      agenceName: [null, Validators.required],
+      RIB: [null, Validators.required],
+      id: [null, Validators.required],
+      selectedBankId: [null, Validators.required],
+      selectedAgenceId: [null, Validators.required]
     });
   }
 

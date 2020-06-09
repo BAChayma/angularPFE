@@ -1,0 +1,49 @@
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Modifier compte bancaire</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+        <div class="hidden">
+            <label for="kdcl">Id declaration:</label>
+            <input type="text" formControlName="kdcl" placeholder="kdcl" name="kdcl" class="form-control" id="kdcl" readonly>
+        </div>
+
+        <div class="hidden">
+            <label for="kcnc">Id contribuable:</label>
+            <input type="text" formControlName="kcnc" placeholder="kcnc" name="kcnc" class="form-control" id="kcnc" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="impotName">Listes des impots:</label>
+            <ng-select formControlName="impotName" 
+                   [items]="impotsItems"
+                   [virtualScroll]="true"
+                   [searchable]="true" 
+                   bindLabel="abriviation"
+                   bindValue="kimpot"
+                   placeholder="Choisir un impot"
+                   [(ngModel)]="selectedImpotId">
+                   <ng-option [value]="selectedImpotId" *ngFor="let item of impotsItems">
+                    <label> Selected impot taux: {{item.taux}} </label>
+                    </ng-option>
+            </ng-select>
+            <label> Selected impot ID: {{selectedImpotId}} </label>
+        </div>
+
+        <div class="form-group">
+            <label for="mantantDeclarer">Mantant declarer:</label>
+            <input type="text" formControlName="mantantDeclarer" placeholder="mantantDeclarer" name="mantantDeclarer" class="form-control" id="mantantDeclarer" >
+        </div>
+
+        <div class="form-group">
+            <label for="mantantDeclaration">Mantant declaration:</label>
+            <input type="text" formControlName="mantantDeclaration" placeholder="mantantDeclaration" name="mantantDeclaration" class="form-control" id="mantantDeclaration" >
+        </div>
+
+        <div class="hidden">
+            <label for="datedcl">Date de declaration:</label>
+            <input type="text" formControlName="datedcl" placeholder="datedcl" name="datedcl" class="form-control" id="datedcl" >
+        </div>
+
+        <button class="btn btn-success">Update</button>
+    </form>
+</div>

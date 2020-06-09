@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 import { ContribuableGetComponent } from './contribuable-get/contribuable-get.component';
 import {ContribuableUpdateComponent} from './contribuable-get/contribuable-update/contribuable-update.component';
@@ -27,11 +30,19 @@ import { FormejuridiqueNewComponent } from './administration/formejuridique-get/
 import { FormejuridiqueUpdateComponent } from './administration/formejuridique-get/formejuridique-update/formejuridique-update.component';
 
 import { DeclarationGetComponent } from './declaration-get/declaration-get.component';
+import { DeclarationNewComponent } from './declaration-get/declaration-new/declaration-new.component';
 
 const routes: Routes = [
-  {path: 'connexion', component: ConnexionComponent},
+  {path: '',   redirectTo: '/connexion', pathMatch: 'full' },
+  {path: 'connexion', component: ConnexionComponent },
+  {
+    path: 'Accueil',
+    //canActivate: [AuthGaurdService],
+    component: AccueilComponent
+  },
   {path: 'inscription', component: InscriptionComponent},
   {path: 'contribuable', component: ContribuableGetComponent},
+  {path: 'contribuable/:nif', component: ContribuableGetComponent},
   {path: 'updateContribuable', component: ContribuableUpdateComponent},
   {path: 'updateCb/:kcompte', component: CbUpdateComponent , data: [{isProd: true}]},
   {path: 'Administration', component: AdministrationComponent},
@@ -47,8 +58,11 @@ const routes: Routes = [
   {path: 'updateFJ/:kFormJuri', component: FormejuridiqueUpdateComponent},
   {path: 'newADR', component: AdresseNewComponent},
   {path: 'newCB', component: CbNewComponent},
-  {path: 'declaration', component: DeclarationGetComponent}
-
+  {path: 'declaration', component: DeclarationGetComponent},
+  {path: 'newDCL', component: DeclarationNewComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'header', component: HeaderComponent},
+  {path: '', component: AccueilComponent}
 ];
 
 @NgModule({

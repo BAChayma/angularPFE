@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contribuable } from '../classes/Contribuable';
 import { ScontribuableService } from '../WSservices/scontribuable.service';
@@ -9,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import {parseHttpResponse} from 'selenium-webdriver/http';
 import { CompteBancaire } from '../classes/ComteBancaire';
 import { Adresse } from '../classes/Adresse';
+import { SdeclarationService } from '../WSservices/sdeclaration.service';
 
 @Component({
   selector: 'app-contribuable-get',
@@ -27,6 +27,9 @@ export class ContribuableGetComponent implements OnInit {
   //cb: CompteBancaire[];
   CompteBancaire: any[];
   cbs: CompteBancaire[];
+
+  Declaration: any[];
+
 
     nif: string;
     capitalSociale = {};
@@ -47,7 +50,7 @@ export class ContribuableGetComponent implements OnInit {
       })
     }
 
-  constructor(private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient) { }
+  constructor(private cdeclarationService: SdeclarationService ,private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient) { }
 
   ngOnInit() {
     }
@@ -65,6 +68,23 @@ export class ContribuableGetComponent implements OnInit {
       return this.contribuables;
     }
 
+    RechercheContri(nif)  
+      {
+        this.contribuableService.RechercheContribuable(this.nif).subscribe(
+          (data) => { 
+            this.contribuables = data;
+            this.contribuables = Array.of(this.contribuables); 
+            console.log(this.contribuables);
+           },
+          err => console.error(err), 
+          () => console.log('getContribuableById completed') 
+          )
+          this.recherche1(this.nif);
+          this.recherche2(this.nif);
+          this.recherche3(this.nif);
+          return this.contribuables;
+     }
+
     recherche(nif)  
       {
         this.contribuableService.getContribuableById1(this.nif).subscribe(
@@ -78,6 +98,7 @@ export class ContribuableGetComponent implements OnInit {
           )
           this.recherche1(this.nif);
           this.recherche2(this.nif);
+          this.recherche3(this.nif);
           return this.contribuables;
      }
 
@@ -108,6 +129,20 @@ export class ContribuableGetComponent implements OnInit {
           )
           return this.CompteBancaire;
      }
+
+     recherche3(nif)  
+     {
+       this.cdeclarationService.DclContriByNif(this.nif).subscribe(
+         (data) => { 
+           this.Declaration = data;
+           this.Declaration = Array.of(this.Declaration); 
+           console.log(this.Declaration);
+          },
+         err => console.error(err), 
+         () => console.log('DclContriByNif completed') 
+         )
+         return this.Declaration;
+    }
 
      /*update(nif) {
       this.router.navigate(['contribuableUpdate' , nif]);
@@ -155,6 +190,9 @@ export class ContribuableGetComponent implements OnInit {
           })
         };
     
+        ajouterdcl() {
+          this.router.navigate(['newDCL']);
+        }
 
   }
 

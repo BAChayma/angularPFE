@@ -3,23 +3,27 @@ export class Contribuable {
     nif?: string;
     capitalSociale?: number;
     dateDebExp?: Date;
-    libelleae?: string;
-    libelleagence?: string;
-    libellefj?: string;
-    nationnalite?: string;
     nomCommerciale?: string; 
-    nombanque?: string;
     raisonSociale?: string;
     registreCommerce?: string;
+
+    libelleae?: string;
+
+    libellefj?: string;
+
+    libelleagence?: string;
+    nombanque?: string;
+    nomBanque?: string;
+    libelleAgence?: string;
+    kcompte?: number;
     rib?: string;
+    kbanque?: number;
+    kagence?: number;
+
     identifiant?: string; 
     nom?: string;
     prenom?: string;
-    kbanque?: number;
-    nomBanque?: string;
-    kagence?: number;
-    libelleAgence?: string;
-    kcompte?: number;
+
     kadresse?: number; 
     numRue?: number;
     rue?: string;
@@ -28,6 +32,16 @@ export class Contribuable {
     libellesadr?: string;
     TStructureAdr?: number;
     libelletsadr?: string;  
+
+    libelleAE?: string;
+    kActEnt?: number;
+
+    libelleFJ?: string;
+    kFormJuri?: number;
+
+    kpays?: number;
+    pays?: string;
+    nationnalite?: string;
      
 
     /*constructor( nomCommerciale:string, raisonSociale:string, registreCommerce:string) {

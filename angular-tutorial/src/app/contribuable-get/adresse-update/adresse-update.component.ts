@@ -56,7 +56,14 @@ export class AdresseUpdateComponent implements OnInit {
     .subscribe(
       data => {
         this.editForm1.patchValue({id: this.adr.kadresse , numRue: this.adr.numRue , rue: this.adr.rue , cp: this.adr.cp , sadrName: this.adr.kStructureAdr });
-        console.log(data);
+          console.log(data);
+          console.log(this.adr.kadresse);
+          console.log(this.adr.numRue);
+          console.log(this.adr.rue);
+          console.log(this.adr.cp);
+          console.log(this.adr.kStructureAdr);
+          console.log(this.editForm1);
+          console.log(this.adr);
       },
       error => {
         alert(error);
@@ -66,6 +73,19 @@ export class AdresseUpdateComponent implements OnInit {
 
   onSubmit() {
     this.updateAdr();
+    /*
+    onSubmit() {
+    this.contribuableService.modifierAdr(this.editForm1.value)
+      .subscribe(
+        data => {
+            alert('Adresse contribuable updated successfully.');
+            this.router.navigate(['contribuable']);
+        },
+        error => {
+          alert(error);
+        });
+  }
+    */
   }
   gotoList() {
     alert('Adresse contribuable updated successfully.');
