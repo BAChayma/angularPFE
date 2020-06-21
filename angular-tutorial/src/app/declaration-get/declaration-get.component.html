@@ -6,80 +6,170 @@
 </head>
 <body>
 
-	<div style="width: 1200px; height: 1000px; background: rgb(229, 234, 238);">
-		<as-split direction="horizontal">
-						  <as-split-area size="40">
-							  <as-split direction="vertical">
-								  <as-split-area size="10">
-									<h5 class="card-title">Recherche d'un contribuable</h5>
-									<label> Nif: </label>
-									<input type="text" name="nif"/> 
-									<button type="submit" class="btn btn-primary" (click)="rechercheContri(nif)">Recherche</button>
-								  </as-split-area>
+	<div style="width: 1290px; height: 1000px;  margin-left: auto; margin-right: auto;background: rgb(255, 255, 255);">
+		
+		<as-split direction="vertical">
 
-								  <as-split-area size="50" *ngFor="let contribuables of contribuables">
-									<h5 class="card-title">Informations sur un contribuable</h5>
-									<br>
-									<table>
-										<table>
-												<tbody>
-                                                    <tr><td> <div *ngIf="contribuables">  NIF:<input type="text" name="nif" [(ngModel)]="contribuables.nif" readonly></div></td><br></tr>
-                                                    <tr><td> <div *ngIf="contribuables">  Id contribuable:<input type="text" name="kcnc" [(ngModel)]="contribuables.kcnc" readonly></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Nom commerciale:<input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Raison sociale:<input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce"></div></td> <br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale"></div></td> <br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae"></div></td><br></tr>
-												  <tr><td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite"></div></td><br></tr>
-												</tbody>
-										</table>
-									</table>
-									<br>
-									<div>
-										<button type="button" class="btn btn-outline-primary" >Modifier</button>
-									</div>
-								</as-split-area>
+			<as-split-area size="20" *ngFor="let contribuables of contribuables"  >
+				<h5 class="card-title">Contribuable</h5>
+				<table>
+					<table>
+							<tbody >
+							  <tr> <td> <div  *ngIf="contribuables"> <label> NIF: </label> <input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nif" disabled style="border-left-width: 0px"></div></td>
+							  <td> <div  *ngIf="contribuables"> <label> Nom commerciale: </label> <input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale" disabled></div></td>
+							  <td> <div  *ngIf="contribuables"> <label> Raison sociale: </label> <input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale" disabled></div></td> </tr>
 
-								  
-								<as-split-area size="40" *ngIf="contribuables">
-								<h5 class="card-title">Liste des declarations</h5>
-								<br>
-								<table class="table table-hover">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">ID declaration</th>
-                                        <th scope="col">ID contribuable</th>
-                                        <th scope="col">ID impot</th>
-                                        <th scope="col">Mantant declarer</th>
-                                        <th scope="col">Mantant declaration</th>
-                                        <th scope="col">Date declaration</th>
-                                        <button  class="btn btn-outline-primary" [routerLink]="['newDCL']" (click)="ajouterdcl()">Ajouter</button>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                        <ng-container  *ngFor="let dcl of Declaration">
-                                        <tr *ngFor="let d of dcl.declaration">
-                                          <td >{{d.kdcl}}</td>
-                                          <td >{{d.kcnc}}</td>
-                                          <td >{{d.kimpot}}</td>
-                                          <td >{{d.mantantDeclarer}}</td>
-                                          <td >{{d.mantantDeclaration}}</td>
-                                          <td >{{d.datedcl}}</td>
-										  
-										  </tr>
-										  
-                                        </ng-container>
-                                      </tbody>
-							  </table>
-							
-								  </as-split-area>
-							  </as-split>
-						  </as-split-area>
-                        </as-split>
+							  <tr> <td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce" disabled></div></td> 
+							  <td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale" disabled></div></td> </tr>
+							 
+							  <tr> <td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite" disabled></div></td> </tr>
+							</tbody>
+					</table>
+				</table>
+			</as-split-area>
+
+			<as-split-area size="40" *ngFor="let contribuables of contribuables"  >
+				<h5 class="card-title">Déclaration</h5>
+
+				<!-- toolbar -->
+			<div class="row">
+				<div class="col-md-12 mb-4">
+					<button type="button" class="btn btn-elegant" (click)="enableInput()"><i class="far fa-user pr-2" aria-hidden="true"></i>Ajouter</button>
+					<button type="button" class="btn btn-unique"><i class="fas fa-wifi pr-2" aria-hidden="true"></i>Supprimer</button>
+					<button type="button" class="btn btn-pink"><i class="fas fa-plane pr-2" aria-hidden="true"></i>Valider</button>
+				</div>
+			</div>
+
+				<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+		
+					<div class="form-row">
+						
+						<div class="form-group col-md-6">
+							<div class="form-group" >
+								<label for="impotContriName">Nature de l'impot:</label>
+								<div *ngIf="impotsItems.length >= 0">
+								<ng-select formControlName="impotContriName"  id="impotContriName"
+									   [items]="impotsItems"
+									   [virtualScroll]="true"
+									   [searchable]="true" 
+									   bindLabel="abriviation"
+									   bindValue="kimpot"
+									   placeholder="Choisir un impot"
+									   [(ngModel)]="selectedImpotId">
+								</ng-select></div>
+								<label> Selected impot ID: {{selectedImpotId}} </label>
+
+								<!--<select formControlName="impotContriName" name="impotContriName" id="impotContriName" class="form-control" [(ngModel)]="selectedImpotId">
+									<option *ngFor="let option of impotsItems" [value]="option" >{{option}}</option>
+								</select>-->
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="form-group">
+								<label for="per">Périodicité:</label>
+								<input type="text" formControlName="per" placeholder="Périodicité" name="per" class="form-control" id="per" >
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<div class="form-group">
+								<label for="moisEx">Mois/Exercice:</label>
+								<input type="text" formControlName="moisEx" placeholder="Mois/Exercice" name="moisEx" class="form-control" id="moisEx" >
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="form-group">
+								<label for="echDec">Echéance de la déclaration:</label>
+								<input type="text" formControlName="echDec" placeholder="Echéance de la déclaration" name="echDec" class="form-control" id="echDec" >
+							</div>
+						</div>
+					</div>
+
+					<!--<div class="form-group">
+						<label for="impotContriName">Nature de l'impot:</label>
+						<ng-select formControlName="impotContriName"  id="impotContriName"
+							   [items]="impotsContriItems"
+							   [virtualScroll]="true"
+							   [searchable]="true" 
+							   bindLabel="abriviation"
+							   bindValue="kimpot"
+							   placeholder="Choisir un impot"
+							   [(ngModel)]="selectedImpotId">
+						</ng-select>
+						<label> Selected impot ID: {{selectedImpotId}} </label>
+					</div>
+					
+					<div class="form-group">
+						<label for="per">Périodicité:</label>
+						<input type="text" formControlName="per" placeholder="Périodicité" name="per" class="form-control" id="per" >
+					</div>
+
+					<div class="form-group">
+						<label for="moisEx">Mois/Exercice:</label>
+						<input type="text" formControlName="moisEx" placeholder="Mois/Exercice" name="moisEx" class="form-control" id="moisEx" >
+					</div>
+
+					<div class="form-group">
+						<label for="echDec">Echéance de la déclaration:</label>
+						<input type="text" formControlName="echDec" placeholder="Echéance de la déclaration" name="echDec" class="form-control" id="echDec" >
+					</div>-->
+
+				</form>
+			</as-split-area>
+
+			<as-split-area size="40" *ngFor="let contribuables of contribuables"  >
+				<h5 class="card-title">Détails déclaration</h5>
+				<form [formGroup]="addForm1" (ngSubmit)="onSubmit1()">
+
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<div class="form-group">
+								<label for="md">Montant des droits:</label>
+								<input type="text" formControlName="md" placeholder="Montant des droits" name="md" class="form-control" id="md" >
+							</div>
+						</div>
+						<div class="form-group col-md-4">
+							<div class="form-group">
+								<label for="mv">Montant versé:</label>
+								<input type="text" formControlName="mv" placeholder="Echéance de la déclaration" name="mv" class="form-control" id="mv" >
+							</div>
+						</div>
+						<div class="form-group col-md-4">
+							<div class="form-group">
+								<label for="rp">Reste à payer:</label>
+								<input type="text" formControlName="rp" placeholder="Reste à payer" name="rp" class="form-control" id="rp" >
+							</div>
+						</div>
+					</div>
+
+					<!--<div class="form-group">
+						<label for="md">Montant des droits:</label>
+						<input type="text" formControlName="md" placeholder="Montant des droits" name="md" class="form-control" id="md" >
+					</div>
+
+					<div class="form-group">
+						<label for="mv">Montant versé:</label>
+						<input type="text" formControlName="mv" placeholder="Echéance de la déclaration" name="mv" class="form-control" id="mv" >
+					</div>
+
+					<div class="form-group">
+						<label for="rp">Reste à payer:</label>
+						<input type="text" formControlName="rp" placeholder="Reste à payer" name="rp" class="form-control" id="rp" >
+					</div>-->
+
+				</form>
+			</as-split-area>
+
+
+
+		</as-split>
 						  
-	  </div>
+	</div>
 	  
 </body>
 </html>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { HeaderComponent } from './header/header.component';
@@ -42,7 +43,7 @@ const routes: Routes = [
   },
   {path: 'inscription', component: InscriptionComponent},
   {path: 'contribuable', component: ContribuableGetComponent},
-  {path: 'contribuable/:nif', component: ContribuableGetComponent},
+  {path: 'consulterContribuable/:nif', component: ContribuableGetComponent},
   {path: 'updateContribuable', component: ContribuableUpdateComponent},
   {path: 'updateCb/:kcompte', component: CbUpdateComponent , data: [{isProd: true}]},
   {path: 'Administration', component: AdministrationComponent},

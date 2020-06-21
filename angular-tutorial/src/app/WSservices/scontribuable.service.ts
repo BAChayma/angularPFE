@@ -187,6 +187,13 @@ LOVPays(){
   return this.httpClient.get<Pays[]>(this.LOVPAYSUrl , this.httpOptions );
 } 
 
+/* list des impots */
+ImpotContriByNifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/compteBancaieWS/CBInfoContribuableById?nif=';
+ImpotContriByNif(nif): Observable<any>{
+  //return this.httpClient.get<any>(`${this.ImpotContriByNifUrl}?nif=${nif}`);
+  return this.httpClient.get<any>(this.ImpotContriByNif+'123456') 
+} 
+
 }
 
 

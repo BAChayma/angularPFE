@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SconnexionService } from '../WSservices/sconnexion.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,21 @@ import { SconnexionService } from '../WSservices/sconnexion.service';
 })
 export class HeaderComponent implements OnInit {
 
+  isCollapsed: boolean = true;
+  username: string;
+  mdp: string;
+
+  isLoggedIn$: Observable<boolean>;
+
   constructor(public loginService:SconnexionService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
   }
+
+  onLogout() {
+    this.loginService.logout();
+  }
+
 
 }

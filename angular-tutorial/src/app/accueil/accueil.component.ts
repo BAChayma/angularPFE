@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SconnexionService } from '../WSservices/sconnexion.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ContribuableUser } from '../classes/ContribuableUser';
 
 @Component({
   selector: 'app-accueil',
@@ -10,7 +11,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AccueilComponent implements OnInit {
 
-  Contribuableuser: any;
+  ContribuableUser: any;
+  //Contribuableuser: ContribuableUser[];
+
+  public edited = false;
 
   constructor(private cnxService: SconnexionService , private router: Router, private http: HttpClient) { }
 
@@ -25,14 +29,22 @@ export class AccueilComponent implements OnInit {
   list(){
     this.cnxService.ListUserContri().subscribe(
     (data) => {
-      this.Contribuableuser = data;
-      this.Contribuableuser = Array.of(this.Contribuableuser); 
-      console.log(this.Contribuableuser);
+      this.ContribuableUser = data;
+      this.ContribuableUser = Array.of(this.ContribuableUser); 
+      console.log(this.ContribuableUser);
     },
     err => console.error(err) ,
     () => console.log('ListUserContri completed') 
     )
-    return this.Contribuableuser;
+    return this.ContribuableUser;
+  }
+
+  nextPage(cu: ContribuableUser): void {
+    this.router.navigate(['Consultercontribuable']);
+  };
+
+  isclicked(){
+    return false; 
   }
 
 }

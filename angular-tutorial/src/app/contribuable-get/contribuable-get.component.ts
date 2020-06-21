@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contribuable } from '../classes/Contribuable';
 import { ScontribuableService } from '../WSservices/scontribuable.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import {parseHttpResponse} from 'selenium-webdriver/http';
@@ -30,6 +30,8 @@ export class ContribuableGetComponent implements OnInit {
 
   Declaration: any[];
 
+  contribuableImpot: any;
+
 
     nif: string;
     capitalSociale = {};
@@ -50,12 +52,28 @@ export class ContribuableGetComponent implements OnInit {
       })
     }
 
-  constructor(private cdeclarationService: SdeclarationService ,private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient) { }
+  constructor(private cdeclarationService: SdeclarationService ,private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) { }
 
+  c: Contribuable;
   ngOnInit() {
+
+    this.c = new Contribuable();
+
+    this.nif = this.route.snapshot.params['nif'];
+
+    this.recherche(this.nif);
+    
+    /*this.contribuableService.getContriByNif(this.nif)
+      .subscribe(data => {
+        this.c = data;
+        console.log(data);
+        console.log(this.c);
+      }, 
+      error => console.log(error));*/
+      
     }
 
-    list(){
+    /*list(){
       this.contribuableService.getAllContribuable().subscribe(
       (res) => {
         this.contribuables = res;
@@ -66,7 +84,7 @@ export class ContribuableGetComponent implements OnInit {
       () => console.log('getAllContribuable completed') 
       )
       return this.contribuables;
-    }
+    }*/
 
     RechercheContri(nif)  
       {
@@ -99,6 +117,7 @@ export class ContribuableGetComponent implements OnInit {
           this.recherche1(this.nif);
           this.recherche2(this.nif);
           this.recherche3(this.nif);
+          this.ListObligationFiscale(this.nif);
           return this.contribuables;
      }
 
@@ -142,6 +161,34 @@ export class ContribuableGetComponent implements OnInit {
          () => console.log('DclContriByNif completed') 
          )
          return this.Declaration;
+    }
+
+    recherche4(nif)  
+     {
+       this.contribuableService.ImpotContriByNif(this.nif).subscribe(
+         (data) => { 
+           this.Declaration = data;
+           this.Declaration = Array.of(this.Declaration); 
+           console.log(this.Declaration);
+          },
+         err => console.error(err), 
+         () => console.log('DclContriByNif completed') 
+         )
+         return this.Declaration;
+    }
+
+    ListObligationFiscale(nif)
+    {
+      this.cdeclarationService.LOVImpotContri1().subscribe(
+        (data) => { 
+          this.contribuableImpot = data;
+          this.contribuableImpot = Array.of(this.contribuableImpot); 
+          console.log(this.contribuableImpot);
+         },
+        err => console.error(err), 
+        () => console.log('LOVImpotContri completed') 
+        )
+        return this.contribuableImpot;
     }
 
      /*update(nif) {

@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 import { ConnexionComponent } from './connexion/connexion.component';
@@ -77,7 +78,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     NgSelectModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatTabsModule
+    MatTabsModule,
+    MatMenuModule
   ],
   providers: [
    

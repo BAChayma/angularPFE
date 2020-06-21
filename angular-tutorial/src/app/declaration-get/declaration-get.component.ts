@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SdeclarationService } from '../WSservices/sdeclaration.service';
 import { Declaration } from '../classes/Declaration';
+import { Contribuable } from '../classes/Contribuable';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { contribuableImpot } from '../classes/contribuableImpot';
 
 @Component({
   selector: 'app-declaration-get',
@@ -15,6 +18,12 @@ export class DeclarationGetComponent implements OnInit {
   nif: string;
   Declaration: any[];
   Declarations: any[];
+
+  impotsItems = [];
+  selectedImpotId: number;
+  addForm: FormGroup;
+  addForm1: FormGroup;
+
   
   //dcl: Declaration;
   //Declaration: any[];
@@ -24,11 +33,51 @@ export class DeclarationGetComponent implements OnInit {
       'Content-Type': 'application/json'
     })
   }
+  //formBuilder: any;
 
-  constructor(private cdeclarationService: SdeclarationService , private router: Router ,  private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) 
+  {
+    
+    /*this.cdeclarationService.LOVIC().subscribe(data => {  
+      this.impotsItems = data;
+      this.impotsItems = Array.of(this.impotsItems); 
+      console.log(data);
+      console.log(this.impotsItems);
+    });*/
 
-  ngOnInit(): void {
   }
+
+  c: Contribuable;
+  ngOnInit(): void {
+    
+    this.c = new Contribuable();
+    this.nif = this.route.snapshot.params['nif'];
+    this.rechercheContri(this.nif);
+
+    this.addForm = this.formBuilder.group({
+      impotContriName: ['', Validators.required],
+      per: ['', Validators.required],
+      moisEx: ['', Validators.required],
+      echDec: ['', Validators.required]
+    });
+
+    this.addForm1 = this.formBuilder.group({
+      md: ['', Validators.required],
+      mv: ['', Validators.required],
+      rp: ['', Validators.required]
+    });
+
+    this.cdeclarationService.LOVImpotContri(this.nif).subscribe(data => {  
+      this.impotsItems = data;
+      this.impotsItems = Array.of(this.impotsItems); 
+      console.log(data);
+      console.log(this.impotsItems);
+    });
+
+    this.disabledInput();
+
+  }
+ 
 
   rechercheContri(nif)  
       {
@@ -74,5 +123,51 @@ export class DeclarationGetComponent implements OnInit {
           this.declarations = this.declarations.filter(u => u !== dcl);
         })
       };*/
+
+      onSubmit() {
+      }
+
+      onSubmit1() {
+      }
+
+      disabledInput(){
+        let impotContriName = this.addForm.get('impotContriName');
+        let per = this.addForm.get('per');
+        let moisEx = this.addForm.get('moisEx');
+        let echDec = this.addForm.get('echDec');
+
+        impotContriName.disable();
+        per.disable();
+        moisEx.disable();
+        echDec.disable();
+
+        let md = this.addForm1.get('md');
+        let mv = this.addForm1.get('mv');
+        let rp = this.addForm1.get('rp');
+
+        md.disable();
+        mv.disable();
+        rp.disable();
+      }
+
+      enableInput(){
+        let impotContriName = this.addForm.get('impotContriName');
+        let per = this.addForm.get('per');
+        let moisEx = this.addForm.get('moisEx');
+        let echDec = this.addForm.get('echDec');
+
+        impotContriName.enable();
+        per.enable();
+        moisEx.enable();
+        echDec.enable();
+
+        let md = this.addForm1.get('md');
+        let mv = this.addForm1.get('mv');
+        let rp = this.addForm1.get('rp');
+
+        md.enable();
+        mv.enable();
+        rp.enable();
+      }
 
 }

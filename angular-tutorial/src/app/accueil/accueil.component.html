@@ -1,11 +1,16 @@
 
 
-<table class="table table-hover">
+<table class="table table-hover" >
     <thead>
       <tr>
-        <th scope="col">ID user</th>
-        <th scope="col">ID contribuable</th>
+        <!--<th scope="col">ID user</th>
+        <th scope="col">ID contribuable</th>-->
         <th scope="col">NIF</th>
+        <th scope="col">Raison sociale</th>
+        <th scope="col">Nom commerciale</th>
+        <th scope="col">Registre commerciale</th>
+        <!--<th scope="col">Forme juridique</th>
+        <th scope="col">Activite entreprise</th>-->
         
         <th scope="col"> Operation</th>
        
@@ -13,16 +18,19 @@
     </thead>
 
     <tbody>
-      <!--<ng-container *ngFor="let cu of Contribuableuser">  let c of cu.contribuableuser  -->  
-        <tr *ngFor="let cu of Contribuableuser">
-              <td> {{cu.Contribuableuser?.kuser}} </td>
-              <td> {{cu.Contribuableuser?.kcnc}} </td>
-              <td> {{cu.Contribuableuser?.nif}} </td>
-              <!--<td>{{cu.kuser}}</td>
-              <td>{{cu.kcnc}}</td>
-              <td>{{cu.nif}}</td>-->
+      <!--<ng-container *ngFor="let c of ContribuableUser">  --> 
+        <tr *ngFor="let cu of ContribuableUser">
+              <!--<td> {{cu.contribuableUser?.kuser}} </td>
+              <td> {{cu.contribuableUser?.kcnc}} </td>-->
+              <td> {{cu.contribuableUser?.nif}} </td>
+              <td> {{cu.contribuableUser?.raisonSociale}} </td>
+              <td> {{cu.contribuableUser?.nomCommerciale}} </td>
+              <td> {{cu.contribuableUser?.registreCommerce}} </td>
+              <!--<td> {{cu.contribuableUser?.libellefj}} </td>
+              <td> {{cu.contribuableUser?.libelleae}} </td>-->
+            
               <td> 
-                <button type="button" class="btn btn-outline-primary" routerLink="/contribuable/{{cu.nif}}" >Consulter</button>
+                <button type="button" class="btn btn-outline-primary" routerLink="/consulterContribuable/{{cu.contribuableUser?.nif}}" >Consulter</button>
               </td>
               </tr>
       <!--</ng-container>-->
@@ -30,3 +38,4 @@
     </tbody>
 
   </table>
+

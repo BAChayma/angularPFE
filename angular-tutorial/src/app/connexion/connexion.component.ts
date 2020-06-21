@@ -51,12 +51,12 @@ export class ConnexionComponent implements OnInit {
   }
 
   gotoList() {
-    alert('Connected successfully.');
+    //alert('Connected successfully.');
     this.router.navigate(['Accueil']);
   }
 
   gotoCnx() {
-    alert('Username or password wrong!.');
+    //alert('Username or password wrong!.');
     this.router.navigate(['connexion']);
   }
 
