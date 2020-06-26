@@ -31,12 +31,12 @@ export class SconnexionService {
 
   username: string;
   mdp: string;
-  public SERVER_URL = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/UtilisateurWS/connexion';
+  public SERVER_URL = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/UtilisateurWS/login';
   
   getConnexion(username , mdp) :Observable<any> 
   {
     this.loggedIn.next(true);
-    return this.httpClient.get<any>(`${this.SERVER_URL}?mdp=${mdp}&username=${username}` , this.httpOptions ); 
+    return this.httpClient.post<any>(`${this.SERVER_URL}?mdp=${mdp}&username=${username}` , this.httpOptions ); 
   }
 
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}

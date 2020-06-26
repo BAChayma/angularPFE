@@ -25,14 +25,14 @@ export class SdeclarationService {
  getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContribuableById?nif=';
  getContribuableById1(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.getContribuableByIdUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.getContribuableByIdUrl+'123456') 
+  return this.httpClient.get<any>(this.getContribuableByIdUrl+nif) 
   //return this.httpClient.get<any>(this.getContribuableByIdUrl + nif);
 } 
 
 dclcontribynifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/DeclarationWS/DclAll?nif=';
 DclContriByNif(nif: string): Observable<any>{
   //return this.httpClient.get<any>(`${this.dclcontribynifUrl}${nif}`);
-  return this.httpClient.get<any>(this.dclcontribynifUrl+'123456') 
+  return this.httpClient.get<any>(this.dclcontribynifUrl+nif) 
   //return this.httpClient.get<any>(this.dclcontribynifUrl + nif);
 }
 
@@ -60,10 +60,10 @@ LOVImpotContri(nif: string){
 } 
 
 LOVImpotContriUrl1: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/ContribuableImpotWS/ImpotByContribuable?nif=';
-LOVImpotContri1(){
+LOVImpotContri1(nif: string){
   //return this.httpClient.get<contribuableImpot[]>(`${this.LOVImpotContriUrl1}${nif}`);
   //return this.httpClient.get<any>(`${this.LOVImpotContriUrl1}${nif}`);
-  return this.httpClient.get<contribuableImpot[]>(this.LOVImpotContriUrl1+'123456' , this.httpOptions); 
+  return this.httpClient.get<contribuableImpot[]>(this.LOVImpotContriUrl1+nif , this.httpOptions); 
 } 
 
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>  
+<title>Dossier contribuable</title>
+</head>
+<body>
+
+	<div style="width: 1290px; height: 1000px;  margin-left: auto; margin-right: auto;background: rgb(255, 255, 255);">
+		
+		<as-split direction="vertical">
+
+			<as-split-area size="20" *ngFor="let contribuables of contribuables"  >
+				<h5 class="card-title">Contribuable</h5>
+				<table>
+					<table>
+							<tbody >
+							  <tr> <td> <div  *ngIf="contribuables"> <label> NIF: </label> <input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nif" disabled style="border-left-width: 0px"></div></td>
+							  <td> <div  *ngIf="contribuables"> <label> Nom commerciale: </label> <input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale" disabled></div></td>
+							  <td> <div  *ngIf="contribuables"> <label> Raison sociale: </label> <input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale" disabled></div></td> </tr>
+
+							  <tr> <td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce" disabled></div></td> 
+							  <td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale" disabled></div></td> </tr>
+							 
+							  <tr> <td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae" disabled></div></td>
+							  <td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite" disabled></div></td> </tr>
+							</tbody>
+					</table>
+				</table>
+            </as-split-area>
+
+
+            <as-split-area size="20" *ngFor="let contribuables of contribuables"  >
+                <h5 class="card-title">Liste des impayés</h5>
+
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Code de la declaration</th>
+                        <th scope="col">Exercice</th>
+                        <th scope="col"> Nature de l'impot</th>
+                        <th scope="col"> Mois d'effet</th>
+                        <th scope="col"> Montant du</th>
+                        <th scope="col"> Montant versé</th>
+                        <th scope="col"> Montant à verser</th>
+                      </tr>
+                    </thead>
+                
+                  </table>
+
+            </as-split-area>
+
+
+            <as-split-area size="20" *ngFor="let contribuables of contribuables"  >
+                <h5 class="card-title">Paiements</h5>
+                
+                <form [formGroup]="addForm1" (ngSubmit)="onSubmit1()">
+
+                    <div class="form-group">
+						<label for="dr">Date de reglement:</label>
+						<input type="text"  formControlName="dr" placeholder="Date de reglement" name="dr" class="form-control" id="dr" >
+					</div>
+
+					<div class="form-group" >
+						<label for="nt">N° de la transaction:</label>
+						<input type="text" formControlName="nt" placeholder="N° de la transaction" name="nt" class="form-control" id="nt" >
+					</div>
+
+					<div class="form-group">
+						<label for="mp">Mode de paiement:</label>
+						<input type="text" formControlName="mp" placeholder="Mode de paiement" name="mp" class="form-control" id="mp" >
+                    </div>
+
+                    <div class="form-group">
+						<label for="banq">Banque:</label>
+						<input type="text" formControlName="banq" placeholder="Banque" name="banq" class="form-control" id="banq" >
+                    </div>
+
+                    <div class="form-group">
+						<label for="nc">N° de la carte:</label>
+						<input type="text" formControlName="nc" placeholder="N° de la carte" name="nc" class="form-control" id="nc" >
+                    </div>
+                    
+
+				</form>
+            </as-split-area>
+            
+</as-split>
+</div>
+</body>
+</html>

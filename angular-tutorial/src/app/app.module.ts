@@ -11,7 +11,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
 
-
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ContribuableGetComponent } from './contribuable-get/contribuable-get.component';
@@ -38,6 +37,8 @@ import { DeclarationNewComponent } from './declaration-get/declaration-new/decla
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { MenuComponent } from './menu/menu.component';
+import { PaiementComponent } from './paiement/paiement.component';
 
 
 
@@ -66,7 +67,9 @@ import { AccueilComponent } from './accueil/accueil.component';
     DeclarationNewComponent,
     HeaderComponent,
     LogoutComponent,
-    AccueilComponent
+    AccueilComponent,
+    MenuComponent,
+    PaiementComponent
   ],
   imports: [
     BrowserModule,

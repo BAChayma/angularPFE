@@ -7,6 +7,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { MenuComponent } from './menu/menu.component';
 
 import { ContribuableGetComponent } from './contribuable-get/contribuable-get.component';
 import {ContribuableUpdateComponent} from './contribuable-get/contribuable-update/contribuable-update.component';
@@ -33,6 +34,9 @@ import { FormejuridiqueUpdateComponent } from './administration/formejuridique-g
 import { DeclarationGetComponent } from './declaration-get/declaration-get.component';
 import { DeclarationNewComponent } from './declaration-get/declaration-new/declaration-new.component';
 
+import { PaiementComponent } from './paiement/paiement.component';
+
+
 const routes: Routes = [
   {path: '',   redirectTo: '/connexion', pathMatch: 'full' },
   {path: 'connexion', component: ConnexionComponent },
@@ -40,10 +44,13 @@ const routes: Routes = [
     path: 'Accueil',
     //canActivate: [AuthGaurdService],
     component: AccueilComponent
-  },
-  {path: 'inscription', component: InscriptionComponent},
+},
+
   {path: 'contribuable', component: ContribuableGetComponent},
-  {path: 'consulterContribuable/:nif', component: ContribuableGetComponent},
+  {path: 'declaration', component: DeclarationGetComponent},
+  {path: 'paiement', component: PaiementComponent},
+
+  {path: 'inscription', component: InscriptionComponent},
   {path: 'updateContribuable', component: ContribuableUpdateComponent},
   {path: 'updateCb/:kcompte', component: CbUpdateComponent , data: [{isProd: true}]},
   {path: 'Administration', component: AdministrationComponent},
@@ -59,11 +66,22 @@ const routes: Routes = [
   {path: 'updateFJ/:kFormJuri', component: FormejuridiqueUpdateComponent},
   {path: 'newADR', component: AdresseNewComponent},
   {path: 'newCB', component: CbNewComponent},
-  {path: 'declaration', component: DeclarationGetComponent},
   {path: 'newDCL', component: DeclarationNewComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'header', component: HeaderComponent},
+  {path: 'header', component: HeaderComponent 
+  },
+
+  {path: 'menu/:nif', component: MenuComponent,
+  children: [
+    { path: 'consulterContribuable', component: ContribuableGetComponent},
+    { path: 'declarationContribuable', component: DeclarationGetComponent},
+    {path: 'paiementContribuable', component: PaiementComponent}
+  ]
+  },
+
   {path: '', component: AccueilComponent}
+  
+
 ];
 
 @NgModule({

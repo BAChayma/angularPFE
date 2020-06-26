@@ -40,7 +40,7 @@ export class AccueilComponent implements OnInit {
   }
 
   nextPage(cu: ContribuableUser): void {
-    this.router.navigate(['Consultercontribuable']);
+    this.router.navigate(['menu']);
   };
 
   isclicked(){

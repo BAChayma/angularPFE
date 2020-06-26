@@ -18,22 +18,19 @@
     </thead>
 
     <tbody>
-      <!--<ng-container *ngFor="let c of ContribuableUser">  --> 
-        <tr *ngFor="let cu of ContribuableUser">
-              <!--<td> {{cu.contribuableUser?.kuser}} </td>
-              <td> {{cu.contribuableUser?.kcnc}} </td>-->
-              <td> {{cu.contribuableUser?.nif}} </td>
-              <td> {{cu.contribuableUser?.raisonSociale}} </td>
-              <td> {{cu.contribuableUser?.nomCommerciale}} </td>
-              <td> {{cu.contribuableUser?.registreCommerce}} </td>
-              <!--<td> {{cu.contribuableUser?.libellefj}} </td>
-              <td> {{cu.contribuableUser?.libelleae}} </td>-->
-            
+      <ng-container *ngFor="let c of ContribuableUser" >      
+        <tr *ngFor="let cu of c.contribuableUser">
+          <td> {{cu.nif}} </td>
+          <td> {{cu.raisonSociale}} </td>
+          <td> {{cu.nomCommerciale}} </td>
+          <td> {{cu.registreCommerce}} </td>
               <td> 
-                <button type="button" class="btn btn-outline-primary" routerLink="/consulterContribuable/{{cu.contribuableUser?.nif}}" >Consulter</button>
+                <!--<button type="button" class="btn btn-outline-primary" routerLink="/consulterContribuable/{{cu.contribuableUser?.nif}}" >Consulter</button>-->
+                <!--  -->
+                <button type="button" class="btn btn-outline-primary" routerLink="/menu/{{cu.nif}}" >Consulter</button>
               </td>
-              </tr>
-      <!--</ng-container>-->
+        </tr>
+      </ng-container>
               
     </tbody>
 

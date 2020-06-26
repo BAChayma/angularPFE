@@ -6,6 +6,7 @@
 <title>Consulter dossier contribuable</title>
 </head>
 <body>
+	<router-outlet></router-outlet>
 		<!--<h5>Recherche d'un contribuable</h5>
 		<label> NIF: </label>
 		<input type="text" name="nif"/> 
@@ -69,12 +70,12 @@
 							<tbody>
 								<ng-container  *ngFor="let adrr of Adresse">
 								<tr *ngFor="let adr of adrr.adresse">
-								  <td >{{adr.kadresse}}</td>
-								  <td >{{adr.numrue}}</td>
-								  <td >{{adr.rue}}</td>
-								  <td >{{adr.cp}}</td>
-								  <td >{{adr.libellesadr}}</td>
-								  <td >{{adr.libelletsadr}}</td>
+								  <td *ngIf="adr" >{{adr.kadresse}}</td>
+								  <td *ngIf="adr" >{{adr.numrue}}</td>
+								  <td *ngIf="adr" >{{adr.rue}}</td>
+								  <td *ngIf="adr" >{{adr.cp}}</td>
+								  <td *ngIf="adr" >{{adr.libellesadr}}</td>
+								  <td *ngIf="adr" >{{adr.libelletsadr}}</td>
 								  <!--<td> 
 									<button type="button" class="btn btn-outline-primary"  routerLink="/updateAdr/{{adr.kadresse}}" >Modifier</button> 
 									<button type="button" class="btn btn-outline-secondary" (click)="deleteADR(adr)">Supprimer</button>
@@ -99,10 +100,10 @@
 							<tbody>
 								<ng-container  *ngFor="let cb of CompteBancaire">
 									<tr>
-										<td>{{cb.compteBancaire?.kcompte}}</td>
-										<td>{{cb.compteBancaire?.rib}}</td>
-										<td>{{cb.compteBancaire?.nomBanque}}</td>
-										<td>{{cb.compteBancaire?.libelleAgence}}</td>	
+										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.kcompte}}</td>
+										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.rib}}</td>
+										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.nomBanque}}</td>
+										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.libelleAgence}}</td>	
 										<!--<td> 
 											<button type="button" class="btn btn-outline-primary" routerLink="/updateCb/{{cb.compteBancaire?.kcompte}}" >Modifier</button> 
 											<button type="button" class="btn btn-outline-secondary" (click)="deletecb(cb)">Supprimer</button>
@@ -128,8 +129,8 @@
 							<tbody>
 								<ng-container  *ngFor="let ci of contribuableImpot">
 									<tr>
-										<td>{{ci.contribuableImpot?.abriviation}}</td>
-										<td>{{ci.contribuableImpot?.taux}}</td>
+										<td *ngIf="contribuableImpot">{{ci.contribuableImpot?.abriviation}}</td>
+										<td *ngIf="contribuableImpot">{{ci.contribuableImpot?.taux}}</td>
 										
 									</tr> 
 								</ng-container>
@@ -153,12 +154,12 @@
 				<tbody>
 					<ng-container  *ngFor="let dcl of Declaration">
 					<tr *ngFor="let d of dcl.declaration">
-					  <td >{{d.kdcl}}</td>
-					  <td >{{d.kcnc}}</td>
-					  <td >{{d.kimpot}}</td>
-					  <td >{{d.mantantDeclarer}}</td>
-					  <td >{{d.mantantDeclaration}}</td>
-					  <td >{{d.datedcl}}</td>
+					  <td *ngIf="d">{{d.kdcl}}</td>
+					  <td *ngIf="d">{{d.kcnc}}</td>
+					  <td *ngIf="d">{{d.kimpot}}</td>
+					  <td *ngIf="d">{{d.mantantDeclarer}}</td>
+					  <td *ngIf="d">{{d.mantantDeclaration}}</td>
+					  <td *ngIf="d">{{d.datedcl}}</td>
 					  </tr>	  
 					</ng-container>
 				  </tbody>
@@ -170,6 +171,9 @@
 		</mat-tab>
 
 	</mat-tab-group>
+
+	
 	  
 </body>
 </html>
+

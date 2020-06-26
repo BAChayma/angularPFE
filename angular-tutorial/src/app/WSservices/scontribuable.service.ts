@@ -42,31 +42,31 @@ export class ScontribuableService {
  getContriByNifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContriDclByNif?nif=';
  getContriByNif(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.getContriByNifUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.getContriByNifUrl+'123456') 
+  return this.httpClient.get<any>(this.getContriByNifUrl+nif) 
 } 
 
 getContribuableByIdUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/InfoContribuableById?nif=';
  getContribuableById1(nif : string): Observable<any>{
   //return this.httpClient.get<any>(`${this.getContribuableByIdUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.getContribuableByIdUrl+'123456') 
+  return this.httpClient.get<any>(this.getContribuableByIdUrl+nif) 
 } 
 
 RechercheContribuableUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/contribuableWs/RechercheContribuable?nif=';
 RechercheContribuable(nif : string): Observable<any>{
   //return this.httpClient.get<any>(`${this.RechercheContribuableUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.RechercheContribuableUrl+'123456') 
+  return this.httpClient.get<any>(this.RechercheContribuableUrl+nif) 
 } 
 
 adrcontribynifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/adresseWS/AdresseInfoContribuableById?nif=';
 AdrContriByNif(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.adrcontribynifUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.adrcontribynifUrl+'123456') 
+  return this.httpClient.get<any>(this.adrcontribynifUrl+nif) 
 } 
 
 cbcontribynifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/compteBancaieWS/CBInfoContribuableById?nif=';
 CbContriByNif(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.cbcontribynifUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.cbcontribynifUrl+'123456') 
+  return this.httpClient.get<any>(this.cbcontribynifUrl+nif) 
 } 
 
  SupprimerContribuable(nif) {
@@ -191,7 +191,7 @@ LOVPays(){
 ImpotContriByNifUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/compteBancaieWS/CBInfoContribuableById?nif=';
 ImpotContriByNif(nif): Observable<any>{
   //return this.httpClient.get<any>(`${this.ImpotContriByNifUrl}?nif=${nif}`);
-  return this.httpClient.get<any>(this.ImpotContriByNif+'123456') 
+  return this.httpClient.get<any>(this.ImpotContriByNif+nif) 
 } 
 
 }
