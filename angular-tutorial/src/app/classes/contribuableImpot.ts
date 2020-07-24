@@ -1,3 +1,4 @@
+import {contribuableImpotDetail} from './contribuableImpotDetail';
 export class contribuableImpot {  
 
     kimpot: number;
@@ -10,6 +11,7 @@ export class contribuableImpot {
     kimpotcontribuable: number;
     kcnc: number;
  
-    contribuableImpots: []
+    contribuableImpot: contribuableImpotDetail[] ;
+    //contribuableImpots: []
  
  }

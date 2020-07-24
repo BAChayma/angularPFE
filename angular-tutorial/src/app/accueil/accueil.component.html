@@ -3,15 +3,10 @@
 <table class="table table-hover" >
     <thead>
       <tr>
-        <!--<th scope="col">ID user</th>
-        <th scope="col">ID contribuable</th>-->
         <th scope="col">NIF</th>
         <th scope="col">Raison sociale</th>
         <th scope="col">Nom commerciale</th>
         <th scope="col">Registre commerciale</th>
-        <!--<th scope="col">Forme juridique</th>
-        <th scope="col">Activite entreprise</th>-->
-        
         <th scope="col"> Operation</th>
        
       </tr>
@@ -25,8 +20,6 @@
           <td> {{cu.nomCommerciale}} </td>
           <td> {{cu.registreCommerce}} </td>
               <td> 
-                <!--<button type="button" class="btn btn-outline-primary" routerLink="/consulterContribuable/{{cu.contribuableUser?.nif}}" >Consulter</button>-->
-                <!--  -->
                 <button type="button" class="btn btn-outline-primary" routerLink="/menu/{{cu.nif}}" >Consulter</button>
               </td>
         </tr>
@@ -35,4 +28,3 @@
     </tbody>
 
   </table>
-

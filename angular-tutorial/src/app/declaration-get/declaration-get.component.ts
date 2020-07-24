@@ -6,6 +6,16 @@ import { Declaration } from '../classes/Declaration';
 import { Contribuable } from '../classes/Contribuable';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { contribuableImpot } from '../classes/contribuableImpot';
+import { SdataService } from '../WSservices/sdata.service';
+import { ImpotDetail } from '../classes/ImpotDetail';
+import { Impot } from '../classes/Impot';
+import { contribuableImpotDetail } from '../classes/contribuableImpotDetail';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DeclarationNewComponent } from './declaration-new/declaration-new.component';
+import { PeriodiciteDet } from '../classes/PeriodiciteDet';
+import { Periodicite } from '../classes/Periodicite';
+import { datailPeriodiciteDet } from '../classes/datailPeriodiciteDet';
+import { datailPeriodicite } from '../classes/datailPeriodicite';
 
 @Component({
   selector: 'app-declaration-get',
@@ -19,8 +29,19 @@ export class DeclarationGetComponent implements OnInit {
   Declaration: any[];
   Declarations: any[];
 
-  impotsItems = [];
-  selectedImpotId: number;
+  selectedImpotId: any;
+  impotItems : contribuableImpotDetail[];
+  contribuableImpot : contribuableImpot[];
+
+  selectedPeriodId: any;
+  periodItems : PeriodiciteDet[];
+  periodicite : Periodicite[];
+  perItems = [];
+
+  selectedDetPeriodId: any;
+  detperiodItems : datailPeriodiciteDet[];
+  detPer : datailPeriodicite[];
+
   addForm: FormGroup;
   addForm1: FormGroup;
 
@@ -33,26 +54,23 @@ export class DeclarationGetComponent implements OnInit {
       'Content-Type': 'application/json'
     })
   }
-  //formBuilder: any;
 
-  constructor(private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) 
+  constructor(public dataService:SdataService, public dialog: MatDialog, private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) 
   {
     
-    /*this.cdeclarationService.LOVIC().subscribe(data => {  
-      this.impotsItems = data;
-      this.impotsItems = Array.of(this.impotsItems); 
-      console.log(data);
-      console.log(this.impotsItems);
-    });*/
-
   }
 
   c: Contribuable;
   ngOnInit(): void {
     
     this.c = new Contribuable();
-    this.nif = this.route.snapshot.params['nif'];
+
+    this.nif = this.dataService.getsharedNif();  
+    console.log(this.nif);
     this.rechercheContri(this.nif);
+
+    /*this.nif = this.route.snapshot.params['nif'];
+    this.rechercheContri(this.nif);*/
 
     this.addForm = this.formBuilder.group({
       impotContriName: ['', Validators.required],
@@ -67,16 +85,65 @@ export class DeclarationGetComponent implements OnInit {
       rp: ['', Validators.required]
     });
 
-    this.cdeclarationService.LOVImpotContri(this.nif).subscribe(data => {  
-      this.impotsItems = data;
-      this.impotsItems = Array.of(this.impotsItems); 
-      console.log(data);
-      console.log(this.impotsItems);
-    });
-
+    this.ListObligationFiscale();
+    this.getPeriodiciteByImpot();
+    this.getDetPeriodiciteByPer();
     this.disabledInput();
 
   }
+
+
+  getPeriodiciteByImpot(){
+    /*this.cdeclarationService.LOVPeriodicite(this.selectedImpotId).subscribe(data => {  
+      console.log(this.selectedImpotId);
+      this.periodItems = data.periodicite;
+      console.log(data);
+      console.log(this.periodItems); 
+    });*/
+  this.cdeclarationService.LOVPeriodicite(this.selectedImpotId).subscribe(data => {  
+    console.log(this.selectedImpotId);
+    this.perItems = data;
+    this.perItems = Array.of(this.perItems); 
+    console.log(data);
+    console.log(this.perItems);
+
+    this.getDetPeriodiciteByPer();
+  });
+  }
+
+  getDetPeriodiciteByPer(){
+    this.cdeclarationService.LOVDetailPeriodicite(this.selectedPeriodId).subscribe(data => {  
+      console.log(this.selectedPeriodId);
+      this.detperiodItems = data.datailPeriodicite;
+      console.log(data);
+      console.log(this.detperiodItems); 
+  });
+  }
+  
+
+  /*getImpot(){
+    this.cdeclarationService.LOVImpotDupp().subscribe(data => {  
+      this.impotItems = data.impot;
+      console.log(data);
+      console.log(this.impotItems); 
+  });
+  }*/
+
+  /* impot par coontribuable */
+  ListObligationFiscale()
+    {
+      this.cdeclarationService.LOVImpotContri1(this.nif).subscribe(
+        (data) => { 
+          this.impotItems = data.contribuableImpot;
+          console.log(data);
+          console.log(this.impotItems); 
+         },
+        err => console.error(err), 
+        () => console.log('LOVImpotContri completed') 
+        )
+        return this.impotItems;
+    }
+  /* fin */
  
 
   rechercheContri(nif)  
@@ -108,21 +175,9 @@ export class DeclarationGetComponent implements OnInit {
          return this.Declaration;
     }
 
-    /*editDcl(kdcl: number){
-      this.router.navigate(['updateDcl', kdcl]);
-    };*/
-
     ajouterdcl() {
       this.router.navigate(['newDCL']);
     }
-
-    /*//declarations: Declaration[];
-    deleteADR(dcl: Declaration): void {
-      this.cdeclarationService.supprimerdcl(dcl.kdcl)
-        .subscribe( data => {
-          this.declarations = this.declarations.filter(u => u !== dcl);
-        })
-      };*/
 
       onSubmit() {
       }
@@ -168,6 +223,21 @@ export class DeclarationGetComponent implements OnInit {
         md.enable();
         mv.enable();
         rp.enable();
+      }
+
+      openDialogDcl() {
+        /*const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "80%";
+        this.dialog.open(ParametrageNewColonneComponent,dialogConfig);*/
+    
+        const dialogConfig = this.dialog.open(DeclarationNewComponent, {
+          width: '800px',
+          data: {
+            selectedImpotId : this.selectedImpotId
+          }
+          });
       }
 
 }

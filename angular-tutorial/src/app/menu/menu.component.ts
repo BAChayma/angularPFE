@@ -3,6 +3,8 @@ import { Contribuable } from '../classes/Contribuable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SconnexionService } from '../WSservices/sconnexion.service';
 import { HttpClient } from '@angular/common/http';
+import { SdataService } from '../WSservices/sdata.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -12,8 +14,21 @@ import { HttpClient } from '@angular/common/http';
 export class MenuComponent implements OnInit {
   c: Contribuable;
   nif: string;
+  stockednif: string;
 
-  constructor(public loginService:SconnexionService ,  private router: Router, private http: HttpClient ,private route: ActivatedRoute) { }
+  isLoggedIn$: Observable<boolean>;
+
+  /*get data(): string {
+    return this.dataService.sharedNif;
+  }
+  set data(value: string) {
+    this.dataService.sharedNif = value;
+  }*/
+
+  constructor(public dataService:SdataService, public loginService:SconnexionService ,  private router: Router, private http: HttpClient ,private route: ActivatedRoute) 
+  { 
+    
+  }
 
   ngOnInit(): void {
     this.c = new Contribuable();
@@ -21,10 +36,25 @@ export class MenuComponent implements OnInit {
     this.nif = this.route.snapshot.params['nif'];
     //this.nif = this.route.parent.params['nif'];
 
-    console.log(this.nif);
+    //console.log(this.nif);
+
+    //this.storeNif();
+
+    //this.dataService.setsharedNif(this.storeNif());
+    this.dataService.setsharedNif(this.nif);
+
+    //localStorage.setItem('nif', 'nif');
+
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
+    
   }
 
   ContribuableUser: any;
+
+  storeNif(){
+    this.stockednif = this.nif;
+    console.log("stored nif:" + this.stockednif);
+  }
 
   onLogout() {
     this.loginService.logout();

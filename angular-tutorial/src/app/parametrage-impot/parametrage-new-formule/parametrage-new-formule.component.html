@@ -1,0 +1,105 @@
+<div class="modal-body">
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Ajouter formule</h2>
+
+    <form  [formGroup]="addFormFormule" (ngSubmit)="onSubmitFormule()">
+
+        <div class="form-group">
+            <label for="kimpot"> Code impot:</label> 
+            <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="KCellule">Listes des cellules:</label>
+            <ng-select formControlName="KCellule"  
+                [items]="celluleItems"
+                [virtualScroll]="true"
+                [searchable]="true" 
+                bindLabel="libelledetligne"
+                bindValue="KCellule"
+                placeholder="Choisir une cellule"
+                [(ngModel)]="selectedCelluleId"
+                >
+            </ng-select>
+            <label> Selected cellule ID: {{selectedCelluleId}} </label>
+        </div>
+
+        <div class="form-group">
+            <label for="KOperateur" >Listes des operateurs:</label>
+            <ng-select formControlName="KOperateur"  
+                [items]="opItems"
+                [virtualScroll]="true"
+                [searchable]="true" 
+                bindLabel="signeOperateur"
+                bindValue="KOperateur"
+                placeholder="Choisir un operateur"
+                [(ngModel)]="selectedOpId"
+                >
+            </ng-select>
+            <label> Selected operateur ID: {{selectedOpId}} </label>
+        </div>
+
+        <div class="form-group">
+            <label for="ordreFormule" >Ordre:</label>
+            <input type="text" formControlName="ordreFormule"  placeholder="Rang formule" name="ordreFormule" class="form-control" id="ordreFormule">
+        </div>
+
+        <button class="mat-raised-button">Ajouter</button>
+
+        <!--<div formArrayName="cellules" *ngFor="let cellule of addFormFormule.get('cellules')['controls']; let i=index;">
+            <div formGroupName="i">
+                <div class="form-group">
+                    <label for="KCellule">Listes des cellules:</label>
+                    <ng-select formControlName="KCellule"  
+                        [items]="celluleItems"
+                        [virtualScroll]="true"
+                        [searchable]="true" 
+                        bindLabel="libelledetligne"
+                        bindValue="KCellule"
+                        placeholder="Choisir une cellule"
+                        [(ngModel)]="selectedCelluleId"
+                        >
+                    </ng-select>
+                    <label> Selected cellule ID: {{selectedCelluleId}} </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="KOperateur" >Listes des operateurs:</label>
+                    <ng-select formControlName="KOperateur"  
+                        [items]="opItems"
+                        [virtualScroll]="true"
+                        [searchable]="true" 
+                        bindLabel="signeOperateur"
+                        bindValue="KOperateur"
+                        placeholder="Choisir un operateur"
+                        [(ngModel)]="selectedOpId"
+                        >
+                    </ng-select>
+                    <label> Selected operateur ID: {{selectedOpId}} </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="ordreFormule" >Ordre:</label>
+                    <input type="text" formControlName="ordreFormule"  placeholder="Rang formule" name="ordreFormule" class="form-control" id="ordreFormule">
+                </div>
+
+                <button class="mat-raised-button">Ajouter</button>
+
+            </div>
+        
+        </div>-->
+
+        <div class="form-group">
+            <button class="mat-raised-button" (click)="addFormuleBtn()">Ajouter cellule</button>
+        </div>
+
+        <br>
+
+        <!--<button class="mat-raised-button">Ajouter</button>-->
+
+    </form>
+
+    <button class="mat-raised-button" (click)="onClose()">Fermer</button>
+
+</div>
+</div>

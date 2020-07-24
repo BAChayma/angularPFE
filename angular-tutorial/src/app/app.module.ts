@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule , HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -10,11 +11,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+import { ToastrModule } from 'ngx-toastr';
 
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ContribuableGetComponent } from './contribuable-get/contribuable-get.component';
-import { FormsModule } from '@angular/forms';
 import { ContribuableUpdateComponent } from './contribuable-get/contribuable-update/contribuable-update.component';
 
 import { AngularSplitModule } from 'angular-split';
@@ -39,6 +43,10 @@ import { LogoutComponent } from './logout/logout.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { MenuComponent } from './menu/menu.component';
 import { PaiementComponent } from './paiement/paiement.component';
+import { ParametrageImpotComponent } from './parametrage-impot/parametrage-impot.component';
+import { ParametrageNewLigneComponent } from './parametrage-impot/parametrage-newLigne/parametrage-newLigne.component';
+import { ParametrageNewColonneComponent } from './parametrage-impot/parametrage-new-colonne/parametrage-new-colonne.component';
+import { ParametrageNewFormuleComponent } from './parametrage-impot/parametrage-new-formule/parametrage-new-formule.component';
 
 
 
@@ -69,7 +77,11 @@ import { PaiementComponent } from './paiement/paiement.component';
     LogoutComponent,
     AccueilComponent,
     MenuComponent,
-    PaiementComponent
+    PaiementComponent,
+    ParametrageImpotComponent,
+    ParametrageNewLigneComponent,
+    ParametrageNewColonneComponent,
+    ParametrageNewFormuleComponent
   ],
   imports: [
     BrowserModule,
@@ -82,11 +94,20 @@ import { PaiementComponent } from './paiement/paiement.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatTabsModule,
-    MatMenuModule
-  ],
+    MatMenuModule,
+    MatSelectModule,
+    MatDialogModule ,
+    MatIconModule
+   ],
   providers: [
    
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    ParametrageNewLigneComponent,
+    ParametrageNewColonneComponent,
+    DeclarationNewComponent,
+    ParametrageNewFormuleComponent
+  ]
 })
 export class AppModule { }

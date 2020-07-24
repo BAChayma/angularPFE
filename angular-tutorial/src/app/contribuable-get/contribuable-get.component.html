@@ -6,6 +6,7 @@
 <title>Consulter dossier contribuable</title>
 </head>
 <body>
+
 	<router-outlet></router-outlet>
 		<!--<h5>Recherche d'un contribuable</h5>
 		<label> NIF: </label>
@@ -59,7 +60,7 @@
 						<table class="table table-hover">
 							<thead>
 							  <tr>
-								<th scope="col">ID adresse</th>
+								<!--<th scope="col">ID adresse</th>-->
 								<th scope="col">Numero rue</th>
 								<th scope="col">Rue</th>
 								<th scope="col">Code postale</th>
@@ -70,12 +71,12 @@
 							<tbody>
 								<ng-container  *ngFor="let adrr of Adresse">
 								<tr *ngFor="let adr of adrr.adresse">
-								  <td *ngIf="adr" >{{adr.kadresse}}</td>
-								  <td *ngIf="adr" >{{adr.numrue}}</td>
-								  <td *ngIf="adr" >{{adr.rue}}</td>
-								  <td *ngIf="adr" >{{adr.cp}}</td>
-								  <td *ngIf="adr" >{{adr.libellesadr}}</td>
-								  <td *ngIf="adr" >{{adr.libelletsadr}}</td>
+								  <!--<td *ngIf="contribuables" >{{adr.kadresse}}</td>-->
+								  <td *ngIf="contribuables" >{{adr.numRue}}</td>
+								  <td *ngIf="contribuables" >{{adr.rue}}</td>
+								  <td *ngIf="contribuables" >{{adr.cp}}</td>
+								  <td *ngIf="contribuables" >{{adr.libellesadr}}</td>
+								  <td *ngIf="contribuables" >{{adr.libelletsadr}}</td>
 								  <!--<td> 
 									<button type="button" class="btn btn-outline-primary"  routerLink="/updateAdr/{{adr.kadresse}}" >Modifier</button> 
 									<button type="button" class="btn btn-outline-secondary" (click)="deleteADR(adr)">Supprimer</button>
@@ -91,7 +92,7 @@
 						<table class="table table-hover">
 							<thead>
 							  <tr>
-								<th scope="col">ID compte bancaire</th>
+								<!--<th scope="col">ID compte bancaire</th>-->
 								<th scope="col">RIB</th>
 								<th scope="col">Nom de la banque</th>
 								<th scope="col">Nom de l'agence</th>
@@ -100,14 +101,14 @@
 							<tbody>
 								<ng-container  *ngFor="let cb of CompteBancaire">
 									<tr>
-										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.kcompte}}</td>
-										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.rib}}</td>
-										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.nomBanque}}</td>
-										<td *ngIf="CompteBancaire">{{cb.compteBancaire?.libelleAgence}}</td>	
+										<!--<td *ngIf="contribuables">{{cb.compteBancaire?.kcompte}}</td>-->
+										<td *ngIf="contribuables">{{cb.compteBancaire?.rib}}</td>
+										<td *ngIf="contribuables">{{cb.compteBancaire?.nomBanque}}</td>
+										<td *ngIf="contribuables">{{cb.compteBancaire?.libelleAgence}}</td>	
 										<!--<td> 
 											<button type="button" class="btn btn-outline-primary" routerLink="/updateCb/{{cb.compteBancaire?.kcompte}}" >Modifier</button> 
 											<button type="button" class="btn btn-outline-secondary" (click)="deletecb(cb)">Supprimer</button>
-										   </td>	-->									
+										</td>	-->							
 									</tr> 
 								</ng-container>
 							</tbody>
@@ -128,10 +129,11 @@
 							</thead>
 							<tbody>
 								<ng-container  *ngFor="let ci of contribuableImpot">
-									<tr>
-										<td *ngIf="contribuableImpot">{{ci.contribuableImpot?.abriviation}}</td>
-										<td *ngIf="contribuableImpot">{{ci.contribuableImpot?.taux}}</td>
-										
+									<tr *ngFor="let c of ci.contribuableImpot">
+										<!--<td *ngIf="contribuables">{{ci.contribuableImpot?.abriviation}}</td>
+										<td *ngIf="contribuables">{{ci.contribuableImpot?.taux}}</td>-->
+										<td *ngIf="contribuables">{{c.abriviation}}</td>
+										<td *ngIf="contribuables">{{c.taux}}</td>
 									</tr> 
 								</ng-container>
 							</tbody>
@@ -154,12 +156,12 @@
 				<tbody>
 					<ng-container  *ngFor="let dcl of Declaration">
 					<tr *ngFor="let d of dcl.declaration">
-					  <td *ngIf="d">{{d.kdcl}}</td>
-					  <td *ngIf="d">{{d.kcnc}}</td>
-					  <td *ngIf="d">{{d.kimpot}}</td>
-					  <td *ngIf="d">{{d.mantantDeclarer}}</td>
-					  <td *ngIf="d">{{d.mantantDeclaration}}</td>
-					  <td *ngIf="d">{{d.datedcl}}</td>
+					  <td *ngIf="contribuables">{{d.kdcl}}</td>
+					  <td *ngIf="contribuables">{{d.kcnc}}</td>
+					  <td *ngIf="contribuables">{{d.kimpot}}</td>
+					  <td *ngIf="contribuables">{{d.mantantDeclarer}}</td>
+					  <td *ngIf="contribuables">{{d.mantantDeclaration}}</td>
+					  <td *ngIf="contribuables">{{d.datedcl}}</td>
 					  </tr>	  
 					</ng-container>
 				  </tbody>

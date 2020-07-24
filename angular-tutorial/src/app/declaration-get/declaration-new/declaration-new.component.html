@@ -1,49 +1,106 @@
+<!--<div class="col-md-6 user-container">
+  <h2 class="text-center">Declaration</h2>
+
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="kimpot"> Code impot:</label> 
+      <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="KDetLigne">Listes des lignes:</label>
+      <ng-select formControlName="KDetLigne" 
+             [items]="detLigItems"
+             [virtualScroll]="true"
+             [searchable]="true" 
+             bindLabel="libelleDetLigne"
+             bindValue="KDetLigne"
+             placeholder="Choisir une ligne"
+             [(ngModel)]="selectedDetLigId"
+             >
+      </ng-select>
+      <label> Selected ligne ID: {{selectedDetLigId}} </label>
+    </div>
+
+        <div class="form-group">
+          <label for="valeur" >Valeur:</label>
+          <input type="text" formControlName="valeur"  placeholder="Rang formule" name="valeur" class="form-control" id="valeur">
+        </div>
+
+    <button class="btn btn-success" >Calculer</button>
+
+  </form>
+
+  <button class="mat-raised-button" (click)="onClose()">Fermer</button>
+
+</div>-->
+
+<!--<div class="col-md-6 user-container">
+  <h2 class="text-center">Declaration</h2>
+
+  <div *ngFor="let detLig of DetailLigne">
+    <div *ngFor="let aa of detLig.detailLigne; let i = index;">
+      <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="kimpot"> Code impot:</label> 
+          <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+        </div>
+        <div class="form-group">
+          <label for="{{aa.libelleDetLigne}}"> {{aa.libelleDetLigne}}:</label> 
+          <input type="text" formControlName="libelleDetLigne{{i}}" (click)="addControl()" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" > 
+        </div>
+        <button class="btn btn-success" >Calculer</button>
+      </form>
+    </div>
+  </div>
+
+</div>-->
+
+
 <div class="col-md-6 user-container">
-    <h2 class="text-center">Modifier compte bancaire</h2>
+    <h2 class="text-center">Declaration</h2>
+
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
-        <div class="hidden">
-            <label for="kdcl">Id declaration:</label>
-            <input type="text" formControlName="kdcl" placeholder="kdcl" name="kdcl" class="form-control" id="kdcl" readonly>
-        </div>
+      <div class="form-group">
+        <label for="kimpot"> Code impot:</label> 
+        <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+      </div>
 
-        <div class="hidden">
-            <label for="kcnc">Id contribuable:</label>
-            <input type="text" formControlName="kcnc" placeholder="kcnc" name="kcnc" class="form-control" id="kcnc" readonly>
-        </div>
+      <!--<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <ng-container *ngFor="let detLig of DetailLigne" >
+            
+            <tr *ngFor="let aa of detLig.detailLigne">
+                  <td>{{aa.libelleDetLigne}}</td>
+                  <td><input type="text" formControlName="{{aa.libelleDetLigne}}"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" ></td>
+                  <td><button class="btn btn-success" >Calculer</button></td>
+            </tr>
+          </ng-container>   
+        </tbody>
+      </table>-->
 
-        <div class="form-group">
-            <label for="impotName">Listes des impots:</label>
-            <ng-select formControlName="impotName" 
-                   [items]="impotsItems"
-                   [virtualScroll]="true"
-                   [searchable]="true" 
-                   bindLabel="abriviation"
-                   bindValue="kimpot"
-                   placeholder="Choisir un impot"
-                   [(ngModel)]="selectedImpotId">
-                   <ng-option [value]="selectedImpotId" *ngFor="let item of impotsItems">
-                    <label> Selected impot taux: {{item.taux}} </label>
-                    </ng-option>
-            </ng-select>
-            <label> Selected impot ID: {{selectedImpotId}} </label>
+      <div *ngFor="let detLig of DetailLigne">
+        <div *ngFor="let aa of detLig.detailLigne">
+          <div class="form-group">
+            <label for="{{aa.libelleDetLigne}}"> {{aa.libelleDetLigne}}:</label> 
+            <input type="text" formControlName="{{aa.libelleDetLigne}}"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" > 
+          </div>
         </div>
+      </div>
 
-        <div class="form-group">
-            <label for="mantantDeclarer">Mantant declarer:</label>
-            <input type="text" formControlName="mantantDeclarer" placeholder="mantantDeclarer" name="mantantDeclarer" class="form-control" id="mantantDeclarer" >
-        </div>
+      <button class="btn btn-success" >Calculer</button>
 
-        <div class="form-group">
-            <label for="mantantDeclaration">Mantant declaration:</label>
-            <input type="text" formControlName="mantantDeclaration" placeholder="mantantDeclaration" name="mantantDeclaration" class="form-control" id="mantantDeclaration" >
-        </div>
+    </form> 
 
-        <div class="hidden">
-            <label for="datedcl">Date de declaration:</label>
-            <input type="text" formControlName="datedcl" placeholder="datedcl" name="datedcl" class="form-control" id="datedcl" >
-        </div>
-
-        <button class="btn btn-success">Update</button>
-    </form>
+    <button class="mat-raised-button" (click)="onClose()">Fermer</button>
 </div>

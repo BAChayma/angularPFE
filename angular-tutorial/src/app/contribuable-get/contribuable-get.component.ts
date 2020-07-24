@@ -9,6 +9,7 @@ import {parseHttpResponse} from 'selenium-webdriver/http';
 import { CompteBancaire } from '../classes/ComteBancaire';
 import { Adresse } from '../classes/Adresse';
 import { SdeclarationService } from '../WSservices/sdeclaration.service';
+import { SdataService } from '../WSservices/sdata.service';
 
 
 @Component({
@@ -55,14 +56,22 @@ export class ContribuableGetComponent implements OnInit {
   sub: any;
   c: Contribuable;
 
-  constructor(private cdeclarationService: SdeclarationService ,private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) 
+  constructor(public dataService:SdataService, private cdeclarationService: SdeclarationService ,private contribuableService: ScontribuableService , private router: Router ,  private http: HttpClient , private route: ActivatedRoute) 
   { 
-
+   
   }
+
+  /*get data(): string {
+    return this.dataService.sharedNif;
+  }*/
 
   ngOnInit() {
 
     this.c = new Contribuable();
+
+    this.nif = this.dataService.getsharedNif();  
+    console.log(this.nif);
+    this.recherche(this.nif);
 
     //this.nif = this.route.snapshot.queryParams["nif"];
     //this.nif = this.route.snapshot.params['nif'];
@@ -71,6 +80,8 @@ export class ContribuableGetComponent implements OnInit {
     //this.nif = this.route.snapshot.parent.paramMap.get('nif');
     //console.log(this.nif);
     //this.recherche(this.nif);
+
+    //this.nif = localStorage.getItem('nif');
 
     }
 

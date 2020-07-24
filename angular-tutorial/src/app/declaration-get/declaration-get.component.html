@@ -19,13 +19,13 @@
 							  <td> <div  *ngIf="contribuables"> <label> Nom commerciale: </label> <input type="text" name="nomCommerciale" [(ngModel)]="contribuables.nomCommerciale" disabled></div></td>
 							  <td> <div  *ngIf="contribuables"> <label> Raison sociale: </label> <input type="text" name="raisonSociale" [(ngModel)]="contribuables.raisonSociale" disabled></div></td> </tr>
 
-							  <tr> <td> <div *ngIf="contribuables">  Registre commerciale :<input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce" disabled></div></td> 
-							  <td> <div *ngIf="contribuables">  Date de debut d'exploitation:<input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp" disabled></div></td>
-							  <td> <div *ngIf="contribuables">  Capitale sociale:<input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale" disabled></div></td> </tr>
+							  <tr> <td> <div *ngIf="contribuables"> <label> Registre commerciale :</label><input type="text" name="registreCommerce" [(ngModel)]="contribuables.registreCommerce" disabled></div></td> 
+							  <td> <div *ngIf="contribuables"> <label> Date de debut d'exploitation:</label><input type="text" name="dateDebExp" [(ngModel)]="contribuables.dateDebExp" disabled></div></td>
+							  <td> <div *ngIf="contribuables"> <label> Capitale sociale:</label><input type="text" name="capitalSociale" [(ngModel)]="contribuables.capitalSociale" disabled></div></td> </tr>
 							 
-							  <tr> <td> <div *ngIf="contribuables">  Forme juridique:<input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj" disabled></div></td>
-							  <td> <div *ngIf="contribuables">  Activite d'entreprise:<input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae" disabled></div></td>
-							  <td> <div *ngIf="contribuables">  Nationnalite:<input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite" disabled></div></td> </tr>
+							  <tr> <td> <div *ngIf="contribuables"> <label> Forme juridique: </label> <input type="text" name="libellefj" [(ngModel)]="contribuables.libellefj" disabled></div></td>
+							  <td> <div *ngIf="contribuables"> <label> Activite d'entreprise: </label><input type="text" name="libelleae" [(ngModel)]="contribuables.libelleae" disabled></div></td>
+							  <td> <div *ngIf="contribuables"> <label> Nationnalite:</label><input type="text" name="nationnalite" [(ngModel)]="contribuables.nationnalite" disabled></div></td> </tr>
 							</tbody>
 					</table>
 				</table>
@@ -39,47 +39,69 @@
 				<div class="col-md-12 mb-4">
 					<button type="button" class="btn btn-elegant" (click)="enableInput()"><i class="far fa-user pr-2" aria-hidden="true"></i>Ajouter</button>
 					<button type="button" class="btn btn-unique"><i class="fas fa-wifi pr-2" aria-hidden="true"></i>Supprimer</button>
-					<button type="button" class="btn btn-pink"><i class="fas fa-plane pr-2" aria-hidden="true"></i>Valider</button>
+					<button type="button" class="btn btn-pink"  (click)="openDialogDcl()" ><i class="fas fa-plane pr-2" aria-hidden="true"></i>Valider</button>
 				</div>
 			</div>
 
 				<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 		
 					<div class="form-row">
-						
 						<div class="form-group col-md-6">
 							<div class="form-group" >
-								<label for="impotContriName">Nature de l'impot:</label>
-								<div *ngIf="impotsItems.length >= 0">
-								<ng-select formControlName="impotContriName"  id="impotContriName"
-									   [items]="impotsItems"
-									   [virtualScroll]="true"
-									   [searchable]="true" 
-									   bindLabel="abriviation"
-									   bindValue="kimpot"
-									   placeholder="Choisir un impot"
-									   [(ngModel)]="selectedImpotId">
-								</ng-select></div>
-								<label> Selected impot ID: {{selectedImpotId}} </label>
-
-								<!--<select formControlName="impotContriName" name="impotContriName" id="impotContriName" class="form-control" [(ngModel)]="selectedImpotId">
-									<option *ngFor="let option of impotsItems" [value]="option" >{{option}}</option>
-								</select>-->
+								<label for="impotContriName">Listes des impots:</label>
+            					<ng-select formControlName="impotContriName" 
+                   					[items]="impotItems"
+                   					[virtualScroll]="true"
+                   					[searchable]="true" 
+                   					bindLabel="abriviation"
+                   					bindValue="kimpot"
+                   					placeholder="Choisir un impot"
+                   					[(ngModel)]="selectedImpotId"
+                   					(change)="getPeriodiciteByImpot()">
+            					</ng-select>
+            					<label> Selected impot ID: {{selectedImpotId}} </label>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label for="per">Périodicité:</label>
 								<input type="text" formControlName="per" placeholder="Périodicité" name="per" class="form-control" id="per" >
+							</div>-->
+							<div class="form-group" >
+								<label for="per">Périodicité:</label>
+								<ng-select formControlName="per" 
+                   					[items]="perItems"
+                   					[virtualScroll]="true"
+                   					[searchable]="true" 
+                   					bindLabel="libellePeriodicite"
+                   					bindValue="KPeriodicite"
+                   					placeholder="Périodicité"
+                   					[(ngModel)]="selectedPeriodId"
+                   					(change)="getDetPeriodiciteByPer()">
+            					</ng-select>
+								<label> Selected periodicite ID: {{selectedPeriodId}} </label>
 							</div>
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label for="moisEx">Mois/Exercice:</label>
 								<input type="text" formControlName="moisEx" placeholder="Mois/Exercice" name="moisEx" class="form-control" id="moisEx" >
+							</div>-->
+							<div class="form-group" >
+								<label for="moisEx">Mois/Exercice:</label>
+								<ng-select formControlName="moisEx" 
+                   					[items]="detperiodItems"
+                   					[virtualScroll]="true"
+                   					[searchable]="true" 
+                   					bindLabel="libelleDetPeriodicite"
+                   					bindValue="KDetPeriodicite"
+                   					placeholder="Detail périodicité"
+                   					[(ngModel)]="selectedDetPeriodId">
+            					</ng-select>
+								<label> Selected detail periodicite ID: {{selectedDetPeriodId}} </label>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
@@ -89,35 +111,6 @@
 							</div>
 						</div>
 					</div>
-
-					<!--<div class="form-group">
-						<label for="impotContriName">Nature de l'impot:</label>
-						<ng-select formControlName="impotContriName"  id="impotContriName"
-							   [items]="impotsContriItems"
-							   [virtualScroll]="true"
-							   [searchable]="true" 
-							   bindLabel="abriviation"
-							   bindValue="kimpot"
-							   placeholder="Choisir un impot"
-							   [(ngModel)]="selectedImpotId">
-						</ng-select>
-						<label> Selected impot ID: {{selectedImpotId}} </label>
-					</div>
-					
-					<div class="form-group">
-						<label for="per">Périodicité:</label>
-						<input type="text" formControlName="per" placeholder="Périodicité" name="per" class="form-control" id="per" >
-					</div>
-
-					<div class="form-group">
-						<label for="moisEx">Mois/Exercice:</label>
-						<input type="text" formControlName="moisEx" placeholder="Mois/Exercice" name="moisEx" class="form-control" id="moisEx" >
-					</div>
-
-					<div class="form-group">
-						<label for="echDec">Echéance de la déclaration:</label>
-						<input type="text" formControlName="echDec" placeholder="Echéance de la déclaration" name="echDec" class="form-control" id="echDec" >
-					</div>-->
 
 				</form>
 			</as-split-area>
@@ -146,21 +139,6 @@
 							</div>
 						</div>
 					</div>
-
-					<!--<div class="form-group">
-						<label for="md">Montant des droits:</label>
-						<input type="text" formControlName="md" placeholder="Montant des droits" name="md" class="form-control" id="md" >
-					</div>
-
-					<div class="form-group">
-						<label for="mv">Montant versé:</label>
-						<input type="text" formControlName="mv" placeholder="Echéance de la déclaration" name="mv" class="form-control" id="mv" >
-					</div>
-
-					<div class="form-group">
-						<label for="rp">Reste à payer:</label>
-						<input type="text" formControlName="rp" placeholder="Reste à payer" name="rp" class="form-control" id="rp" >
-					</div>-->
 
 				</form>
 			</as-split-area>

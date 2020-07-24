@@ -1,0 +1,67 @@
+  <div class="col-md-6 user-container">
+    <h2 class="text-center">Ajouter paramétrage d'un impot</h2>
+    <h2 class="text-center">Ajouter détail ligne</h2>
+
+    <form  [formGroup]="addFormNewLig" (ngSubmit)="onSubmitNewLig()">
+
+        <div class="form-group">
+          <label for="kimpot"> Code impot:</label> 
+          <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="KDetLigne">Code detail ligne:</label>
+            <input type="text" formControlName="KDetLigne" placeholder="Code detail ligne" name="KDetLigne" class="form-control" id="KDetLigne" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="libelleDetLigne">Libelle detail ligne:</label>
+            <input type="text" formControlName="libelleDetLigne" placeholder="Libelle detail ligne" name="libelleDetLigne" class="form-control" id="libelleDetLigne">
+        </div>
+
+        <div class="form-group">
+            <label for="ordreDetLigne">Rang detail ligne:</label>
+            <input type="text" formControlName="ordreDetLigne"  placeholder="Rang detail ligne" name="ordreDetLigne" class="form-control" id="ordreDetLigne">
+        </div>
+
+        <button class="mat-raised-button">Ajouter</button>
+        <br>
+        <br>
+
+    </form>
+
+    <button class="mat-raised-button" (click)="onClose()">Fermer</button>
+
+</div>
+
+  <!-- 
+    <mat-toolbar>
+    <span>Ajouter paramétrage d'un impot</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+  
+  
+    <form [formGroup]="add" class="normal-form" (submit)="onSubmit()">
+    
+        <div class="controles-container">
+
+          <mat-form-field>
+            <input formControlName="idlig" matInput placeholder="Code detail ligne*" disabled>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input formControlName="liblig" matInput placeholder="Libelle detail ligne">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input formControlName="ranglig" matInput placeholder="Rang">
+          </mat-form-field>
+
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit">Ajouter</button>
+          </div>
+
+        </div>
+      
+  </form> -->

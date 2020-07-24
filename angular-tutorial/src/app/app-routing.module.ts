@@ -22,6 +22,8 @@ import { AdministrationComponent } from './administration/administration.compone
 import { ImpotGetComponent } from './administration/impot-get/impot-get.component';
 import { PaysGetComponent } from './administration/pays-get/pays-get.component';
 import { ModePaiementGetComponent } from './administration/mode-paiement-get/mode-paiement-get.component';
+import { ParametrageImpotComponent } from './parametrage-impot/parametrage-impot.component';
+
 
 import { ActiviteEseGetComponent } from './administration/activite-ese-get/activite-ese-get.component';
 import { ActiviteEseUpdateComponent } from './administration/activite-ese-get/activite-ese-update/activite-ese-update.component';
@@ -68,14 +70,14 @@ const routes: Routes = [
   {path: 'newCB', component: CbNewComponent},
   {path: 'newDCL', component: DeclarationNewComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'header', component: HeaderComponent 
-  },
+  {path: 'parametrageImpot', component: ParametrageImpotComponent},
+  {path: 'header', component: HeaderComponent },
 
   {path: 'menu/:nif', component: MenuComponent,
   children: [
     { path: 'consulterContribuable', component: ContribuableGetComponent},
     { path: 'declarationContribuable', component: DeclarationGetComponent},
-    {path: 'paiementContribuable', component: PaiementComponent}
+    { path: 'paiementContribuable', component: PaiementComponent}
   ]
   },
 

@@ -3,6 +3,8 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { SconnexionService } from '../WSservices/sconnexion.service';
+import { AuthService } from '../WSservices/auth.service';
+import { TokenStorageService } from '../WSservices/token-storage.service';
 
 @Component({
   selector: 'app-connexion',
@@ -11,7 +13,45 @@ import { SconnexionService } from '../WSservices/sconnexion.service';
 })
 export class ConnexionComponent implements OnInit {
 
+  /*form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+
+  ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      //this.roles = this.tokenStorage.getUser().roles;
+    }
+  }
+
+  onSubmit() {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        //this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
+
+  reloadPage() {
+    window.location.reload();
+  }
+*/
    
+  
   Form: FormGroup;
   constructor(private formBuilder: FormBuilder ,private cnxService: SconnexionService ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) {}
 

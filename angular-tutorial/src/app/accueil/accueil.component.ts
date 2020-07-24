@@ -3,6 +3,7 @@ import { SconnexionService } from '../WSservices/sconnexion.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ContribuableUser } from '../classes/ContribuableUser';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-accueil',
@@ -14,12 +15,15 @@ export class AccueilComponent implements OnInit {
   ContribuableUser: any;
   //Contribuableuser: ContribuableUser[];
 
+  isLoggedIn$: Observable<boolean>;
+
   public edited = false;
 
   constructor(private cnxService: SconnexionService , private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.list();
+    this.isLoggedIn$ = this.cnxService.isLoggedIn;
   }
 
   /*
@@ -45,6 +49,10 @@ export class AccueilComponent implements OnInit {
 
   isclicked(){
     return false; 
+  }
+
+  onLogout() {
+    this.cnxService.logout();
   }
 
 }

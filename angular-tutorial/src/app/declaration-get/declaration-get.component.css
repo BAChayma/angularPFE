@@ -1,6 +1,22 @@
-input {
-  height: 40px;
-  border-width: 0px;
-  background: rgb(255, 255, 255);
+h5 { 
+  color: #1E90FF; 
 }
 
+input {
+  border-width: 0px;
+  background: rgb(255, 255, 255);
+  font-family: "Times New Roman", Times, serif;
+}
+
+.container {
+  padding-right:0px;
+  width: 100%;
+}
+
+label {
+  font-family: cursive;
+}
+
+td{
+  font-family: "Times New Roman", Times, serif;
+}

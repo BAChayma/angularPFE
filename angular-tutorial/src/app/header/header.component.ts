@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Contribuable } from '../classes/Contribuable';
+import { SdataService } from '../WSservices/sdata.service';
+import { SmenuService } from '../WSservices/smenu.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,7 @@ import { Contribuable } from '../classes/Contribuable';
 export class HeaderComponent implements OnInit {
 
   c: Contribuable;
-  nif: string;
+  nif: any;
 
   isCollapsed: boolean = true;
   username: string;
@@ -22,20 +24,36 @@ export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
   ContribuableUser: any;
+  MenuDataP: any;
+  MenuDataF: any;
+  MenuData: any;
 
   sub: any;
   parentRouteId: number;
 
-  constructor(public loginService:SconnexionService ,  private router: Router, private http: HttpClient , private route: ActivatedRoute) { }
+  public isMenuCollapsed = true;
+
+
+  constructor(public menuService: SmenuService , public dataService:SdataService, public loginService:SconnexionService ,  private router: Router, private http: HttpClient , private route: ActivatedRoute) 
+  {
+    
+   }
 
   ngOnInit(): void {
 
     this.c = new Contribuable();
-    this.nif = this.route.snapshot.params['nif'];
+    //this.nif = this.route.snapshot.params['nif'];
+    //console.log(this.nif);
+
+    this.nif = this.dataService.getsharedNif();  
     console.log(this.nif);
 
     this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.list();
+    //this.menuP();
+    //this.menuF();
+    this.menuList();
+
   }
 
   list(){
@@ -50,6 +68,45 @@ export class HeaderComponent implements OnInit {
     )
     return this.ContribuableUser;
   }
+
+  menuList(){
+    this.menuService.menu().subscribe(
+    (data) => {
+      this.MenuData = data;
+      this.MenuData = Array.of(this.MenuData); 
+      console.log(this.MenuDataP);
+    },
+    err => console.error(err) ,
+    () => console.log('menu completed') 
+    )
+    return this.MenuData;
+  }
+
+  /*menuP(){
+    this.menuService.menuP().subscribe(
+    (data) => {
+      this.MenuDataP = data;
+      this.MenuDataP = Array.of(this.MenuDataP); 
+      console.log(this.MenuDataP);
+    },
+    err => console.error(err) ,
+    () => console.log('menuP completed') 
+    )
+    return this.MenuDataP;
+  }
+
+  menuF(){
+    this.menuService.menuF().subscribe(
+    (data) => {
+      this.MenuDataF = data;
+      this.MenuDataF = Array.of(this.MenuDataF); 
+      console.log(this.MenuDataF);
+    },
+    err => console.error(err) ,
+    () => console.log('menuF completed') 
+    )
+    return this.MenuDataF;
+  }*/
 
   gotoConsulterContri1(){
     this.router.navigate(['consulterContribuable'], {relativeTo: this.route} );
@@ -67,6 +124,10 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.loginService.logout();
   }
+
+  home() {
+    this.router.navigate(['Accueil']);
+    }
 
 
 }

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>  
+<title>Consulter dossier contribuable</title>
+</head>
+<body>
+
+    <div style="width: 1290px; height: 1000px;  margin-left: auto; margin-right: auto;background: rgb(255, 255, 255);">
+		
+		<as-split direction="vertical">
+
+            <as-split-area size="20"   >
+                <h5 class="card-title">Liste des impots</h5>
+                <div class="form-group" >
+                    <label for="impotName">Liste des impots:</label>
+                    <ng-select  id="impotName"
+                           [items]="impotItems"
+                           [virtualScroll]="true"
+                           [searchable]="true" 
+                           bindLabel="limpot"
+                           bindValue="kimpot"
+                           placeholder="Choisir un impot"
+                           [(ngModel)]="selectedImpotId"
+                           (change)="lov()">
+                    </ng-select>
+                    <label> Code impot: {{selectedImpotId}} </label>
+                </div> 
+            </as-split-area>
+
+            <as-split-area size="30" >
+                <h5 class="card-title">Etapes de calcul</h5>
+                <mat-tab-group>
+
+                  <mat-tab label="Ligne"> 
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Code</th>
+                            <th scope="col">Libelle</th>
+                            <th scope="col">Rang</th>
+                            <th scope="col"> Operation</th>
+                            <button  class="btn btn-outline-primary" (click)="openDialogLigne()" >Ajouter</button>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let detLig of DetailLigne" >      
+                            <tr *ngFor="let a of detLig.detailLigne">
+                                  <td>{{a.KDetLigne}}</td>
+                                  <td>{{a.libelleDetLigne}}</td>
+                                  <td>{{a.ordreDetLigne}}</td>
+                                  <td> 
+                                    <!-- <button type="button" class="btn btn-outline-primary" routerLink="/updateAE/{{a.KDetLigne}}" >Modifier</button> -->
+                                    <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
+                                  </td>
+                                  
+                                  </tr>
+                          </ng-container>
+                        </tbody>
+                    </table>
+                  </mat-tab>
+
+                  <mat-tab label="Colonne"> 
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Code</th>
+                            <th scope="col">Libelle</th>
+                            <th scope="col">Rang</th>
+                            <th scope="col"> Operation</th>
+                            <button  class="btn btn-outline-primary" (click)="openDialogColonne()" >Ajouter</button>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let detCol of DetailColonne" >      
+                            <tr *ngFor="let aa of detCol.detailColonne" >
+                                  <td>{{aa.KDetColonne}}</td>
+                                  <td>{{aa.libelleDetColonne}}</td>
+                                  <td>{{aa.ordreDetColonne}}</td>
+                                  <td> 
+                                    <!-- <button type="button" class="btn btn-outline-primary" routerLink="/updateAE/{{a.KDetColonne}}" >Modifier</button> -->
+                                    <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
+                                  </td>
+                                  </tr>
+                          </ng-container>
+                        </tbody>
+                    </table>
+                  </mat-tab>
+                
+                </mat-tab-group>
+            </as-split-area>
+
+            <as-split-area size="50"   >
+                <h5 class="card-title">Formule de calcul</h5>
+                <mat-tab-group>
+                <mat-tab label="Cellules"> 
+                <form [formGroup]="LForm" (ngSubmit)="onSubmitCellule()">
+
+                    <div class="form-group">
+                      <label for="KDetLigne">Listes des lignes:</label>
+                      <ng-select formControlName="KDetLigne" 
+                             [items]="detLigItems"
+                             [virtualScroll]="true"
+                             [searchable]="true" 
+                             bindLabel="libelleDetLigne"
+                             bindValue="KDetLigne"
+                             placeholder="Choisir une ligne"
+                             [(ngModel)]="selectedDetLigId"
+                             >
+                      </ng-select>
+                      <label> Selected ligne ID: {{selectedDetLigId}} </label>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="KDetColonne">Listes des colonnes:</label>
+                    <ng-select formControlName="KDetColonne" 
+                           [items]="detColItems"
+                           [virtualScroll]="true"
+                           [searchable]="true" 
+                           bindLabel="libelleDetColonne"
+                           bindValue="KDetColonne"
+                           placeholder="Choisir une colonne"
+                           [(ngModel)]="selectedDetColId"
+                           >
+                    </ng-select>
+                    <label> Selected colonne ID: {{selectedDetColId}} </label>
+                </div>
+
+                    <div class="form-group">
+                        <label for="detCellule">Donnee:</label>
+                        <input type="text" formControlName="detCellule" placeholder="donnee" name="detCellule" class="form-control" id="detCellule" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ordreCellule">Rang:</label>
+                        <input type="text" formControlName="ordreCellule" placeholder="rang" name="ordreCellule" class="form-control" id="ordreCellule" >
+                    </div>
+
+                    <button  class="mat-raised-button"  >Ajouter formule</button>
+
+                </form>
+                </mat-tab>
+
+                <mat-tab label="Formules"> 
+
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Cellule</th>
+                        <th scope="col">Operateur</th>
+                        <th scope="col">Rang</th>
+                        <th scope="col"> Operation</th>
+                        <button  class="btn btn-outline-primary" (click)="openDialogFormule()" >Ajouter</button>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <ng-container *ngFor="let f of Formule" >      
+                        <tr *ngFor="let form of f.formule">
+                              <td>{{form.libelleDetLigne}}</td>
+                              <td>{{form.signeoperateur}}</td>
+                              <td>{{form.ordreFormule}}</td>
+                        </tr>
+                      </ng-container>    
+                    </tbody>
+
+                  </table>
+                    
+                </mat-tab>
+                </mat-tab-group>
+            </as-split-area>
+        
+    </as-split>
+    </div>
+
+</body>
+</html>

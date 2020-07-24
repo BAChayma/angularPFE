@@ -1,13 +1,13 @@
+import {ImpotDetail} from './ImpotDetail';
 export class Impot {  
 
-   kimpot: number;
+   kimpot: string;
    limpot: string;
    abriviation: string;
    periodicite: string;
-   taux: number;
-   dateDebEffet: Date;
-
-   impots: []
+   taux: string;
+   dateDebEffet: string;
+   impot: ImpotDetail[];
 
 }
     

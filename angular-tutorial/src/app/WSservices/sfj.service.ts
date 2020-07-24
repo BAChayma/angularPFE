@@ -33,7 +33,7 @@ export class SfjService {
   }
 
   AjouterFJ( fj : FormeJuridique): Observable<FormeJuridique> {
-    return this.http.post<FormeJuridique>(this.url_FJ+ '/createActEse' , fj);
+    return this.http.post<FormeJuridique>(this.url_FJ+ '/createFJ' , fj);
   }
 
   public url_UpdateFJ = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/FormejuridiqueWS/updateFJ?kFormJuri=';
