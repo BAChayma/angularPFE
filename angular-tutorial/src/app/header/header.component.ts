@@ -22,11 +22,17 @@ export class HeaderComponent implements OnInit {
   mdp: string;
 
   isLoggedIn$: Observable<boolean>;
+  ismenu$: Observable<boolean>;
+
+
 
   ContribuableUser: any;
   MenuDataP: any;
   MenuDataF: any;
+
   MenuData: any;
+  SmenuData: any;
+  Kmenu;
 
   sub: any;
   parentRouteId: number;
@@ -37,7 +43,7 @@ export class HeaderComponent implements OnInit {
   constructor(public menuService: SmenuService , public dataService:SdataService, public loginService:SconnexionService ,  private router: Router, private http: HttpClient , private route: ActivatedRoute) 
   {
     
-   }
+  }
 
   ngOnInit(): void {
 
@@ -49,11 +55,14 @@ export class HeaderComponent implements OnInit {
     console.log(this.nif);
 
     this.isLoggedIn$ = this.loginService.isLoggedIn;
+
+    this.ismenu$ = this.loginService.ismenu;
+
     this.list();
     //this.menuP();
     //this.menuF();
     this.menuList();
-
+    this.smenuList();
   }
 
   list(){
@@ -69,7 +78,7 @@ export class HeaderComponent implements OnInit {
     return this.ContribuableUser;
   }
 
-  menuList(){
+  /*menuList(){
     this.menuService.menu().subscribe(
     (data) => {
       this.MenuData = data;
@@ -80,6 +89,27 @@ export class HeaderComponent implements OnInit {
     () => console.log('menu completed') 
     )
     return this.MenuData;
+  }*/
+  menuList(){
+  this.menuService.menu().subscribe(data => {  
+    this.MenuData = data.menuItem;
+    this.MenuData = Array.of(this.MenuData); 
+    console.log(data);
+    console.log(this.MenuData);
+  });
+}
+
+  smenuList(){
+    this.menuService.smenu(this.Kmenu).subscribe(
+    (data) => {
+      this.SmenuData = data;
+      this.SmenuData = Array.of(this.SmenuData); 
+      console.log(this.SmenuData);
+    },
+    err => console.error(err) ,
+    () => console.log('smenu completed') 
+    )
+    return this.SmenuData;
   }
 
   /*menuP(){
@@ -125,9 +155,15 @@ export class HeaderComponent implements OnInit {
     this.loginService.logout();
   }
 
+  voirmenu() {
+    this.loginService.voirMenu();
+  }
+
   home() {
     this.router.navigate(['Accueil']);
     }
+
+    
 
 
 }

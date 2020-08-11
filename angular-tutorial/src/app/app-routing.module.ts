@@ -39,6 +39,7 @@ import { DeclarationNewComponent } from './declaration-get/declaration-new/decla
 import { PaiementComponent } from './paiement/paiement.component';
 
 
+
 const routes: Routes = [
   {path: '',   redirectTo: '/connexion', pathMatch: 'full' },
   {path: 'connexion', component: ConnexionComponent },

@@ -18,13 +18,6 @@ export class MenuComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
 
-  /*get data(): string {
-    return this.dataService.sharedNif;
-  }
-  set data(value: string) {
-    this.dataService.sharedNif = value;
-  }*/
-
   constructor(public dataService:SdataService, public loginService:SconnexionService ,  private router: Router, private http: HttpClient ,private route: ActivatedRoute) 
   { 
     

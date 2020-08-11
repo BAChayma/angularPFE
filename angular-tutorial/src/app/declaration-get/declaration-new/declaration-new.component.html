@@ -1,4 +1,14 @@
-<!--<div class="col-md-6 user-container">
+
+<div class="col-md-6 user-container">
+
+  <ul class="navbar-nav "> 
+    <li>
+      <button mat-raised-button (click)="onClose()" >
+        <mat-icon>close</mat-icon>
+      </button>
+    </li>
+  </ul>
+
   <h2 class="text-center">Declaration</h2>
 
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
@@ -8,99 +18,20 @@
       <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
     </div>
 
-    <div class="form-group">
-      <label for="KDetLigne">Listes des lignes:</label>
-      <ng-select formControlName="KDetLigne" 
-             [items]="detLigItems"
-             [virtualScroll]="true"
-             [searchable]="true" 
-             bindLabel="libelleDetLigne"
-             bindValue="KDetLigne"
-             placeholder="Choisir une ligne"
-             [(ngModel)]="selectedDetLigId"
-             >
-      </ng-select>
-      <label> Selected ligne ID: {{selectedDetLigId}} </label>
-    </div>
-
+    <div *ngFor="let detLig of DetailLigne">
+      <div *ngFor="let aa of detLig.detailLigne ; let  i=index" >
         <div class="form-group">
-          <label for="valeur" >Valeur:</label>
-          <input type="text" formControlName="valeur"  placeholder="Rang formule" name="valeur" class="form-control" id="valeur">
-        </div>
-
-    <button class="btn btn-success" >Calculer</button>
-
-  </form>
-
-  <button class="mat-raised-button" (click)="onClose()">Fermer</button>
-
-</div>-->
-
-<!--<div class="col-md-6 user-container">
-  <h2 class="text-center">Declaration</h2>
-
-  <div *ngFor="let detLig of DetailLigne">
-    <div *ngFor="let aa of detLig.detailLigne; let i = index;">
-      <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="kimpot"> Code impot:</label> 
-          <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
-        </div>
-        <div class="form-group">
-          <label for="{{aa.libelleDetLigne}}"> {{aa.libelleDetLigne}}:</label> 
-          <input type="text" formControlName="libelleDetLigne{{i}}" (click)="addControl()" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" > 
-        </div>
-        <button class="btn btn-success" >Calculer</button>
-      </form>
-    </div>
-  </div>
-
-</div>-->
-
-
-<div class="col-md-6 user-container">
-    <h2 class="text-center">Declaration</h2>
-
-    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
-      <div class="form-group">
-        <label for="kimpot"> Code impot:</label> 
-        <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
-      </div>
-
-      <!--<table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-    
-        <tbody>
-          <ng-container *ngFor="let detLig of DetailLigne" >
-            
-            <tr *ngFor="let aa of detLig.detailLigne">
-                  <td>{{aa.libelleDetLigne}}</td>
-                  <td><input type="text" formControlName="{{aa.libelleDetLigne}}"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" ></td>
-                  <td><button class="btn btn-success" >Calculer</button></td>
-            </tr>
-          </ng-container>   
-        </tbody>
-      </table>-->
-
-      <div *ngFor="let detLig of DetailLigne">
-        <div *ngFor="let aa of detLig.detailLigne">
-          <div class="form-group">
-            <label for="{{aa.libelleDetLigne}}"> {{aa.libelleDetLigne}}:</label> 
-            <input type="text" formControlName="{{aa.libelleDetLigne}}"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.libelleDetLigne}}" > 
-          </div>
+          <label formControlName="KDetLigne" > {{aa.KDetLigne}}:</label>
+          <label> {{aa.libelleDetLigne}}:</label> 
+          <!--<input type="text" formControlName="KDetLigne" placeholder="{{aa.KDetLigne}}" disabled >-->
+          <input type="text" formControlName="valeur"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" >
         </div>
       </div>
+    </div>
 
-      <button class="btn btn-success" >Calculer</button>
+    <button class="btn btn-success" > <mat-icon>check_circle</mat-icon> Calculer </button>
 
-    </form> 
+  </form> 
 
-    <button class="mat-raised-button" (click)="onClose()">Fermer</button>
+  <!--<button class="mat-raised-button" (click)="onClose()"> <mat-icon>close</mat-icon> Fermer</button>-->
 </div>

@@ -1,9 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Optional, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SaeService } from 'src/app/WSservices/sae.service';
 import { ActiviteEntreprise } from 'src/app/classes/ActiviteEntreprise';
+import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActiviteEseGetComponent } from '../activite-ese-get.component';
+
 
 @Component({
   selector: 'app-activite-ese-update',
@@ -12,6 +15,11 @@ import { ActiviteEntreprise } from 'src/app/classes/ActiviteEntreprise';
 })
 
 export class ActiviteEseUpdateComponent implements OnInit {
+
+  /*
+public dialogConfig: MatDialogRef<ActiviteEseGetComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ActiviteEseGetComponent>,
+  */
 
   constructor(private formBuilder: FormBuilder ,private aeService: SaeService ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) 
   {}
@@ -69,6 +77,10 @@ export class ActiviteEseUpdateComponent implements OnInit {
     gotoList() {
       alert('activite entreprise updated successfully.');
       this.router.navigate(['ActiviteEse']);
+    }
+
+    onClose() {
+     // this.dialogRef.close();
     }
 
 }

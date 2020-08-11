@@ -55,4 +55,10 @@ export class AccueilComponent implements OnInit {
     this.cnxService.logout();
   }
 
+  visibility(){
+    this.cnxService.voirMenu();
+  }
+
+
+
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { menu } from '../classes/menu';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,10 @@ export class SmenuService {
     return this.httpClient.get<menu>(this.menuUrl , this.httpOptions); 
   } 
 
+  smenuUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/MenuWS/SMenu?Kmenu=';
+  smenu(Kmenu: number): Observable<menu>{
+    return this.httpClient.get<menu>(this.smenuUrl + Kmenu , this.httpOptions); 
+  } 
+
+ 
 }

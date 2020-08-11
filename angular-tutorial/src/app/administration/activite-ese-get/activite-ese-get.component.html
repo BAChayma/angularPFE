@@ -7,7 +7,7 @@
         <th scope="col">ID activite de l'entreprise</th>
         <th scope="col">Libelle activite de l'entreprise</th>
         <th scope="col"> Operation</th>
-        <button  class="btn btn-outline-primary" (click)="ajouter()" >Ajouter</button>
+        <button  class="btn btn-outline-primary"  (click)="openDialogNew()"> <mat-icon>add</mat-icon> Ajouter</button>
       </tr>
     </thead>
 
@@ -17,8 +17,8 @@
               <td>{{a.KActEnt}}</td>
               <td>{{a.libelleAE}}</td>
               <td> 
-                <button type="button" class="btn btn-outline-primary" routerLink="/updateAE/{{a.KActEnt}}" >Modifier</button>
-                <button type="button" class="btn btn-outline-secondary" >Supprimer</button>
+                <button type="button" class="btn btn-outline-primary"  routerLink="/updateAE/{{a.KActEnt}}" > <mat-icon>update</mat-icon> Modifier</button>
+                <button type="button" class="btn btn-outline-secondary" > <mat-icon>delete_forever</mat-icon> Supprimer</button>
               </td>
               </tr>
       </ng-container>

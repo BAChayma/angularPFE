@@ -17,7 +17,7 @@ import { detailLigneDet } from 'src/app/classes/detailLigneDet';
   styleUrls: ['./declaration-new.component.css']
 })
 export class DeclarationNewComponent implements OnInit {
-
+  i:number;
   impotsItems = [];
   selectedImpotId: number;
   addForm: FormGroup;
@@ -32,6 +32,8 @@ export class DeclarationNewComponent implements OnInit {
   detLigItems : detailLigneDet[];
   ligne : detailLigne[];
 
+  form: FormGroup;
+
   constructor(public dialogConfig: MatDialogRef<DeclarationGetComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeclarationGetComponent>, private detligService: SDetLigneService ,private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService  ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) 
   { 
@@ -39,53 +41,17 @@ export class DeclarationNewComponent implements OnInit {
       console.log(this.recivedRow);
   }
 
-  ngOnInit(): void {/**
-    
-    
-    this.addForm = this.formBuilder.group({
-     
-      kimpot: ['', Validators.required],
-      //libelleDetLigne: ['', Validators.required]
-       KDclMvt: [null, Validators.required],
-      KDetLigne: [null, Validators.required],
-      valeur: [null, Validators.required],
-    });
-*/
+  ngOnInit(): void {
 
 this.addForm =  new FormGroup({ 
   kimpot : new FormControl('') ,
-  lignes: new FormArray([
-    this.initLignes(),
-  ])
+  KDetLigne : new FormControl('') ,
+  valeur : new FormControl('') 
 })
     this.list();
 
     this.getDetLigtByImpot();
    
-  }
-
-  initLignes(): FormGroup{
-    return new FormGroup({
-      //KDclMv: new FormControl(''),
-      KDetLigne: new FormControl(''),
-      valeur: new FormControl('')
-     
-    });
-
-  }
-
-  addLigne() {
-    const control = <FormArray>this.addForm.get('lignes');
-    control.push(this.initLignes());
-  }
-
-  getLignes(form) {
-    //console.log(form.get('sections').controls);
-    return form.controls.lignes.controls;
-  }
-
-  getLignesFormControls(): AbstractControl[] {
-    return (<FormArray> this.addForm.get('lignes')).controls
   }
 
   list(){
@@ -110,24 +76,30 @@ this.addForm =  new FormGroup({
   });
   }
 
-  onSubmit() {  
-    this.cdeclarationService.AjouterDclMvt(this.addForm.value)
+  onSubmit() { 
+    console.log(this.DetailLigne[0]['detailLigne'].length)
+  for (var j=0;j<this.DetailLigne[0]['detailLigne'].length;j++) {
+
+    this.addForm.controls['KDetLigne'].setValue(this.DetailLigne[0]['detailLigne'][j]['KDetLigne'])
+  console.log(this.DetailLigne[0]['detailLigne'][j]['KDetLigne']);
+  var inputValue = (<HTMLInputElement>document.getElementById(this.DetailLigne[0]['detailLigne'][j]['KDetLigne'])).value;
+
+    this.addForm.controls['valeur'].setValue(inputValue)
+
+this.cdeclarationService.AjouterDclMvt(this.addForm.value)
     .subscribe(res => {
       console.log(res);
       console.log(this.addForm.value);
-      console.log('#username'.valueOf());
     }, (err) => {
       console.log(err);
     });
+   
   }
-
-  addControl(){
-    this.libCount++;
-    this.addForm.addControl('libelleDetLigne' + this.libCount, new FormControl('', Validators.required));
   }
 
   onClose() {
     this.dialogRef.close();
   }
 
+  
 }

@@ -58,36 +58,59 @@ export class ConnexionComponent implements OnInit {
   ngOnInit(): void {
     this.Form = this.formBuilder.group({
       username: [null, Validators.required],
-      password: [null, Validators.required]
+      mdp: [null, Validators.required]
     });
   }
 
   utilisateurs: any;
   username: string;
   mdp: string;
+  testLogIn =  false;
+  loading = false;
 
+  // /* login() {
+  //   this.cnxService.getConnexion(this.username , this.mdp) 
+  //   .subscribe(
+  //     (res) => {
+  //       this.utilisateurs = res;
+  //       console.log(res);
+  //       console.log(this.utilisateurs);
+  //     },
+  //     err => console.error(err) ,
+  //     () => {
+  //       console.log('connexion...') 
+  //     }
+  //     )
+  //     this.gotoList();
+  //     return this.utilisateurs;
+  // }
+ 
   login() {
     this.cnxService.getConnexion(this.username , this.mdp) 
-    .subscribe(
-      (res) => {
-        this.utilisateurs = res;
-        console.log(res);
-        console.log(this.utilisateurs);
-        //this.gotoList();
-      },
-      err => console.error(err) ,
-      () => {
-        console.log('connexion...') 
-        //this.gotoCnx();
-      }
-      )
-      this.gotoList();
-      //this.gotoCnx();
-      return this.utilisateurs;
+      .subscribe(
+         (res) => {
+           this.utilisateurs = res;
+         })
+    return this.utilisateurs;
   }
 
+
   onSubmit() {
-    this.login();
+    //this.login();
+    this.testLogIn = true;
+    if (this.Form.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.cnxService.getConnexion(this.username, this.mdp)
+            .subscribe(
+                data => {
+                  this.router.navigate(['Accueil']);
+                },
+                error => {
+                    this.loading = false;
+                });
+
   }
 
   gotoList() {

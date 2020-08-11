@@ -12,9 +12,11 @@
             <input type="text" formControlName="lae" [(ngModel)]="ae.libelleAE" placeholder="lae" name="lae" class="form-control" id="lae" >
           </div>
 
-        <button class="btn btn-success">Modifier</button>
+        <button class="btn btn-success"> <mat-icon>check_circle</mat-icon> Modifier</button>
 
     </form>
+
+    <button class="mat-raised-button" (click)="onClose()"> <mat-icon>close</mat-icon> Fermer</button>
 </div>
 
 <!--<div class="container">

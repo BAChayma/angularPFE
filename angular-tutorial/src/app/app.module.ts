@@ -14,7 +14,6 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
-import { ToastrModule } from 'ngx-toastr';
 
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
@@ -49,7 +48,6 @@ import { ParametrageNewColonneComponent } from './parametrage-impot/parametrage-
 import { ParametrageNewFormuleComponent } from './parametrage-impot/parametrage-new-formule/parametrage-new-formule.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +80,7 @@ import { ParametrageNewFormuleComponent } from './parametrage-impot/parametrage-
     ParametrageNewLigneComponent,
     ParametrageNewColonneComponent,
     ParametrageNewFormuleComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -107,7 +105,9 @@ import { ParametrageNewFormuleComponent } from './parametrage-impot/parametrage-
     ParametrageNewLigneComponent,
     ParametrageNewColonneComponent,
     DeclarationNewComponent,
-    ParametrageNewFormuleComponent
+    ParametrageNewFormuleComponent,
+    ActiviteEseNewComponent,
+    ActiviteEseUpdateComponent
   ]
 })
 export class AppModule { }

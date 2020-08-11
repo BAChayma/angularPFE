@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SaeService } from 'src/app/WSservices/sae.service';
 import { Router } from '@angular/router';
 import { ActiviteEntreprise } from 'src/app/classes/ActiviteEntreprise';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ActiviteEseNewComponent } from './activite-ese-new/activite-ese-new.component';
+import { ActiviteEseUpdateComponent } from './activite-ese-update/activite-ese-update.component';
+
 
 @Component({
   selector: 'app-activite-ese-get',
@@ -13,7 +17,7 @@ export class ActiviteEseGetComponent implements OnInit {
   ae: ActiviteEntreprise[];
   ActiviteEntreprise: any;
   kActEnt: number;
-  constructor(private aeService: SaeService , private router: Router) { }
+  constructor(public dialog: MatDialog, private aeService: SaeService , private router: Router) { }
 
   ngOnInit(): void {
     this.list();
@@ -51,6 +55,22 @@ this.router.navigate(['updateAE' , KActEnt]);
 ajouter() {
 this.router.navigate(['newAE']);
 //this.router.navigate(['newAE' , 'new']);
+}
+
+openDialogNew() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "80%";
+  this.dialog.open(ActiviteEseNewComponent,dialogConfig);
+}
+
+openDialogUpdate() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "80%";
+  this.dialog.open(ActiviteEseUpdateComponent,dialogConfig);
 }
 
 }

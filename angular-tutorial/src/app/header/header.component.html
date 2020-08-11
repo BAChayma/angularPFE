@@ -1,193 +1,124 @@
 <header>
 
-  <div *ngFor="let cu of ContribuableUser"> 
-  
-  <!--<nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async" >
-  
-    <ul class="navbar-nav"  > 
-       
-      <li>
-       <button mat-menu-item [matMenuTriggerFor] = "menu1">Consultation du dossier en ligne</button>
-          <mat-menu #menu1 = "matMenu">
-            <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'consulterContribuable']" class="nav-link" >Consultation du dossier en ligne</button>
-          </mat-menu>
-      </li>
-  
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu2">Déclaration en ligne</button>
-          <mat-menu #menu2 = "matMenu">
-            <button mat-menu-item  [routerLink]="['/menu', cu.contribuableUser?.nif, 'declarationContribuable']" class="nav-link" > Gestion des déclarations</button>
-          </mat-menu>
-      </li>
-  
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu3">Paiement en ligne </button>
-          <mat-menu #menu3 = "matMenu">
-            <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'paiementContribuable']" class="nav-link"> Paiement en impots</button>
-          </mat-menu>
-      </li>
-  
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu4">Réclamation en ligne </button>
-          <mat-menu #menu4 = "matMenu">
-            <button mat-menu-item  class="nav-link"> Traitement des réclamations</button>
-            <button mat-menu-item  class="nav-link"> Gestion des réclamations</button>
-          </mat-menu>
-      </li>
+  <div *ngFor="let cu of ContribuableUser">
 
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu6"> Réferentiels </button>
-        <mat-menu #menu6 = "matMenu">
-          <button mat-menu-item [matMenuTriggerFor] = "menu61"> Administrations </button>
-          <button mat-menu-item [matMenuTriggerFor] = "menu62"> Paremétrage des impots </button>
-  
-          <mat-menu #menu61 = "matMenu">
-            <button mat-menu-item routerLink="ActiviteEse" class="nav-link"> Activite entreprise</button>
-            <button mat-menu-item routerLink="Formejuridique" class="nav-link"> Forme juridique</button>
-            <button mat-menu-item routerLink="Impot" class="nav-link"> Impot</button>
-            <button mat-menu-item routerLink="Pays" class="nav-link"> Pays</button>
-            <button mat-menu-item routerLink="ModePaiement" class="nav-link"> Mode de paiement</button>
-          </mat-menu>
-  
-          <mat-menu #menu62 = "matMenu">
-            <button mat-menu-item routerLink="parametrageImpot" class="nav-link"> Paramétrage des formules de calcul des impots</button>
-          </mat-menu>
-        </mat-menu>
-      </li>
-  
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu5">Profile </button>
-        <mat-menu #menu5 = "matMenu">
-          <button mat-menu-item routerLink="declaration" class="nav-link"> Mon compte</button>
-          <button mat-menu-item (click)="onLogout()"  > Se déconnecter</button>
-        </mat-menu>
-      </li> 
-  
-  
-    </ul>
-  
-  </nav>-->
+    <nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async" > 
 
-  
-  <nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async">
-    <div class="float-left">
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
-    </div>
-    <div class="breadcrumb-dn mr-auto text-white">
-      <p>Material Design for Bootstrap</p>
-    </div>
-    <ul class="nav navbar-nav nav-flex-icons ml-auto"> 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <li>
-        <button mat-raised-button  >
-          <mat-icon>lock</mat-icon>
-        </button>
-      </li>
- 
-      <li>
-        <button mat-raised-button  (click)="onLogout()">
-          <mat-icon>power_settings_new</mat-icon>          
-        </button>
-      </li> 
-
-      <li>
-        <button mat-raised-button  (click)="home()">
-          <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-        </button>
-      </li>
-
-    </ul>
-  </nav>
-
-
-  <nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async">
+      <ul class="navbar-nav mr-auto"> 
+         
+        <li>
+         <button mat-menu-item [matMenuTriggerFor] = "menu1" >Consultation du dossier en ligne</button>
+            <mat-menu #menu1 = "matMenu">
+              <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'consulterContribuable']" class="nav-link" >Consultation du dossier en ligne</button>
+            </mat-menu>
+        </li>
     
-    <ul class="navbar-nav"> 
-
-      <li>
-        <button mat-menu-item (click)="isMenuCollapsed = !isMenuCollapsed">Télé-procedure</button>
-      </li>
-
-      <li>
-        <button mat-menu-item >Réferentiels</button>
-      </li>
- 
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu5">Profile </button>
-        <mat-menu #menu5 = "matMenu">
-          <button mat-menu-item routerLink="declaration" class="nav-link"> Mon compte</button>
-          <button mat-menu-item (click)="onLogout()"  > Se déconnecter</button>
-        </mat-menu>
-      </li> 
-
-    </ul>
-  </nav>
+        <li>
+          <button mat-menu-item [matMenuTriggerFor] = "menu2" >Déclaration en ligne</button>
+            <mat-menu #menu2 = "matMenu">
+              <button mat-menu-item  [routerLink]="['/menu', cu.contribuableUser?.nif, 'declarationContribuable']" class="nav-link" > Gestion des déclarations</button>
+            </mat-menu>
+        </li>
+    
+        <li>
+          <button mat-menu-item [matMenuTriggerFor] = "menu3" >Paiement en ligne </button>
+            <mat-menu #menu3 = "matMenu">
+              <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'paiementContribuable']" class="nav-link"> Paiement en impots</button>
+            </mat-menu>
+        </li>
+    
+        <li>
+          <button mat-menu-item [matMenuTriggerFor] = "menu4" >Réclamation en ligne </button>
+            <mat-menu #menu4 = "matMenu">
+              <button mat-menu-item  class="nav-link"> Traitement des réclamations</button>
+              <button mat-menu-item  class="nav-link"> Gestion des réclamations</button>
+            </mat-menu>
+        </li>
   
+        <li>
+          <button mat-menu-item [matMenuTriggerFor] = "menu6" name="m5"> Réferentiels </button>
+          <mat-menu #menu6 = "matMenu">
+            <button mat-menu-item [matMenuTriggerFor] = "menu61"> Administrations </button>
+            <button mat-menu-item [matMenuTriggerFor] = "menu62"> Paremétrage des impots </button>
+    
+            <mat-menu #menu61 = "matMenu">
+              <button mat-menu-item routerLink="ActiviteEse" class="nav-link"> Activite entreprise</button>
+              <button mat-menu-item routerLink="Formejuridique" class="nav-link"> Forme juridique</button>
+              <button mat-menu-item routerLink="Impot" class="nav-link"> Impot</button>
+              <button mat-menu-item routerLink="Pays" class="nav-link"> Pays</button>
+              <button mat-menu-item routerLink="ModePaiement" class="nav-link"> Mode de paiement</button>
+            </mat-menu>
+    
+            <mat-menu #menu62 = "matMenu">
+              <button mat-menu-item routerLink="parametrageImpot" class="nav-link"> Paramétrage des formules de calcul des impots</button>
+            </mat-menu>
+          </mat-menu>
+        </li>
 
- <nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async" >
-  <div class="float-left">
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
-  </div>
+      </ul>
+       
+      <ul class="navbar-nav "> 
   
-  <ul class="nav navbar-nav nav-flex-icons ml-auto">
-    <li>
-      <button mat-menu-item [matMenuTriggerFor] = "menu1">Consultation du dossier en ligne</button>
-         <mat-menu #menu1 = "matMenu">
-           <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'consulterContribuable']" class="nav-link" >Consultation du dossier en ligne</button>
-         </mat-menu>
-     </li>
- 
-     <li>
-       <button mat-menu-item [matMenuTriggerFor] = "menu2">Déclaration en ligne</button>
-         <mat-menu #menu2 = "matMenu">
-           <button mat-menu-item  [routerLink]="['/menu', cu.contribuableUser?.nif, 'declarationContribuable']" class="nav-link" > Gestion des déclarations</button>
-         </mat-menu>
-     </li>
- 
-     <li>
-       <button mat-menu-item [matMenuTriggerFor] = "menu3">Paiement en ligne </button>
-         <mat-menu #menu3 = "matMenu">
-           <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'paiementContribuable']" class="nav-link"> Paiement en impots</button>
-         </mat-menu>
-     </li>
- 
-     <li>
-       <button mat-menu-item [matMenuTriggerFor] = "menu4">Réclamation en ligne </button>
-         <mat-menu #menu4 = "matMenu">
-           <button mat-menu-item  class="nav-link"> Traitement des réclamations</button>
-           <button mat-menu-item  class="nav-link"> Gestion des réclamations</button>
-         </mat-menu>
-     </li>
-  </ul>
+        <li>
+          <button mat-raised-button  >
+            <mat-icon>lock</mat-icon>
+          </button>
+        </li>
+   
+        <li>
+          <button mat-raised-button  (click)="onLogout()">
+            <mat-icon>power_settings_new</mat-icon>          
+          </button>
+        </li> 
+  
+        <li>
+          <button mat-raised-button  (click)="home()">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+          </button>
+        </li>
+  
+      </ul>
 
-</nav>
-
-
-  <nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn$ | async">
-    <div class="float-left">
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
     </div>
-    <ul class="nav navbar-nav nav-flex-icons ml-auto">
-      <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu61"> Administrations </button>
-        <mat-menu #menu61 = "matMenu">
-          <button mat-menu-item routerLink="ActiviteEse" class="nav-link"> Activite entreprise</button>
-          <button mat-menu-item routerLink="Formejuridique" class="nav-link"> Forme juridique</button>
-          <button mat-menu-item routerLink="Impot" class="nav-link"> Impot</button>
-          <button mat-menu-item routerLink="Pays" class="nav-link"> Pays</button>
-          <button mat-menu-item routerLink="ModePaiement" class="nav-link"> Mode de paiement</button>
-        </mat-menu>
-       </li>
+  
+    </nav>
 
-       <li>
-        <button mat-menu-item [matMenuTriggerFor] = "menu62"> Paremétrage des impots </button>
-        <mat-menu #menu62 = "matMenu">
-          <button mat-menu-item routerLink="parametrageImpot" class="nav-link"> Paramétrage des formules de calcul des impots</button>
-        </mat-menu>
-       </li>
 
-    </ul>
-  </nav>
+
+    <!--<nav class ="navbar navbar-expand-lg navbar-light bg-light" *ngIf="ismenu$ | async" > 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"> 
+          <li>
+            <button mat-menu-item [matMenuTriggerFor] = "menu1">Consultation du dossier en ligne</button>
+               <mat-menu #menu1 = "matMenu">
+                 <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'consulterContribuable']" class="nav-link" >Consultation du dossier en ligne</button>
+               </mat-menu>
+           </li>
+           <li>
+             <button mat-menu-item [matMenuTriggerFor] = "menu2">Déclaration en ligne</button>
+               <mat-menu #menu2 = "matMenu">
+                 <button mat-menu-item  [routerLink]="['/menu', cu.contribuableUser?.nif, 'declarationContribuable']" class="nav-link" > Gestion des déclarations</button>
+               </mat-menu>
+           </li>
+           <li>
+             <button mat-menu-item [matMenuTriggerFor] = "menu3">Paiement en ligne </button>
+               <mat-menu #menu3 = "matMenu">
+                 <button mat-menu-item [routerLink]="['/menu', cu.contribuableUser?.nif, 'paiementContribuable']" class="nav-link"> Paiement en impots</button>
+               </mat-menu>
+           </li>
+           <li>
+             <button mat-menu-item [matMenuTriggerFor] = "menu4">Réclamation en ligne </button>
+               <mat-menu #menu4 = "matMenu">
+                 <button mat-menu-item  class="nav-link"> Traitement des réclamations</button>
+                 <button mat-menu-item  class="nav-link"> Gestion des réclamations</button>
+               </mat-menu>
+           </li>
+        </ul>
+      </div>
+    </nav>-->
+
 
   
   </div>
