@@ -5,6 +5,6 @@ export class detailLigne {
     libelleDetLigne : string;
     ordreDetLigne : number;
     kimpot : number;
-    //ligne: detailLigneDet[];
+
     detailLigne: detailLigneDet[];
     }

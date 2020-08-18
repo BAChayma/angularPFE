@@ -1,0 +1,6 @@
+.modal-body{
+	height: 350px;
+	overflow:hiden;
+}
+
+.modal-body:hover{overflow-y:auto;}

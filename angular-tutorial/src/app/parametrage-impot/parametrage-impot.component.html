@@ -156,10 +156,10 @@
 
                     <tbody>
                       <ng-container *ngFor="let f of Formule" >      
-                        <tr *ngFor="let form of f.formule">
-                              <td>{{form.libelleDetLigne}}</td>
-                              <td>{{form.signeoperateur}}</td>
-                              <td>{{form.ordreFormule}}</td>
+                        <tr *ngFor="let ff of f.formule">
+                              <td>{{ff.libelleDetLigne}}</td>
+                              <td>{{ff.signeoperateur}}</td>
+                              <td>{{ff.ordreFormule}}</td>
                         </tr>
                       </ng-container>    
                     </tbody>

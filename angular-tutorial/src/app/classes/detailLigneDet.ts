@@ -4,4 +4,5 @@ export class detailLigneDet {
     ordreDetLigne : number;
     kimpot : number;
 
+
     }

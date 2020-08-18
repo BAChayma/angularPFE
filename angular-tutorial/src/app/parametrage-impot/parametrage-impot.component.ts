@@ -134,7 +134,8 @@ export class ParametrageImpotComponent implements OnInit {
   }
 
   listFormule(){
-    this.formuleService.FormuleByImpot(this.selectedImpotId).subscribe(
+    //this.formuleService.FormuleByImpot(this.selectedImpotId).subscribe(
+    this.formuleService.CalculFormuleByImpot(this.selectedImpotId).subscribe(
     (data) => {
       this.Formule = data;
       this.Formule = Array.of(this.Formule); 

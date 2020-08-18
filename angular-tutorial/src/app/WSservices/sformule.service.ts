@@ -25,4 +25,8 @@ export class SformuleService {
   FormuleByImpot(kimpot: number) : Observable<any>
   { return this.httpClient.get<any>(this.FormuleByImpotUrl+kimpot)}
 
+  public url_calculByImpot = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/FormuleWS/calculByImpot?kimpot=';
+  CalculFormuleByImpot(kimpot: number) : Observable<any>
+  { return this.httpClient.get<any[]>(this.url_calculByImpot+kimpot)}
+
 }

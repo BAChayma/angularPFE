@@ -9,7 +9,12 @@ import { detailLigne } from 'src/app/classes/detailLigne';
 import { SDetLigneService } from 'src/app/WSservices/sdet-ligne.service';
 import { Subscription } from 'rxjs';
 import { detailLigneDet } from 'src/app/classes/detailLigneDet';
+import { SformuleService } from 'src/app/WSservices/sformule.service';
 
+export type Operator = '-' | '+' | '*' | '/' | '(' | ')';
+export function isOperator(token: string): token is Operator {
+  return token === '-' || token === '+' || token === '*' || token === '/' || token === '(' || token === ')';
+}
 
 @Component({
   selector: 'app-declaration-new',
@@ -24,7 +29,7 @@ export class DeclarationNewComponent implements OnInit {
   filedName: any;
   recivedRow;
   lig: detailLigne[];
-  DetailLigne: any;
+  DetailLigne: detailLigne;
   numberLigne : any ;
   private libCount: number = 1;
 
@@ -34,23 +39,58 @@ export class DeclarationNewComponent implements OnInit {
 
   form: FormGroup;
 
+  Formule: any[];
+
+  formuleTemplate: any;
+  detailLigneTemplate: any;
+  formuleCaalcule='';
+  resultat:any;
+  tokens: string[] = [];
+ group={};
+ DetailLigneChayma: any[];
+
   constructor(public dialogConfig: MatDialogRef<DeclarationGetComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeclarationGetComponent>, private detligService: SDetLigneService ,private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService  ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) 
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeclarationGetComponent>, private formuleService:SformuleService , private detligService: SDetLigneService ,private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService  ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) 
   { 
+    //this.recivedRow = this.DetailLigne;
       this.recivedRow = data.selectedImpotId;
       console.log(this.recivedRow);
   }
 
   ngOnInit(): void {
 
-this.addForm =  new FormGroup({ 
+/*this.addForm =  new FormGroup({ 
   kimpot : new FormControl('') ,
   KDetLigne : new FormControl('') ,
   valeur : new FormControl('') 
-})
-    this.list();
+})*/
+     /// this.list();
 
+
+   /* const group = {};
+    this.list()?.detailLigne.forEach( (inputTemplate) => {
+      
+        group[inputTemplate.KDetLigne] = new FormControl();   
+     
+    })
+    console.log(group)
+    this.addForm =  new FormGroup(  group  )
+ console.log(this.addForm)
+   */
+
+  this.list();
+    
+    
+       
+    
+  
+    
+    this.addForm =  new FormGroup(this.group)
     this.getDetLigtByImpot();
+
+    this.listFormule();
+
+    
    
   }
 
@@ -58,14 +98,21 @@ this.addForm =  new FormGroup({
     this.detligService.LOVLigneByImpot(this.recivedRow).subscribe(
     (data) => {
       this.DetailLigne = data;
-      this.DetailLigne = Array.of(this.DetailLigne); 
-      console.log(this.DetailLigne);
-     
+      
+      this.DetailLigne.detailLigne.forEach(elem => {
+        this.group[elem.KDetLigne] = new FormControl(); 
+      });
+      this.addForm =  new FormGroup(this.group) ;
+       
+      this.DetailLigneChayma = Array.of(this.DetailLigne); 
+     // console.log(this.DetailLigne);
+    
     },
     err => console.error(err) ,
     () => console.log('LOVLigneByImpot') 
     )
-    return this.DetailLigne;
+    
+   
   }
 
   getDetLigtByImpot(){ 
@@ -74,6 +121,34 @@ this.addForm =  new FormGroup({
       console.log(data);
       console.log(this.detLigItems); 
   });
+  }
+
+  listFormule(){
+    this.formuleService.CalculFormuleByImpot(this.recivedRow).subscribe(
+    (data: any[]) => {
+      this.Formule = data;
+     
+    
+    
+    
+      this.Formule = Array.of(this.Formule); 
+      this.Formule.forEach(
+        item =>{
+            item.formule.sort((a, b) => (b.ordreFormule - a.ordreFormule));
+        this.formuleCaalcule= item.formule.reduce( (current, value, index) => {
+          if(index > 0)
+              current += value.signeoperateur;
+          return current + value.ordreFormule;
+        }, ''
+        )
+        }
+      );
+      console.log(this.Formule);
+    },
+    err => console.error(err) ,
+    () => console.log('CalculFormuleByImpot') 
+    )
+    return this.Formule;
   }
 
   onSubmit() { 
@@ -100,6 +175,30 @@ this.cdeclarationService.AjouterDclMvt(this.addForm.value)
   onClose() {
     this.dialogRef.close();
   }
+
+
+  evaluate(){
+    this.resultat=Number(this.addForm.get([this.formuleCaalcule[0]]).value)
+     for(let i=0 ; i<(this.formuleCaalcule.length)-1; i++){
+       if(this.formuleCaalcule[i] === '+'){
+     this.resultat+=Number(this.addForm.get([this.formuleCaalcule[i+1]]).value)
+       }
+        if(this.formuleCaalcule[i] === '-'){
+     this.resultat-=Number(this.addForm.get([this.formuleCaalcule[i+1]]).value)
+       }
+        if(this.formuleCaalcule[i] === '*'){
+     this.resultat*=Number(this.addForm.get([this.formuleCaalcule[i+1]]).value)
+       }
+       if(this.formuleCaalcule[i] === '/'){
+      this.resultat/=Number(this.addForm.get([this.formuleCaalcule[i+1]]).value)
+       }
+        if(this.formuleCaalcule[i] === '='){
+    break
+       }
+       
+      
+     }
+   }
 
   
 }

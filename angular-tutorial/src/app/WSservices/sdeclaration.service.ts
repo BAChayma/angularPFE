@@ -10,6 +10,7 @@ import { detailColonne } from '../classes/detailColonne';
 import { Periodicite } from '../classes/Periodicite';
 import { datailPeriodicite } from '../classes/datailPeriodicite';
 import { DclMvt } from '../classes/DclMvt';
+import { Formule } from '../classes/Formule';
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +90,10 @@ LOVDetailPeriodiciteUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-View
 LOVDetailPeriodicite(kperiodicite: number){
   return this.httpClient.get<datailPeriodicite>(this.LOVDetailPeriodiciteUrl + kperiodicite , this.httpOptions );
 } 
+
+
+
+
 
 
 }
