@@ -52,6 +52,11 @@ public deleteDclUrl = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-c
     return this.httpClient.post<DclMvt>(this.url_AjouterDclMvt , dclmvt);
   }
 
+  public url_AjouterDclMvtTest = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/DclMvtWS/createDclMvtTest';
+  AjouterDclMvtTest( dclmvt : DclMvt): Observable<DclMvt> {
+    return this.httpClient.post<DclMvt>(this.url_AjouterDclMvtTest , dclmvt);
+  }
+
   /* LOV */
 LOVImpotUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/ImpotWS/LOVImpot/';
 LOVImpot(){

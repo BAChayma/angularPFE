@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, Subject } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ContribuableUser } from '../classes/ContribuableUser';
@@ -58,16 +58,24 @@ export class SconnexionService {
 
   getConnexion(username , mdp) :Observable<Utilisateur> 
   {
-    this.loggedIn.next(true);
-    this.menu.next(true);
+  //this.loggedIn.next();
+   // this.menu.next(true);
     //return this.httpClient.post<any>(`${this.SERVER_URL}?mdp=${mdp}&username=${username}` , this.httpOptions ); 
     //return this.httpClient.post<any>(this.url_cnx , this.httpOptions);
     //return this.httpClient.post<any>(this.cnxURL, { username, mdp })
     return this.httpClient.post<Utilisateur>(`${this.cnxURL}?mdp=${mdp}&username=${username}` , this.httpOptions ); 
   }
 
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  
 
+  public loggedIn = new Subject<boolean>(); // {1}
+
+  sendLoggedIn(loggedIn: boolean){
+    this.loggedIn.next(loggedIn);
+  }
+  getLoggedIn():Observable<boolean>{
+    return this.loggedIn.asObservable();
+  }
   private menu = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {

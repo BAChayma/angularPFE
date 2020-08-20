@@ -1,76 +1,79 @@
-  <div class="modal-body">
+<div class="modal-body">
 
-<div class="col-md-6 user-container">
-
-  <ul class="navbar-nav "> 
-    <li>
-      <button mat-raised-button (click)="onClose()" >
-        <mat-icon>close</mat-icon>
-      </button>
-    </li>
-  </ul>
-
-  <h2 class="text-center">Declaration</h2>
-
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
-    <div class="form-group">
-      <label for="kimpot"> Code impot:</label> 
-      <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
-    </div>
-
-    <div *ngFor="let detLig of DetailLigneChayma">
-      <div *ngFor="let aa of detLig.detailLigne ; let  i=index" >
-        <div [ngSwitch]="aa.KDetLigne">
-        <div  *ngSwitchDefault class="form-group" >
-          <label> {{aa.libelleDetLigne}}:</label> 
-          <input type="text" formControlName="{{aa.KDetLigne}}" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" (keyup)="evaluate()" >
-        </div>
-        <div  *ngSwitchCase="'64'" class="form-group" >
-          <label> {{aa.libelleDetLigne}}:</label> 
-          <input type="text" formControlName="{{aa.KDetLigne}}" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" [(ngModel)]="resultat" >
-        </div>
+  <div class="col-md-6 user-container">
+  
+    <ul class="navbar-nav "> 
+      <li>
+        <button mat-raised-button (click)="onClose()" >
+          <mat-icon>close</mat-icon>
+        </button>
+      </li>
+    </ul>
+  
+    <h2 class="text-center">Declaration</h2>
+  
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  
+      <div class="form-group">
+        <label for="kimpot"> Code impot:</label> 
+        <input type="text" formControlName="kimpot" [(ngModel)]="recivedRow"  name="kimpot" class="form-control" id="kimpot" disabled>
+      </div>
+  
+      <div *ngFor="let detLig of DetailLigneChayma">
+        <div *ngFor="let aa of detLig.detailLigne ; let  i=index" >
+          <div [ngSwitch]="aa.KDetLigne">
+          <div  *ngSwitchDefault class="form-group" >
+            <label formControlName="KDetLigne" > {{aa.KDetLigne}}:</label>
+            <label> {{aa.libelleDetLigne}}:</label> 
+            <input type="text" formControlName="{{aa.KDetLigne}}" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" (keyup)="evaluate()" >
+          </div>
+          <div  *ngSwitchCase="'64'" class="form-group" >
+            <label formControlName="KDetLigne" > {{aa.KDetLigne}}:</label>
+            <label> {{aa.libelleDetLigne}}:</label> 
+            <input type="text" formControlName="{{aa.KDetLigne}}" placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" [(ngModel)]="resultat" >
+          </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!--<div *ngFor="let detLig of DetailLigne">
-      <div *ngFor="let aa of detLig.detailLigne ; let  i=index" >
-        <div class="form-group">
-          <label formControlName="KDetLigne" > {{aa.KDetLigne}}:</label>
-          <label> {{aa.libelleDetLigne}}:</label> 
-          <input type="text" formControlName="valeur"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" >
+  
+      <!--<div *ngFor="let detLig of DetailLigne">
+        <div *ngFor="let aa of detLig.detailLigne ; let  i=index" >
+          <div class="form-group">
+            <label formControlName="KDetLigne" > {{aa.KDetLigne}}:</label>
+            <label> {{aa.libelleDetLigne}}:</label> 
+            <input type="text" formControlName="valeur"  placeholder="{{aa.libelleDetLigne}}" name="{{aa.libelleDetLigne}}" class="form-control" id="{{aa.KDetLigne}}" >
+          </div>
         </div>
-      </div>
-    </div>-->
-
-    <!--<table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Cellule</th>
-          <th scope="col">Operateur</th>
-          <th scope="col">Rang</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let f of Formule" >      
-          <tr *ngFor="let ff of f.formule">
-                <td>{{ff.libelleDetLigne}}</td>
-                <td>{{ff.signeoperateur}}</td>
-                <td>{{ff.ordreFormule}}</td>
+      </div>-->
+  
+      <!--<table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Cellule</th>
+            <th scope="col">Operateur</th>
+            <th scope="col">Rang</th>
           </tr>
-        </ng-container>    
-      </tbody>
-    </table>-->
-
-    <button class="btn btn-success" (click)="evaluate()" > <mat-icon>check_circle</mat-icon> Calculer </button>
-   
-  <!-- detailLigne : {{DetailLigne| json}}
-  addForm :  {{addForm.value | json}} -->
-  </form> 
-  <!-- formule {{Formule | json}}
-  <div>formule de calcul {{formuleCaalcule | json}} </div>  
-  <div>resulta{{resultat}} </div>  -->
-
-</div>
-</div>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let f of Formule" >      
+            <tr *ngFor="let ff of f.formule">
+                  <td>{{ff.libelleDetLigne}}</td>
+                  <td>{{ff.signeoperateur}}</td>
+                  <td>{{ff.ordreFormule}}</td>
+            </tr>
+          </ng-container>    
+        </tbody>
+      </table>-->
+  
+      <button class="btn btn-success" (click)="evaluate()" > <mat-icon>check_circle</mat-icon> Calculer </button>
+     
+     detailLigne : {{DetailLigne| json}}
+    addForm :  {{addForm.value | json}} 
+    </form> 
+    <!-- formule {{Formule | json}}
+    <div>formule de calcul {{formuleCaalcule | json}} </div>  
+    <div>resulta{{resultat}} </div>  -->
+  
+  </div>
+ 
+  </div>

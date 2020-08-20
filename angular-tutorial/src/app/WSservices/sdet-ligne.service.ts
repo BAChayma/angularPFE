@@ -29,6 +29,10 @@ export class SDetLigneService {
   {//return this.http.get<detailLigne[]>(this.getAllDetLigByImpotUrl + kimpot ); 
     return this.http.get<any>(this.getAllDetLigByImpotUrl+kimpot)}
   
+  /*LOVLigneByImpotUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/detailLigneWS/LOVDetLigByImpot?kimpot=';
+  LOVLigneByImpot(kimpot: number): Observable<detailLigne[]>  {
+    return this.http.get<detailLigne[]>(this.LOVLigneByImpotUrl + kimpot );
+  }*/
   LOVLigneByImpotUrl: string = 'http://localhost:7101/AppTeleServiceS2V1-ViewController-context-root/resources/detailLigneWS/LOVDetLigByImpot?kimpot=';
   LOVLigneByImpot(kimpot: number)  {
     return this.http.get<detailLigne>(this.LOVLigneByImpotUrl + kimpot );

@@ -26,6 +26,7 @@ export class DeclarationNewComponent implements OnInit {
   impotsItems = [];
   selectedImpotId: number;
   addForm: FormGroup;
+  addForm1: FormGroup;
   filedName: any;
   recivedRow;
   lig: detailLigne[];
@@ -45,6 +46,8 @@ export class DeclarationNewComponent implements OnInit {
   detailLigneTemplate: any;
   formuleCaalcule='';
   resultat:any;
+  values:any;
+  id:any;
   tokens: string[] = [];
  group={};
  DetailLigneChayma: any[];
@@ -52,67 +55,39 @@ export class DeclarationNewComponent implements OnInit {
   constructor(public dialogConfig: MatDialogRef<DeclarationGetComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeclarationGetComponent>, private formuleService:SformuleService , private detligService: SDetLigneService ,private formBuilder: FormBuilder ,private cdeclarationService: SdeclarationService  ,  private http: HttpClient , private router: Router , private route: ActivatedRoute) 
   { 
-    //this.recivedRow = this.DetailLigne;
       this.recivedRow = data.selectedImpotId;
       console.log(this.recivedRow);
   }
 
   ngOnInit(): void {
 
-/*this.addForm =  new FormGroup({ 
+this.addForm1 =  new FormGroup({ 
   kimpot : new FormControl('') ,
   KDetLigne : new FormControl('') ,
   valeur : new FormControl('') 
-})*/
-     /// this.list();
-
-
-   /* const group = {};
-    this.list()?.detailLigne.forEach( (inputTemplate) => {
-      
-        group[inputTemplate.KDetLigne] = new FormControl();   
+})
      
-    })
-    console.log(group)
-    this.addForm =  new FormGroup(  group  )
- console.log(this.addForm)
-   */
-
   this.list();
-    
-    
-       
-    
-  
-    
-    this.addForm =  new FormGroup(this.group)
-    this.getDetLigtByImpot();
-
-    this.listFormule();
-
-    
-   
+  this.addForm =  new FormGroup(this.group)
+  this.getDetLigtByImpot();
+  this.listFormule();
+ 
   }
 
   list(){
     this.detligService.LOVLigneByImpot(this.recivedRow).subscribe(
     (data) => {
       this.DetailLigne = data;
-      
       this.DetailLigne.detailLigne.forEach(elem => {
         this.group[elem.KDetLigne] = new FormControl(); 
       });
       this.addForm =  new FormGroup(this.group) ;
-       
       this.DetailLigneChayma = Array.of(this.DetailLigne); 
      // console.log(this.DetailLigne);
-    
     },
     err => console.error(err) ,
     () => console.log('LOVLigneByImpot') 
-    )
-    
-   
+    ) 
   }
 
   getDetLigtByImpot(){ 
@@ -126,11 +101,7 @@ export class DeclarationNewComponent implements OnInit {
   listFormule(){
     this.formuleService.CalculFormuleByImpot(this.recivedRow).subscribe(
     (data: any[]) => {
-      this.Formule = data;
-     
-    
-    
-    
+      this.Formule = data; 
       this.Formule = Array.of(this.Formule); 
       this.Formule.forEach(
         item =>{
@@ -152,24 +123,58 @@ export class DeclarationNewComponent implements OnInit {
   }
 
   onSubmit() { 
-    console.log(this.DetailLigne[0]['detailLigne'].length)
+  /*console.log(this.DetailLigne[0]['detailLigne'].length)
   for (var j=0;j<this.DetailLigne[0]['detailLigne'].length;j++) {
 
-    this.addForm.controls['KDetLigne'].setValue(this.DetailLigne[0]['detailLigne'][j]['KDetLigne'])
+  this.addForm.controls['KDetLigne'].setValue(this.DetailLigne[0]['detailLigne'][j]['KDetLigne'])
   console.log(this.DetailLigne[0]['detailLigne'][j]['KDetLigne']);
   var inputValue = (<HTMLInputElement>document.getElementById(this.DetailLigne[0]['detailLigne'][j]['KDetLigne'])).value;
 
-    this.addForm.controls['valeur'].setValue(inputValue)
+  this.addForm.controls['valeur'].setValue(inputValue)
 
-this.cdeclarationService.AjouterDclMvt(this.addForm.value)
+  this.cdeclarationService.AjouterDclMvt(this.addForm.value)
     .subscribe(res => {
       console.log(res);
       console.log(this.addForm.value);
     }, (err) => {
       console.log(err);
     });
-   
-  }
+  }*/
+/*
+  console.log(this.addForm.value);
+  console.log(this.DetailLigneChayma[0]['detailLigne'].length)
+  for (var j=0;j<this.DetailLigneChayma[0]['detailLigne'].length;j++) {
+    var inputValue = (<HTMLInputElement>document.getElementById(this.DetailLigneChayma[0]['detailLigne'][j]['KDetLigne'])).value;
+    this.values = (<HTMLInputElement>document.getElementById(this.DetailLigneChayma[0]['detailLigne'][j]['KDetLigne'])).value;
+    console.log(this.values);}
+    */
+
+    /*console.log(this.values.length)
+    for (var k=0;k<this.values.length;k++) {
+
+    }*/
+    //this.addForm.controls['valeur'].setValue(inputValue)
+ 
+
+  (Object.keys(this.addForm.controls)).forEach(
+    element =>{
+      this.cdeclarationService.AjouterDclMvtTest({
+        KDetLigne: Number(element),
+        kimpot: 0,
+        valeur: this.addForm?.get([element])!.value
+      })
+      .subscribe(res => {
+        console.log(res);
+        
+      }, (err) => {
+        console.log(err);
+      });
+    
+    }
+  )
+      
+    
+    
   }
 
   onClose() {

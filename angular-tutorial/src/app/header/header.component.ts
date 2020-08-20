@@ -54,7 +54,9 @@ export class HeaderComponent implements OnInit {
     this.nif = this.dataService.getsharedNif();  
     console.log(this.nif);
 
-    this.isLoggedIn$ = this.loginService.isLoggedIn;
+     
+      this.isLoggedIn$ = this.loginService.getLoggedIn();
+
 
     this.ismenu$ = this.loginService.ismenu;
 

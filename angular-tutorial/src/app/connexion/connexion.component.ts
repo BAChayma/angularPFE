@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular
 import { SconnexionService } from '../WSservices/sconnexion.service';
 import { AuthService } from '../WSservices/auth.service';
 import { TokenStorageService } from '../WSservices/token-storage.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-connexion',
@@ -52,15 +52,16 @@ export class ConnexionComponent implements OnInit {
     if (this.Form.invalid) {
       return;
     }
-    this.loading = true;
     this.cnxService.getConnexion(this.username, this.password)
             .subscribe(
                 data => {
-                  this.testLogIn = true;
+                  this.loading = true;
+                  this.cnxService.sendLoggedIn(true);
                   this.router.navigate(['Accueil']);
                 },
                 error => {
                     this.loading = false;
+                    this.cnxService.sendLoggedIn(false);
                 },
                 () => console.log('connexion completed') 
                 );
